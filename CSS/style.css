@@ -389,6 +389,10 @@ body {
   padding-bottom: 24px;
 }
 
+.card-link-wrapper{
+  text-decoration: none;
+}
+
 .card {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
