@@ -1,44 +1,155 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nicolaas Labuschagne</title>
-  <link rel="stylesheet" href="CSS/style1.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nicolaas Labuschagne — Creative • Professional</title>
+  <link rel="stylesheet" href="/CSS/style.css" />
+  <script defer src="/JS/script.js"></script>
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script>
+  emailjs.init("DZWWPqVLQWRNUnLB5");
+</script>
 </head>
 <body>
-    <div class="background-container"></div>
-      <div class="phone">
-        <div class = "content">
-          <div class="left">
-            <div class="face">
-              <img src="images/myPic3.jpg">
-            </div>
-            <a href="https://www.linkedin.com/in/nicolaas-labuschagne-919739286" class="fa fa-linkedin"></a>
-            <a href="https://github.com/NicolaasLabuschagne" class="fa fa-github"></a>
-          
-            <h1 class="title">Hello! I am <br>Nicolaas Labuschagne</h1>
-            <div class="NavBut">
-              <a href="./pages/aboutMe.html">
-                <div class="but" type="button">
-                  ABOUT ME
-                </div>
-              </a>
-            </div>
-            <div class="NavBut">
-              <a href="./pages/contactMe.html">
-                <div class="but" type="button">
-                  GET IN CONTACT
-                </div>
-              </a>   
-            </div>
+
+  <section id="hero-poster" class="hero-poster">
+      <canvas id="matrix-canvas" aria-hidden="true"></canvas> <!-- Moved here -->
+      <div class="hero-left1">
+        <div class="type-wrap">
+          <h3 class="hero-eyebrow">Fullstack developer</h3>
+          <h1 class="hero-title">NICOLAAS</h1>
+          <h2 class="hero-sub">LABUSCHAGNE</h2>
+          <p class="hero-tag">Creative · Professional</p>
+          <p class="hero-strap"><span id="strap-text"></span><span class="hero-cursor">|</span></p><br/>
+          <a class="cta" href="/pages/Projects/UnderConstruction.html">See Work</a>
+        </div>
+        <div class="left-overlay"></div>
+      </div>
+      <div class="hero-left">
+        <div class="photo-stack">
+          <img src="/images/me-website.png" />
+        </div>
+        <div class="left-overlay"></div>
+        <div class="palette-switcher" aria-label="Palette switcher">
+          <div class="palette-question" role="note" tabindex="-1">
+            <span class="pq-label">Don’t like the colour? Why not change it.</span>
           </div>
 
+          <div class="palette-buttons" role="group" aria-label="Colour options">
+            <button class="palette-btn" data-theme="default" style="background:#5A3E6B;" title="Aubergine" aria-label="Aubergine"></button>
+            <button class="palette-btn" data-theme="copper" style="background:#ff7b00;" title="Copper" aria-label="Copper"></button>
+            <button class="palette-btn" data-theme="purple" style="background:#6A0DAD;" title="Purple" aria-label="Purple"></button>
+          </div>
         </div>
       </div>
+  </section>
 
+  <section id="work" class="section wrap">
+  <h2>Selected Work</h2>
+
+  <div class="cards">
+  <a class="card-link-wrapper" href="/pages/Projects/UnderConstruction.html" aria-label="Open Helpdesk System project">
+    <article class="card" role="article">
+      <h3>Helpdesk System</h3>
+      <p>Modular ticketing, RBAC, audit logs, and escalation flows for property teams.</p>
+      <span class="tag">Full-stack · Angular · ABP</span>
+    </article>
+  </a>
+
+  <a class="card-link-wrapper" href="/pages/Projects/UnderConstruction.html" aria-label="Open Project Board project">
+    <article class="card" role="article">
+      <h3>Project Board</h3>
+      <p>Priority matrix, release planning, and developer handoff logic for agile squads.</p>
+      <span class="tag">UX · Supabase · GitHub</span>
+    </article>
+  </a>
+
+  <a class="card-link-wrapper" href="/pages/Projects/UnderConstruction.html" aria-label="Open Cinematic Backgrounds project">
+    <article class="card" role="article">
+      <h3>Cinematic Backgrounds</h3>
+      <p>Static hero compositions with layered grain, motion overlays, and regional identity.</p>
+      <span class="tag">Design · Motion · Branding</span>
+    </article>
+  </a>
+
+  <a class="card-link-wrapper" href="/pages/Projects/UnderConstruction.html" aria-label="Open Property Management Suite project">
+    <article class="card" role="article">
+      <h3>Property Management Suite</h3>
+      <p>Custom-built tools for debt recovery, tenant tracking, and portfolio oversight.</p>
+      <span class="tag">Real Estate · Razor Pages · MySQL</span>
+    </article>
+  </a>
+
+  <a class="card-link-wrapper" href="/pages/Projects/UnderConstruction.html" aria-label="Open Grid-Based UI Framework project">
+    <article class="card" role="article">
+      <h3>Grid-Based UI Framework</h3>
+      <p>Architectural layout system using modular zones, rhythm columns, and responsive overlays.</p>
+      <span class="tag">CSS · Layout Logic · UI/UX</span>
+    </article>
+  </a>
+
+  <a class="card-link-wrapper" href="/pages/Projects/UnderConstruction.html" aria-label="Open Motion Design Experiments project">
+    <article class="card" role="article">
+      <h3>Motion Design Experiments</h3>
+      <p>Choreographed transitions, kinetic shapes, and playful navigation prototypes.</p>
+      <span class="tag">Canvas · Animation · Interaction</span>
+    </article>
+  </a>
+</div>
+
+  <section id="about" class="about-section wrap">
+  <h2>About Me</h2>
+
+  <div class="card about-content">
+    <p>
+      I’m <strong>Nicolaas Labuschagne</strong> — a full-stack developer, systems architect, and creative problem-solver. I build software that works hard and looks good doing it. From debt recovery platforms to immersive web experiences, my work is rooted in clarity, scalability, and real-world impact.
+    </p>
+    <p>
+      I’ve written custom tools for industries like property management, mining, and freelance design — always with clean code, strategic thinking, and a deep respect for the people using it. Whether I’m crafting a helpdesk system, automating workflows, or designing cinematic backgrounds, I bring curiosity, persistence, and a hands-on mindset.
+    </p>
+    <p>
+      I think in grids, motion, and modular logic. I believe software should feel alive — not just functional. I’m currently working with Estate Recoveries, refining systems that help teams move faster and smarter. I’m also exploring real estate and property development, building tools that support portfolio oversight, tenant tracking, and financial recovery.
+    </p>
+    <p>
+      Explore my real estate development interests and software portfolio
+      <a href="/pages/Projects/UnderConstruction.html" target="_blank">here</a>.
+    </p>
+
+    <p class="typewriter">
+      <span id="type-text"></span><span class="cursor">|</span>
+    </p>
+  </div>
+</section>
+</section>
+
+  <section id="contact" class="contact-reviews wrap">
+  <div class="contact-card">
+    <h2>Contact</h2>
+    <p class="contact-sub">Let’s build something meaningful. Reach out below.</p>
+    <form class="contact-form" id="contact-form" novalidate>
+      <input type="text" name="name" placeholder="Your name" required />
+      <input type="email" name="email" placeholder="Your email" required />
+      <textarea name="message" placeholder="Brief message" rows="5" required></textarea>
+      <div class="form-row">
+        <button type="submit" class="btn">Send</button>
+        <div id="contact-success" class="contact-success" aria-live="polite" hidden>Thanks — message sent.</div>
+      </div>
+    </form>
+  </div>
+
+  <div class="review-chat">
+  <h3>Testamonials</h3>
+  <div id="chat-feed" class="chat-feed d-none"></div>
+</div>
+</section>
+
+<footer class="site-footer wrap">
+  <p>© Nicolaas Labuschagne</p>
+  <nav class="footer-nav">
+    <a href="https://github.com/nicolaas">GitHub</a>
+    <a href="https://linkedin.com/in/nicolaas">LinkedIn</a>
+  </nav>
+</footer>
 </body>
 </html>
