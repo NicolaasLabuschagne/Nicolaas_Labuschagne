@@ -62,7 +62,7 @@
 @media (max-width: 900px) {
   #matrix-canvas { width: 50%; opacity: 0.06; }
 }
-@media (max-width: 560px) {
+@media (max-width: 880px) {
   #matrix-canvas { display: none; } /* disable on very small devices for performance */
 }
 
@@ -387,6 +387,9 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   margin-top: 24px;
   padding: 24px clamp(18px, 4vw, 48px);
+  background: var(--bg);
+  padding-top: 0;
+  padding-right: 0;
 }
 
 .card-link-wrapper{
@@ -521,6 +524,30 @@ body {
   border-top: 1px solid rgba(255,255,255,0.06);
 }
 
+.contact-card,
+.contact-form input,
+.contact-form textarea,
+.contact-form button {
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--ivory);
+}
+
+.contact-form input,
+.contact-form textarea {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 10px 14px;
+  font-weight: 500;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: 3px solid rgba(124,92,255,0.18);
+  outline-offset: 3px;
+}
+
 .contact-card {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
@@ -556,11 +583,6 @@ body {
   resize: vertical;
 }
 
-.contact-form input::placeholder,
-.contact-form textarea::placeholder {
-  color: var(--pro2);
-}
-
 .form-row {
   grid-column: 1 / -1;
   display: flex;
@@ -577,7 +599,10 @@ body {
 /* Review Carousel */
 .review-chat {
   padding: 24px;
-  padding-top: 0px;
+  border-left: 2px solid var(--creative2);
+  max-height: 320px;
+  overflow: hidden;
+  position: relative;
 }
 
 .review-chat h3 {
@@ -590,29 +615,25 @@ body {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  max-height: 400px;
+  position: relative;
 }
 
 .chat-bubble {
   max-width: 80%;
   padding: 12px 16px;
   border-radius: 16px;
+  background: #e5e5ea;
+  color: #000;
   font-size: 0.95rem;
   line-height: 1.5;
   position: relative;
-  animation: popIn 0.4s ease forwards;
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  background: var(--card-bg);; /* light gray */
-  color: #fff;
-  align-self: flex-start;
+  animation: scrollUp 12s linear forwards;
 }
 
 .chat-bubble.alt {
-  background: var(--bg); /* lavender */
+  background: var(--creative2);
   color: #fff;
-  border-color: var(--pro1);
-  border-width: 10px;
-  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.18);
   align-self: flex-end;
 }
 
@@ -623,10 +644,13 @@ body {
   color: var(--creative1);
 }
 
-@keyframes popIn {
-  0% { opacity: 0; transform: scale(0.9) translateY(10px); }
-  100% { opacity: 1; transform: scale(1) translateY(0); }
+@keyframes scrollUp {
+  -40% { transform: translateY(100%); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  140% { transform: translateY(-120%); opacity: 0; }
 }
+
 
 /* Responsive */
 @media (max-width: 880px) {
