@@ -186,7 +186,7 @@ body {
 
 /* Right Side */
 .hero-left {
-  clip-path: polygon(100% 25%, 100% 0%, 0% 0%, 0% 100%, 50% 100%);
+  clip-path: polygon(100% 45%, 100% 0%, 0% 0%, 0% 100%, 50% 100%);
   background:linear-gradient(90deg, #000000, var(--bg));
   display: flex;
   align-items: center;
