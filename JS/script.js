@@ -121,49 +121,6 @@ document.addEventListener('DOMContentLoaded', function () {
   typeLoop();
 });
 document.addEventListener('DOMContentLoaded', function () {
-  const strapEl = document.getElementById('strap-text');
-  const phrases = [
-    "Rise Higher Than Ever.",
-    "Score More Than Ever.",
-    "Keep Hustlin' Than Them All."
-  ];
-
-  let pIndex = 0;
-  let cIndex = 0;
-  let deleting = false;
-  const typeSpeed = 90;
-  const deleteSpeed = 40;
-  const pauseAfterFull = 1100;
-  const pauseAfterEmpty = 300;
-
-  function loopType() {
-    const phrase = phrases[pIndex];
-    if (!deleting) {
-      cIndex++;
-      strapEl.textContent = phrase.slice(0, cIndex);
-      if (cIndex === phrase.length) {
-        deleting = true;
-        setTimeout(loopType, pauseAfterFull);
-        return;
-      }
-      setTimeout(loopType, typeSpeed + Math.random() * 60);
-    } else {
-      cIndex--;
-      strapEl.textContent = phrase.slice(0, cIndex);
-      if (cIndex === 0) {
-        deleting = false;
-        pIndex = (pIndex + 1) % phrases.length;
-        setTimeout(loopType, pauseAfterEmpty);
-        return;
-      }
-      setTimeout(loopType, deleteSpeed + Math.random() * 30);
-    }
-  }
-
-  // start only if element exists
-  if (strapEl) loopType();
-});
-document.addEventListener('DOMContentLoaded', function () {
   const chatFeed = document.getElementById('chat-feed');
 
   const messages = [
