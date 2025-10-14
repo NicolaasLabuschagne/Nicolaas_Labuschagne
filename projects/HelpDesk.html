@@ -5,144 +5,77 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Helpdesk System — Project</title>
   <meta name="description" content="Helpdesk System — Modular ticketing, RBAC, audit logs, SLA orchestration and escalation flows built for property teams." />
-  <style>
-    :root{
-      --bg:#0b0c10; --card:#0f1116; --muted:#9aa3b2; --accent:#5A3E6B;
-      --glass: rgba(255,255,255,0.03); --radius:12px; --gap:18px;
-      --max-width:1100px;
-      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    }
-
-    html,body{margin:0; background:#07070a; color:#e6eef6;}
-    a{color:var(--accent); text-decoration:none;}
-    .container{max-width:var(--max-width); margin:48px auto; padding:28px; box-sizing:border-box;}
-    .top{display:flex; gap:20px; align-items:center; justify-content:space-between; margin-bottom:18px;}
-    .brand{display:flex; gap:14px; align-items:center;}
-    .logo{width:56px; height:56px; border-radius:10px; background:linear-gradient(135deg,var(--accent),#3a2b4a); display:flex; align-items:center; justify-content:center; font-weight:700; color:#fff; box-shadow:0 8px 30px rgba(90,62,107,0.18); font-size:18px;}
-    .project-title{line-height:1; margin:0;}
-    h1{font-size:20px; margin:0 0 2px 0;}
-    p.lead{margin:0; color:var(--muted); font-size:0.95rem;}
-
-    .layout{display:grid; grid-template-columns: 1fr 360px; gap:24px; align-items:start;}
-
-    /* Hero / main card */
-    .hero-card{
-      border:1px solid rgba(255,255,255,0.04);
-      padding:22px; border-radius:var(--radius); box-shadow:0 10px 40px rgba(0,0,0,0.6);
-    }
-    .hero-card h2{margin:6px 0 10px 0; font-size:1.25rem;}
-    .hero-card p{color:var(--muted); margin:0 0 12px 0; font-size:0.98rem;}
-    .meta{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px;}
-    .tag{background:var(--glass); color:var(--muted); padding:6px 10px; border-radius:999px; font-weight:600; font-size:0.88rem; border:1px solid rgba(255,255,255,0.03);}
-    .cta-row{display:flex; gap:12px; align-items:center; margin-top:8px;}
-    .btn{background:linear-gradient(180deg,var(--accent),#3a2b4a); color:#fff; padding:10px 14px; border-radius:10px; border:0; cursor:pointer; font-weight:700; box-shadow:0 8px 30px rgba(90,62,107,0.18);}
-    .btn.secondary{background:transparent; border:1px solid rgba(255,255,255,0.06); color:var(--muted);}
-
-    /* Hero metrics row */
-    .metrics{display:flex; gap:12px; margin-top:12px;}
-    .metric{background:rgba(255,255,255,0.02); padding:10px 12px; border-radius:10px; font-weight:700; color:#fff; display:flex; flex-direction:column; min-width:110px;}
-    .metric .label{font-size:0.82rem; color:var(--muted); font-weight:600;}
-
-    /* Side details */
-    .side{position:relative;}
-    .card-side{padding:16px; border-radius:12px; border:1px solid rgba(255,255,255,0.03); box-shadow:0 8px 26px rgba(0,0,0,0.5);}
-    .side h4{margin:0 0 10px 0; font-size:0.98rem;}
-    .detail-list{display:flex; flex-direction:column; gap:10px; color:var(--muted);}
-    .detail-item{display:flex; justify-content:space-between; align-items:center; gap:10px; padding:8px; background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.02)); border-radius:8px; font-weight:600; font-size:0.92rem;}
-
-    /* Gallery / mock */
-    .gallery{display:grid; grid-template-columns: repeat(2, 1fr); gap:12px; margin-top:16px;}
-    .shot{height:120px; border-radius:10px; background:linear-gradient(135deg, rgba(255,255,255,0.02), rgba(0,0,0,0.05)); border:1px solid rgba(255,255,255,0.03); display:flex; align-items:center; justify-content:center; color:var(--muted); font-weight:700; font-size:0.95rem;}
-
-    /* Features */
-    .section{margin-top:22px; display:grid; gap:12px;}
-    .features{display:grid; grid-template-columns:repeat(3,1fr); gap:12px;}
-    .feature{background:var(--card); padding:12px; border-radius:10px; border:1px solid rgba(255,255,255,0.03); color:var(--muted); font-weight:600; font-size:0.92rem; min-height:88px;}
-
-    /* Technical snippets */
-    pre.snippet{background:transparent;color:var(--muted);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);font-size:0.86rem;overflow:auto; white-space:pre-wrap;}
-
-    /* Footer */
-    footer{margin-top:28px; text-align:center; color:var(--muted); font-size:0.9rem;}
-
-    /* Responsive */
-    @media (max-width:980px){
-      .layout{grid-template-columns:1fr 300px;}
-      .gallery .shot{height:100px;}
-    }
-    @media (max-width:720px){
-      .container{margin:20px; padding:16px;}
-      .layout{grid-template-columns:1fr; }
-      .side{order:2;}
-      .hero-card{order:1;}
-      .features{grid-template-columns:1fr; }
-      .gallery{grid-template-columns:1fr;}
-      .logo{width:48px;height:48px;}
-    }
-  </style>
+  <link rel="stylesheet" href="../CSS/style.css" />
 </head>
 <body>
-  <div class="container" role="main">
-    <header class="top" role="banner">
-      <div class="brand">
-        <div class="logo" aria-hidden="true">HS</div>
+  <div class="wrap container" role="main">
+    <header class="site-header top" role="banner" aria-label="Project header">
+      <div class="brand" style="display:flex;gap:14px;align-items:center;">
+        <div class="logo" aria-hidden="true" style="width:48px;height:48px;border-radius:8px;background:linear-gradient(135deg,var(--creative1),var(--creative2));display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;">HS</div>
         <div>
-          <h1 class="project-title">Helpdesk System</h1>
-          <p class="lead">Ticket lifecycles, RBAC, audit trails and SLA orchestration for operations teams.</p>
+          <h1 class="project-title" style="margin:0;">Helpdesk System</h1>
+          <p class="lead" style="margin:4px 0 0;">Ticket lifecycles, RBAC, audit trails and SLA orchestration for operations teams.</p>
         </div>
       </div>
-      <nav aria-label="Project actions">
+
+      <nav class="site-nav" aria-label="Project actions">
         <a href="../index.html" class="btn secondary" style="text-decoration:none;">Back to Site</a>
       </nav>
     </header>
 
-    <section class="layout" aria-labelledby="project-heading">
-      <main class="hero-card" id="project-heading" aria-describedby="project-desc">
-        <h2>Overview</h2>
-        <p id="project-desc">A robust helpdesk platform engineered to cut resolution time and enforce accountability. Tickets, escalations, built-in auditability, and organization-aware permissions let operations scale confidently.</p>
+    <section class="layout" aria-labelledby="project-heading" style="display:grid;grid-template-columns:1fr 360px;gap:24px;align-items:start;margin-top:18px;">
+      <main class="hero-card" id="project-heading" aria-describedby="project-desc" style="background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.06));border:1px solid rgba(255,255,255,0.04);padding:22px;border-radius:var(--radius);box-shadow:0 10px 40px rgba(0,0,0,0.6);">
+        <h2 style="margin:6px 0 10px 0;font-size:1.25rem;">Overview</h2>
+        <p id="project-desc" style="color:var(--muted);margin:0 0 12px 0;font-size:0.98rem;">A robust helpdesk platform engineered to cut resolution time and enforce accountability. Tickets, escalations, built-in auditability, and organization-aware permissions let operations scale confidently.</p>
 
-        <div class="meta" role="list">
+        <div class="meta" role="list" style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;">
           <div class="tag" role="listitem">Full-stack</div>
           <div class="tag" role="listitem">Angular</div>
           <div class="tag" role="listitem">ABP</div>
         </div>
 
-        <div class="metrics" aria-hidden="false">
-          <div class="metric"><span class="value">80%</span><span class="label">SLA Compliance</span></div>
-          <div class="metric"><span class="value">1.8h</span><span class="label">Median Resolution</span></div>
-          <div class="metric"><span class="value">4x</span><span class="label">Faster Escalation</span></div>
+        <div class="metrics" aria-hidden="false" style="display:flex;gap:12px;margin-top:12px;">
+          <div class="metric" style="background:rgba(255,255,255,0.02);padding:10px 12px;border-radius:10px;font-weight:700;color:#fff;display:flex;flex-direction:column;min-width:110px;">
+            <span class="value">80%</span><span class="label" style="font-size:0.82rem;color:var(--muted);font-weight:600;">SLA Compliance</span>
+          </div>
+          <div class="metric" style="background:rgba(255,255,255,0.02);padding:10px 12px;border-radius:10px;font-weight:700;color:#fff;display:flex;flex-direction:column;min-width:110px;">
+            <span class="value">1.8h</span><span class="label" style="font-size:0.82rem;color:var(--muted);font-weight:600;">Median Resolution</span>
+          </div>
+          <div class="metric" style="background:rgba(255,255,255,0.02);padding:10px 12px;border-radius:10px;font-weight:700;color:#fff;display:flex;flex-direction:column;min-width:110px;">
+            <span class="value">4x</span><span class="label" style="font-size:0.82rem;color:var(--muted);font-weight:600;">Faster Escalation</span>
+          </div>
         </div>
 
-        <div class="cta-row" aria-hidden="false">
-          <button class="btn" id="request-demo">Request demo</button>
-          <a class="btn secondary" href="#" role="button">Download spec (PDF)</a>
+        <div class="cta-row" aria-hidden="false" style="display:flex;gap:12px;align-items:center;margin-top:8px;">
+          <button class="btn" id="request-demo-main">Request demo</button>
+          <a class="btn secondary" href="#" role="button" style="background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted);text-decoration:none;">Download spec (PDF)</a>
         </div>
 
-        <div class="section" aria-labelledby="capabilities">
+        <div class="section" aria-labelledby="capabilities" style="margin-top:18px;">
           <h3 id="capabilities" style="margin:0 0 6px 0;">Key Capabilities</h3>
-          <div class="features" role="list">
-            <div class="feature" role="listitem">Ticket lifecycles with SLA timers</div>
-            <div class="feature" role="listitem">RBAC with tenant-aware scopes</div>
-            <div class="feature" role="listitem">Audit logs, immutable events</div>
-            <div class="feature" role="listitem">Automated escalation and routing</div>
-            <div class="feature" role="listitem">Activity timeline & commenting</div>
-            <div class="feature" role="listitem">Integrations: Email, Webhooks, Reporting</div>
+          <div class="features" role="list" style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px;">
+            <div class="feature" role="listitem" style="background:var(--card-bg);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);color:var(--muted);font-weight:600;min-height:88px;">Ticket lifecycles with SLA timers</div>
+            <div class="feature" role="listitem" style="background:var(--card-bg);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);color:var(--muted);font-weight:600;min-height:88px;">RBAC with tenant-aware scopes</div>
+            <div class="feature" role="listitem" style="background:var(--card-bg);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);color:var(--muted);font-weight:600;min-height:88px;">Audit logs, immutable events</div>
+            <div class="feature" role="listitem" style="background:var(--card-bg);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);color:var(--muted);font-weight:600;min-height:88px;">Automated escalation and routing</div>
+            <div class="feature" role="listitem" style="background:var(--card-bg);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);color:var(--muted);font-weight:600;min-height:88px;">Activity timeline & commenting</div>
+            <div class="feature" role="listitem" style="background:var(--card-bg);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);color:var(--muted);font-weight:600;min-height:88px;">Integrations: Email, Webhooks, Reporting</div>
           </div>
         </div>
 
         <div class="section" style="margin-top:18px;">
           <h3 style="margin:0 0 8px 0;">Screenshots</h3>
-          <div class="gallery" role="list">
-            <div class="shot" role="img" aria-label="Ticket list">Ticket list</div>
-            <div class="shot" role="img" aria-label="Ticket detail">Ticket detail</div>
-            <div class="shot" role="img" aria-label="Escalation rules">Escalation rules</div>
-            <div class="shot" role="img" aria-label="Reports">Reports</div>
+          <div class="gallery" role="list" style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:12px;">
+            <div class="shot" role="img" aria-label="Ticket list" style="height:120px;border-radius:10px;background:linear-gradient(135deg, rgba(255,255,255,0.02), rgba(0,0,0,0.05));border:1px solid rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center;color:var(--muted);font-weight:700;">Ticket list</div>
+            <div class="shot" role="img" aria-label="Ticket detail" style="height:120px;border-radius:10px;background:linear-gradient(135deg, rgba(255,255,255,0.02), rgba(0,0,0,0.05));border:1px solid rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center;color:var(--muted);font-weight:700;">Ticket detail</div>
+            <div class="shot" role="img" aria-label="Escalation rules" style="height:120px;border-radius:10px;background:linear-gradient(135deg, rgba(255,255,255,0.02), rgba(0,0,0,0.05));border:1px solid rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center;color:var(--muted);font-weight:700;">Escalation rules</div>
+            <div class="shot" role="img" aria-label="Reports" style="height:120px;border-radius:10px;background:linear-gradient(135deg, rgba(255,255,255,0.02), rgba(0,0,0,0.05));border:1px solid rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center;color:var(--muted);font-weight:700;">Reports</div>
           </div>
         </div>
 
         <div class="section" style="margin-top:18px;">
           <h3 style="margin:0 0 6px 0;">Technical Summary</h3>
-          <pre class="snippet">
+          <pre class="snippet" style="background:transparent;color:var(--muted);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);font-size:0.9rem;overflow:auto;white-space:pre-wrap;">
 Frontend: Angular (component-per-view, lazy modules)
 Backend: ABP (.NET) modules; modular services, background queues
 Data: SQL Server / MySQL; normalized ticket schema, audit store
@@ -152,25 +85,31 @@ Deploy: Docker images, CI/CD to Kubernetes
         </div>
       </main>
 
-      <aside class="side" aria-label="Project details">
-        <div class="card-side">
-          <h4>Project Info</h4>
-          <div class="detail-list">
-            <div class="detail-item"><span>Role</span><span>Architect / Lead Dev</span></div>
-            <div class="detail-item"><span>Timeline</span><span>6 months</span></div>
-            <div class="detail-item"><span>Status</span><span>Prototype</span></div>
+      <aside class="side" aria-label="Project details" style="position:relative;">
+        <div class="card-side" style="background:var(--card-bg);padding:16px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 8px 26px rgba(0,0,0,0.5);">
+          <h4 style="margin:0 0 10px 0;font-size:0.98rem;">Project Info</h4>
+          <div class="detail-list" style="display:flex;flex-direction:column;gap:10px;color:var(--muted);">
+            <div class="detail-item" style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.02));border-radius:8px;font-weight:600;font-size:0.92rem;">
+              <span>Role</span><span>Architect / Lead Dev</span>
+            </div>
+            <div class="detail-item" style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.02));border-radius:8px;font-weight:600;font-size:0.92rem;">
+              <span>Timeline</span><span>6 months</span>
+            </div>
+            <div class="detail-item" style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.02));border-radius:8px;font-weight:600;font-size:0.92rem;">
+              <span>Status</span><span>Prototype</span>
+            </div>
           </div>
 
-        <div style="margin-top:14px;">
+          <div style="margin-top:14px;">
             <h4 style="margin-top:12px;">Quick links</h4>
             <div style="display:flex;gap:8px;margin-top:8px;">
-                <button id="request-demo" class="btn">Request demo</button>
+              <button id="request-demo-side" class="btn">Request demo</button>
             </div>
-        </div>
+          </div>
 
-        <div style="margin-top:14px;">
+          <div style="margin-top:14px;">
             <h4 style="margin-top:12px;">RBAC snapshot</h4>
-            <pre class="snippet">
+            <pre class="snippet" style="background:transparent;color:var(--muted);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);font-size:0.86rem;overflow:auto;white-space:pre-wrap;">
 Roles: Super, SeniorIT, IT, HR, EndUser
 Super: Full
 SeniorIT: Full
@@ -178,32 +117,33 @@ IT: assign / handle tickets / escalate / audit
 HR: Full
 EndUser: read-only / Ticket Creation
             </pre>
-        </div>
+          </div>
 
-        <div style="margin-top:12px;">
+          <div style="margin-top:12px;">
             <h4 style="margin-top:12px;">API examples</h4>
-            <pre class="snippet">
+            <pre class="snippet" style="background:transparent;color:var(--muted);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);font-size:0.86rem;overflow:auto;white-space:pre-wrap;">
 POST /api/tickets
 GET  /api/tickets?status=open
 POST /api/tickets/details
             </pre>
-        </div>
+          </div>
         </div>
       </aside>
     </section>
 
-    <footer>
+    <footer style="margin-top:28px;text-align:center;color:var(--muted);font-size:0.9rem;">
       <p>© Nicolaas Labuschagne · Helpdesk System</p>
     </footer>
   </div>
 
   <script>
-    // Lightweight demo actions
-    document.getElementById('request-demo').addEventListener('click', ()=> {
+    // demo button handlers (unique IDs)
+    document.getElementById('request-demo-main')?.addEventListener('click', function(){
       alert('Thanks — demo request received. I will follow up with availability.');
     });
-    document.getElementById('view-demo').addEventListener('click', ()=> alert('Demo link coming soon.'));
-    document.getElementById('view-code').addEventListener('click', ()=> alert('Code link coming soon.'));
+    document.getElementById('request-demo-side')?.addEventListener('click', function(){
+      alert('Thanks — demo request received. I will follow up with availability.');
+    });
   </script>
 </body>
 </html>
