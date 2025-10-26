@@ -29,7 +29,7 @@ function effectMatrix(canvas) {
     function getThemeColor() {
   const raw = getComputedStyle(document.documentElement).getPropertyValue('--creative1') || '';
   const hex = raw.trim().toLowerCase();
-  if (hex === '#5a3e6b') return '#ff00ff';
+  if (hex === '#7c4d8a') return '#ff00ff';
   return hex || '#ff00ff';
 }
 
@@ -162,54 +162,124 @@ document.addEventListener('DOMContentLoaded', function () {
 
   typeLoop();
 });
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', () => {
   const chatFeed = document.getElementById('chat-feed');
 
   const messages = [
-    {
-      text: "Nicolaas was one of the students that excelled in university. He really made it hard to compete with him. He is relentless if he sets his mind to it.",
-      author: "Patrick Bailey · Fellow Student (2023)"
-    },
-    {
-      text: "Nicolaas is really one of the best and brightest I’ve seen. I wouldn’t have made it through university without his help.",
-      author: "Jolene Jansen Van Rensburg · Junior Developer (2024)"
-    },
-    {
-      text: "Great developer, even better person. Nicolaas is the kind of guy you want on your team when the pressure is on.",
-      author: "Michael du Toit · Technical Lead (2024)"
-    },
-    {
-      text: "Nicolaas helped me build my first website. He’s patient, kind, and explains things in a way that makes sense.",
-      author: "Sipho Mokoena · Junior Developer (2025)"
-    },
-    {
-      text: "He’s fast, thoughtful, and always delivers something better than expected. His property tools saves us hours every week.",
-      author: "JD · Property Manager (2025)"
-    },
-    {
-      text: "He sees the big picture, and understands how to make things work for users. A pleasure to work with.",
-      author: "Taryn Jacobs · UX Designer (2024)"
-    }
+    { text: "Nicolaas was one of the students that excelled in university. He really made it hard to compete with him. He is relentless if he sets his mind to it.", author: "Patrick Bailey · Fellow Student (2023)" },
+    { text: "Nicolaas is really one of the best and brightest I’ve seen. I wouldn’t have made it through university without his help.", author: "Jolene Jansen Van Rensburg · Junior Developer (2024)" },
+    { text: "Great developer, even better person. Nicolaas is the kind of guy you want on your team when the pressure is on.", author: "Michael du Toit · Technical Lead (2024)" },
+    { text: "Nicolaas helped me build my first website. He’s patient, kind, and explains things in a way that makes sense.", author: "Sipho Mokoena · Junior Developer (2025)" },
+    { text: "He’s fast, thoughtful, and always delivers something better than expected. His property tools saves us hours every week.", author: "JD · Property Manager (2025)" },
+    { text: "He sees the big picture, and understands how to make things work for users. A pleasure to work with.", author: "Taryn Jacobs · UX Designer (2024)" }
   ];
 
   let index = 0;
+  let autoplay = true;
+  let autoplayTimer = null;
+  const AUTOPLAY_INTERVAL = 6500;
+  const FADE_MS = 420;
 
-  function showNextMessage() {
-    const msg = messages[index];
-    const bubble = document.createElement('div');
-    bubble.className = 'chat-bubble';
-    if (index % 2 === 1) bubble.classList.add('alt');
-
-    bubble.innerHTML = `<p>${msg.text}</p><div class="chat-author">${msg.author}</div>`;
-
-    chatFeed.innerHTML = ''; // Clear previous
-    chatFeed.appendChild(bubble);
-
-    index = (index + 1) % messages.length;
+  function escapeHtml(s) {
+    return s.replace(/[&<>"']/g, (m) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[m]);
   }
 
-  showNextMessage();
-  setInterval(showNextMessage, 10000);
+  function createCard(msg) {
+  const el = document.createElement('article');
+  el.className = 'testimonial card';
+  el.setAttribute('role','article');
+  // build initials for avatar
+  const initials = msg.author.split(' ')[0].slice(0,1) + (msg.author.split(' ')[1] ? msg.author.split(' ')[1].slice(0,1) : '');
+  el.innerHTML = `
+    <div class="quote-wrap">
+      <div class="quote-mark" aria-hidden="true">“</div>
+      <div class="msg">${escapeHtml(msg.text)}</div>
+      <div class="meta"><span class="who">${escapeHtml(msg.author)}</span></div>
+    </div>
+  `;
+  return el;
+}
+
+  // crossfade: fade out old, fade in new; clean up after transition
+  async function crossfadeTo(newIndex) {
+    const oldCard = chatFeed.querySelector('.testimonial');
+    index = (newIndex + messages.length) % messages.length;
+    const newCard = createCard(messages[index]);
+
+    // position and append new card (hidden by default)
+    chatFeed.appendChild(newCard);
+    // force a paint so transitions apply reliably
+    // eslint-disable-next-line no-unused-expressions
+    newCard.offsetHeight;
+    newCard.classList.add('visible');
+
+    if (oldCard) {
+      // fade out old
+      oldCard.classList.remove('visible');
+      // wait for fade duration, then remove
+      await new Promise(res => setTimeout(res, FADE_MS));
+      if (oldCard.parentNode) oldCard.parentNode.removeChild(oldCard);
+    } else {
+      // if no old card, ensure we still wait tiny bit
+      await new Promise(res => setTimeout(res, 10));
+    }
+
+    resetAutoplay();
+  }
+
+  function next() { crossfadeTo(index + 1); }
+  function startAutoplay() {
+    stopAutoplay();
+    if (!autoplay) return;
+    autoplayTimer = setInterval(next, AUTOPLAY_INTERVAL);
+  }
+  function stopAutoplay() {
+    if (autoplayTimer) { clearInterval(autoplayTimer); autoplayTimer = null; }
+  }
+  function resetAutoplay() { stopAutoplay(); if (autoplay) autoplayTimer = setInterval(next, AUTOPLAY_INTERVAL); }
+
+  // hover / focus pause
+  chatFeed.addEventListener('mouseenter', () => { stopAutoplay(); });
+  chatFeed.addEventListener('mouseleave', () => { if (autoplay) startAutoplay(); });
+  chatFeed.addEventListener('focusin', () => { stopAutoplay(); });
+  chatFeed.addEventListener('focusout', () => { if (autoplay) startAutoplay(); });
+
+  // keyboard navigation
+  chatFeed.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') crossfadeTo(index + 1);
+    if (e.key === 'ArrowLeft') crossfadeTo(index - 1);
+    if (e.key === ' ') { e.preventDefault(); autoplay = !autoplay; if (autoplay) startAutoplay(); else stopAutoplay(); }
+  });
+
+  // touch swipe
+  let touchStartX = 0;
+  chatFeed.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  chatFeed.addEventListener('touchend', (e) => {
+    const diff = (e.changedTouches[0].clientX - touchStartX);
+    if (diff > 40) crossfadeTo(index - 1);
+    if (diff < -40) crossfadeTo(index + 1);
+  }, { passive: true });
+
+  // initial mount
+  function mountInitial() {
+    chatFeed.innerHTML = '';
+    const first = createCard(messages[index]);
+    chatFeed.appendChild(first);
+    // force paint, then show
+    // eslint-disable-next-line no-unused-expressions
+    first.offsetHeight;
+    first.classList.add('visible');
+    chatFeed.removeAttribute('aria-hidden');
+    startAutoplay();
+  }
+  mountInitial();
+
+  // public API
+  window.Testimonials = {
+    push(msg) {
+      messages.push(msg);
+    }
+  };
 });
 
 const themes = {

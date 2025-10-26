@@ -1,0 +1,44 @@
+.shot {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
+  min-height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.shot-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 420px;
+  object-fit: cover;
+  filter: blur(8px) saturate(.95);
+  transform: scale(1.02);
+  transition: filter .45s ease, transform .45s ease, opacity .45s ease;
+  opacity: 0.95;
+}
+
+/* When loaded, remove blur and normalize scale */
+.shot-img.loaded {
+  filter: blur(0) saturate(1);
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* caption styling */
+.shot-label {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  padding: 6px 10px;
+  font-weight: 700;
+  color: var(--ivory);
+  background: rgba(0,0,0,0.35);
+  backdrop-filter: blur(4px);
+  border-radius: 6px;
+  pointer-events: none;
+  font-size: 0.9rem;
+}
