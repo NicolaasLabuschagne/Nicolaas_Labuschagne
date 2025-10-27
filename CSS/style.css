@@ -710,7 +710,6 @@ body {
 .testimonial .meta {
   display:flex;
   align-items:center;
-  gap:10px;
   justify-content:space-between;
   color: var(--muted);
   font-weight:700;
