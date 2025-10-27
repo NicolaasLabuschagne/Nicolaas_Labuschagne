@@ -167,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const messages = [
     { text: "Nicolaas was one of the students that excelled in university. He really made it hard to compete with him. He is relentless if he sets his mind to it.", author: "Patrick Bailey · Fellow Student (2023)" },
-    { text: "Nicolaas is really one of the best and brightest I’ve seen. I wouldn’t have made it through university without his help.", author: "Jolene Jansen Van Rensburg · Junior Developer (2024)" },
+    { text: "Nicolaas is really one of the best and brightest I’ve seen.", author: "Jolene Jansen Van Rensburg · Junior Developer (2024)" },
     { text: "Great developer, even better person. Nicolaas is the kind of guy you want on your team when the pressure is on.", author: "Michael du Toit · Technical Lead (2024)" },
     { text: "Nicolaas helped me build my first website. He’s patient, kind, and explains things in a way that makes sense.", author: "Sipho Mokoena · Junior Developer (2025)" },
     { text: "He’s fast, thoughtful, and always delivers something better than expected. His property tools saves us hours every week.", author: "JD · Property Manager (2025)" },
@@ -385,4 +385,5 @@ document.addEventListener('DOMContentLoaded', () => {
     const theme = btn.getAttribute('data-theme');
     if (theme) setTheme(theme);
   });
+
 });
