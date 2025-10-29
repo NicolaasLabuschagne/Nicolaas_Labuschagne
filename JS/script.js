@@ -369,9 +369,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
 // Initialize on load
 window.addEventListener('DOMContentLoaded', () => {
-  const saved = localStorage.getItem('theme') || 'purple';
-  // If saved theme not found in themes, fallback to 'purple'
-  const initial = themes[saved] ? saved : 'purple';
+  const saved = localStorage.getItem('theme') || 'copper';
+  const initial = themes[saved] ? saved : 'copper';
   setTheme(initial);
 });
 
