@@ -349,8 +349,8 @@ function renderPaletteButtons(activeTheme) {
 
 // Replace initialization that calls setTheme with this (single source)
 window.addEventListener('DOMContentLoaded', () => {
-  const saved = localStorage.getItem('theme') || 'purple';
-  const initial = themes[saved] ? saved : 'purple';
+  const saved = localStorage.getItem('theme') || 'copper';
+  const initial = themes[saved] ? saved : 'copper';
   // setTheme will call renderPaletteButtons(initial)
   setTheme(initial);
 
@@ -365,24 +365,4 @@ window.addEventListener('DOMContentLoaded', () => {
     });
     switcher.__paletteHandlerAttached = true;
   }
-});
-
-// Initialize on load
-window.addEventListener('DOMContentLoaded', () => {
-  const saved = localStorage.getItem('theme') || 'copper';
-  const initial = themes[saved] ? saved : 'copper';
-  setTheme(initial);
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-  const switcher = document.querySelector('.palette-switcher');
-  if (!switcher) return;
-
-  switcher.addEventListener('click', (e) => {
-    const btn = e.target.closest('.palette-btn');
-    if (!btn) return;
-    const theme = btn.getAttribute('data-theme');
-    if (theme) setTheme(theme);
-  });
-
 });
