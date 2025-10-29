@@ -350,8 +350,8 @@ function renderPaletteButtons(activeTheme) {
 // Replace initialization that calls setTheme with this (single source)
 window.addEventListener('DOMContentLoaded', () => {
   const saved = localStorage.getItem('theme') || 'copper';
+  if(saved === 'purple'){saved='copper';}
   const initial = themes[saved] ? saved : 'copper';
-  // setTheme will call renderPaletteButtons(initial)
   setTheme(initial);
 
   // Delegated click handler: attach once and only once
