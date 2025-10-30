@@ -29,8 +29,7 @@ function effectMatrix(canvas) {
     function getThemeColor() {
   const raw = getComputedStyle(document.documentElement).getPropertyValue('--creative1') || '';
   const hex = raw.trim().toLowerCase();
-  if (hex === '#7c4d8a') return '#ff00ff';
-  return hex || '#ff00ff';
+  return hex ;
 }
 
     var c = canvas.getContext("2d");
@@ -274,7 +273,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   mountInitial();
 
-  // public API
   window.Testimonials = {
     push(msg) {
       messages.push(msg);
@@ -284,13 +282,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const themes = {
   green: "#39FF14",
-  red: "#FF3B3B",
-  purple: "#6A0DAD",
-  copper: "#B87333"
+  copper: "#B87333",
+  molten: "#FF6A00",
+  yellow: "#FFD700",
+  acid: "#E000E0",
+  red: "#FF0033",
+  purple: "#8A2BE2",
+  cyan: "#00CED1",
+  glitch: "#FF00FF",
 };
 
 function setTheme(theme) {
-  if (!themes[theme]) return; // guard: ignore unknown names
+  if (!themes[theme]) return;
   document.documentElement.setAttribute('data-theme', theme);
   localStorage.setItem('theme', theme);
   renderPaletteButtons(theme);
@@ -300,19 +303,16 @@ function renderPaletteButtons(activeTheme) {
   const switcher = document.querySelector('.palette-switcher');
   if (!switcher) return;
 
-  // Ensure the question exists (defensive)
   if (!switcher.querySelector('.palette-question')) {
     const q = document.createElement('div');
     q.className = 'palette-question';
     q.setAttribute('role', 'note');
     q.textContent = "Don’t like the colour? Why not change it.";
-    // insert at top, before buttons container
     const btns = switcher.querySelector('.palette-buttons');
     if (btns) switcher.insertBefore(q, btns);
     else switcher.prepend(q);
   }
 
-  // Ensure there is a dedicated container for buttons
   let buttonsContainer = switcher.querySelector('.palette-buttons');
   if (!buttonsContainer) {
     buttonsContainer = document.createElement('div');
@@ -322,10 +322,8 @@ function renderPaletteButtons(activeTheme) {
     switcher.appendChild(buttonsContainer);
   }
 
-  // Only clear the buttons container (safe)
   buttonsContainer.innerHTML = '';
 
-  // Compute visible themes (next 3 after active)
   const keys = Object.keys(themes);
   const startIndex = keys.indexOf(activeTheme);
   const visible = [];
@@ -334,12 +332,11 @@ function renderPaletteButtons(activeTheme) {
     if (candidate !== activeTheme) visible.push(candidate);
   }
 
-  // Create buttons inside the buttons container
   visible.forEach(name => {
     const color = themes[name];
     const btn = document.createElement('button');
     btn.className = 'palette-btn';
-    btn.dataset.theme = name;                // used by delegated listener
+    btn.dataset.theme = name;
     btn.style.background = color;
     btn.setAttribute('aria-label', name);
     btn.title = name.charAt(0).toUpperCase() + name.slice(1);
@@ -347,14 +344,34 @@ function renderPaletteButtons(activeTheme) {
   });
 }
 
-// Replace initialization that calls setTheme with this (single source)
 window.addEventListener('DOMContentLoaded', () => {
-  const saved = localStorage.getItem('theme') || 'copper';
-  if(saved === 'purple'){saved='copper';}
-  const initial = themes[saved] ? saved : 'copper';
-  setTheme(initial);
+  const keys = Object.keys(themes);
+  const saved = localStorage.getItem('theme');
 
-  // Delegated click handler: attach once and only once
+  // Helper: pick a random key different from `exclude` (tries up to N times)
+  const pickRandomDifferent = (exclude) => {
+    if (!exclude) return keys[Math.floor(Math.random() * keys.length)];
+    if (keys.length === 1) return keys[0];
+    let pick;
+    const maxTries = 8;
+    let tries = 0;
+    do {
+      pick = keys[Math.floor(Math.random() * keys.length)];
+      tries++;
+    } while (pick === exclude && tries < maxTries);
+    // If still same after attempts (unlikely), pick next key in array
+    if (pick === exclude) {
+      const idx = keys.indexOf(exclude);
+      pick = keys[(idx + 1) % keys.length];
+    }
+    return pick;
+  };
+
+  // If you want "random each visit but not the same as last", use this:
+  const initialTheme = pickRandomDifferent(saved);
+  setTheme(initialTheme);
+
+  // Delegated click handler for palette buttons
   const switcher = document.querySelector('.palette-switcher');
   if (switcher && !switcher.__paletteHandlerAttached) {
     switcher.addEventListener('click', (e) => {
@@ -366,3 +383,118 @@ window.addEventListener('DOMContentLoaded', () => {
     switcher.__paletteHandlerAttached = true;
   }
 });
+
+(function(){
+  
+  const CHAR_POOL = ['1','0'];
+
+  function randomChar(){
+    return CHAR_POOL[Math.floor(Math.random() * CHAR_POOL.length)];
+  }
+
+  function spawnDrop(cloud){
+    const e = document.createElement('div');
+    e.classList.add('drop');
+
+    const r = Math.random();
+    if (r < 0.25) e.classList.add('small');
+    else if (r < 0.7) e.classList.add('medium');
+    else e.classList.add('large');
+
+    e.innerText = randomChar();
+
+    const cloudRect = cloud.getBoundingClientRect();
+    const left = Math.floor(Math.random() * Math.max(1, cloudRect.width));
+    e.style.left = left + 'px';
+
+    const duration = 1.2 + Math.random() * 1.0;
+    e.style.animationDuration = duration + 's';
+
+    const horiz = (Math.random() > 0.5 ? 8 : -8) * (0.5 + Math.random());
+    e.style.setProperty('--horizontal-movement', horiz + 'px');
+
+    cloud.appendChild(e);
+    e.addEventListener('animationend', () => {
+      if (e.parentNode) e.parentNode.removeChild(e);
+    }, { once: true });
+  }
+
+  function startRain(){
+    const cloud = document.querySelector('.cloud');
+    if (!cloud) return;
+
+    const baseInterval = (window.innerWidth < 700) ? 90 : 40;
+
+    let last = 0;
+    setInterval(() => {
+      if (Math.random() < 0.85) spawnDrop(cloud);
+      else if (Math.random() < 0.25) spawnDrop(cloud);
+    }, baseInterval);
+  }
+
+  // run after DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', startRain);
+  } else {
+    startRain();
+  }
+})();
+const popup = document.getElementById('theme-popup');
+if (popup) {
+  setTimeout(() => {
+    popup.classList.add('show');
+
+    // Auto-hide after 11 seconds (total visible time = 14s)
+    setTimeout(() => {
+      popup.classList.remove('show');
+    }, 11000);
+  }, 3000); // Delay before showing
+}
+
+// Helper: return index of current theme, or 0 if not found
+function getCurrentThemeIndex() {
+  const keys = Object.keys(themes);
+  const current = document.documentElement.getAttribute('data-theme');
+  const idx = keys.indexOf(current);
+  return idx >= 0 ? idx : 0;
+}
+
+// Cycle to previous or next theme by offset (-1 or +1)
+function cycleTheme(offset) {
+  const keys = Object.keys(themes);
+  if (keys.length === 0) return;
+  const currentIndex = getCurrentThemeIndex();
+  const nextIndex = (currentIndex + offset + keys.length) % keys.length;
+  const nextTheme = keys[nextIndex];
+  setTheme(nextTheme);
+}
+
+// Keyboard handler
+function onThemeKeydown(e) {
+  // Ignore if any modifier keys are pressed
+  if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
+
+  // Ignore when typing in inputs, textareas, or contenteditable elements
+  const tag = document.activeElement && document.activeElement.tagName;
+  const isEditable = document.activeElement && (
+    document.activeElement.isContentEditable ||
+    tag === 'INPUT' ||
+    tag === 'TEXTAREA' ||
+    tag === 'SELECT'
+  );
+  if (isEditable) return;
+
+  if (e.key === 'ArrowLeft') {
+    e.preventDefault();
+    cycleTheme(-1);
+  } else if (e.key === 'ArrowRight') {
+    e.preventDefault();
+    cycleTheme(1);
+  }
+}
+
+// Attach once (safe guard)
+if (!window.__themeKeyboardAttached) {
+  window.addEventListener('keydown', onThemeKeydown);
+  window.__themeKeyboardAttached = true;
+}

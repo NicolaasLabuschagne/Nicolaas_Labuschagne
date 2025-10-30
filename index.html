@@ -18,6 +18,7 @@
       <canvas id="matrix-canvas" aria-hidden="true"></canvas> <!-- Moved here -->
       <div class="hero-left1">
         <div class="type-wrap">
+          <div class="cloud" aria-hidden="true" role="presentation"></div>
           <h3 class="hero-eyebrow">Fullstack developer</h3>
           <h1 class="hero-title">NICOLAAS</h1>
           <h2 class="hero-sub">LABUSCHAGNE</h2>
@@ -25,8 +26,14 @@
           <p class="hero-strap"><span id="strap-text"></span><span class="hero-cursor">|</span></p><br/>
           <a class="cta" href="#work">See Work</a>
           <a class="cta" href="./CV/Nicolaas-Labuschagne-CV.pdf" download>Download CV</a>
+          <div id="theme-popup" class="theme-popup" role="status" aria-live="polite">
+            <div class="bubble">
+              This site changes colors every time you refresh.
+            </div>
+          </div>
         </div>
         <div class="left-overlay"></div>
+        
       </div>
       <div class="hero-left">
         <div class="photo-stack">
@@ -39,7 +46,7 @@
           </div>
 
           <div class="palette-buttons" role="group" aria-label="Colour options">
-            <button class="palette-btn" data-theme="default" style="background:#5A3E6B;" title="Aubergine" aria-label="Aubergine"></button>
+            <button class="palette-btn" data-theme="red" style="background:#FF0033;" title="red" aria-label="red"></button>
             <button class="palette-btn" data-theme="copper" style="background:#ff7b00;" title="Copper" aria-label="Copper"></button>
             <button class="palette-btn" data-theme="purple" style="background:#6A0DAD;" title="Purple" aria-label="Purple"></button>
           </div>
@@ -124,7 +131,7 @@
 </section>
 
   <section id="contact" class="contact-reviews wrap">
-  <div class="contact-card">
+  <div class="card contact-card">
     <h2>Contact</h2>
     <p class="contact-sub">Have an idea? Let’s hear it. Reach out below.</p>
     <form class="contact-form" id="contact-form" novalidate>
