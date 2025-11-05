@@ -1,44 +1,167 @@
-.shot {
-  position: relative;
-  overflow: hidden;
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
-  min-height: 180px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
+/* Layout tuning */
+.wrap { max-width: 1100px; margin: 0 auto; }
+.hero { background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.04)); }
+
+/* Responsive main/sidebar stacking */
+@media (min-width: 992px) {
+  main { order: 0; }
+  aside { order: 1; }
+}
+@media (max-width: 991.98px) {
+  .site-header .navbar { flex-direction: column; gap: .5rem; align-items: flex-start; }
 }
 
+/* Hero content */
+.hero h2, .hero h3 { color: var(--bs-body-color); }
+.hero .metric { min-width: 120px; }
+
+/* Metric styling */
+.metric {
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  border: 1px solid rgba(255,255,255,0.04);
+  box-shadow: inset 0 -6px 18px rgba(0,0,0,0.2);
+}
+
+/* Key capabilities grid: keep rows tidy on small screens */
+.row .bg-card { background: transparent; border: none; padding: 1rem 0.75rem; }
+
+/* Screenshot grid improvements */
+.screenshots-grid { align-items: stretch; }
+.shot { min-height: 160px; aspect-ratio: 16/9; padding: 0; margin: 0; display: block; border-radius: 10px; }
+.shot-img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; display: block; }
+
+/* shot focus for keyboard users */
+.shot:focus { outline: 3px solid rgba(120, 95, 255, 0.18); outline-offset: 4px; box-shadow: 0 6px 30px rgba(0,0,0,0.6); transform: translateY(-2px); transition: transform .2s ease; }
+
+/* Label contrast and sizing */
+.shot-label {
+  left: 12px; bottom: 12px; padding: 6px 10px; font-weight: 700;
+  color: #fff; font-size: 0.9rem; letter-spacing: 0.2px;
+}
+
+/* Image reveal improvements (avoid jump when switching from blurred svg placeholder) */
+.shot-img { transition: filter .45s cubic-bezier(.2,.9,.2,1), transform .45s cubic-bezier(.2,.9,.2,1), opacity .35s ease; }
+.shot-img.loaded { filter: none; transform: none; opacity: 1; }
+
+/* Prevent accidental text selection on snapshot labels */
+.shot-label, .shot-img { -webkit-user-select: none; user-select: none; }
+
+/* Pre elements: readable in dark */
+pre.snippet {
+  background: linear-gradient(180deg, rgba(255,255,255,0.012), rgba(0,0,0,0.03));
+  border: 1px solid rgba(255,255,255,0.04);
+  color: #cfcfcf;
+  white-space: pre-wrap; word-break: break-word; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace;
+  margin: 0;
+}
+
+/* Footer spacing */
+footer { padding-bottom: 32px; padding-top: 18px; }
+
+/* Tweak for very small screens */
+@media (max-width: 420px) {
+  .project-title { font-size: 1.05rem; }
+  .metric { min-width: 100px; padding: 0.75rem; font-size: 0.95rem; }
+  .shot-label { font-size: 0.82rem; left: 8px; bottom: 8px; padding: 5px 8px; }
+}
+
+/* ---------- Metrics: responsive, non-breaking ---------- */
+.metrics {
+  display: flex;
+  gap: 0.75rem;
+  align-items: stretch;
+  flex-wrap: wrap;
+}
+.metric {
+  flex: 1 1 clamp(120px, 30%, 1fr); /* prefer equal width; never smaller than ~120px */
+  min-width: 120px;
+  box-sizing: border-box;
+  padding: 0.8rem;
+  text-align: center;
+  border-radius: 10px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.04));
+  border: 1px solid rgba(255,255,255,0.04);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+}
+
+/* Make numbers prominent but not overflow */
+.metric .fs-4 { font-size: clamp(1.0rem, 2.8vw, 1.4rem); line-height: 1; }
+.metric .small { font-size: 0.85rem; opacity: 0.9; }
+
+/* On very narrow screens stack vertically and add breathing room */
+@media (max-width: 420px) {
+  .metrics { gap: 0.5rem; }
+  .metric { width: 100%; flex-basis: 100%; padding: 0.7rem; }
+  .metric .fs-4 { font-size: 1.15rem; }
+}
+
+/* ---------- Screenshots: preserve aspect ratio, avoid squish ---------- */
+.screenshot-figure, .shot { display: block; width: 100%; margin: 0; padding: 0; }
+.shot { aspect-ratio: 16/9; min-height: 120px; overflow: hidden; border-radius: 10px; background: #241628; }
 .shot-img {
-  display: block;
   width: 100%;
-  height: auto;
-  max-height: 420px;
+  height: 100%;
   object-fit: cover;
+  display: block;
   filter: blur(8px) saturate(.95);
   transform: scale(1.02);
-  transition: filter .45s ease, transform .45s ease, opacity .45s ease;
-  opacity: 0.95;
+  transition: filter .45s ease, transform .45s ease, opacity .35s ease;
+  opacity: 0.96;
+  max-height: none; /* prevent the previous max-height causing awkward crops */
+}
+.shot-img.loaded { filter: none; transform: none; opacity: 1; }
+
+/* Prevent the placeholder SVG from forcing a tiny layout; let aspect-ratio do the work */
+.shot img[src^="data:image/svg+xml"] { width: 100%; height: 100%; display:block; object-fit: cover; }
+
+/* Smaller screens: reduce label size & padding */
+@media (max-width: 420px) {
+  .shot { aspect-ratio: 4/3; min-height: 110px; }
+  .shot-label { font-size: 0.78rem; left: 8px; bottom: 8px; padding: 5px 8px; }
 }
 
-/* When loaded, remove blur and normalize scale */
-.shot-img.loaded {
-  filter: blur(0) saturate(1);
-  transform: scale(1);
-  opacity: 1;
+/* ---------- Key Capabilities: grid layout with consistent separators ---------- */
+.cap-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.04);
+}
+.cap {
+  padding: 0.9rem 0.95rem;
+  background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.02));
+  color: var(--bs-body-color);
+  font-weight: 600;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  min-height: 56px;
 }
 
-/* caption styling */
-.shot-label {
-  position: absolute;
-  left: 12px;
-  bottom: 12px;
-  padding: 6px 10px;
-  font-weight: 700;
-  color: var(--ivory);
-  background: rgba(0,0,0,0.35);
-  backdrop-filter: blur(4px);
-  border-radius: 6px;
-  pointer-events: none;
-  font-size: 0.9rem;
+/* vertical separators */
+.cap + .cap { border-left: 1px solid rgba(255,255,255,0.03); }
+
+/* horizontal separators: add top border for second row items */
+.cap-grid > .cap:nth-child(n+4) { border-top: 1px solid rgba(255,255,255,0.03); }
+
+/* Responsive breakpoints for the capabilities grid */
+@media (max-width: 991.98px) {
+  .cap-grid { grid-template-columns: repeat(2, 1fr); }
+  .cap-grid > .cap:nth-child(odd) { border-left: none; }
+  .cap + .cap { border-left: 1px solid rgba(255,255,255,0.03); }
 }
+@media (max-width: 520px) {
+  .cap-grid { grid-template-columns: 1fr; }
+  .cap + .cap { border-left: none; }
+  .cap-grid > .cap:nth-child(n+2) { border-top: 1px solid rgba(255,255,255,0.03); }
+  .cap { padding: 0.8rem; min-height: 48px; font-size: 0.92rem; }
+}
+
+/* ---------- Small visual polish ---------- */
+.cap { background-clip: padding-box; }
+.cap-grid .cap:hover { background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.005)); }

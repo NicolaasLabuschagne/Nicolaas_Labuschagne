@@ -29,7 +29,7 @@
   <div class="row gx-4 align-items-start">
     <!-- Main Content -->
     <main class="col-lg-8 p-3">
-      <div class="p-4 rounded shadow hero-card border" id="project-heading" aria-describedby="project-desc">
+      <div class="p-4 rounded shadow hero-card border hero" id="project-heading" aria-describedby="project-desc">
         <h2 class="fs-5 mb-2">Overview</h2>
         <p id="project-desc" class="text-muted mb-3 fs-6">
           A robust helpdesk platform engineered to cut resolution time and enforce accountability. Tickets, escalations, built-in auditability, and organization-aware permissions let operations scale confidently.
@@ -41,7 +41,7 @@
           <span class="badge bg-secondary">ABP</span>
         </div>
 
-        <div class="d-flex gap-3 mb-5">
+        <div class="metrics mb-5">
           <div class="metric text-white p-3 rounded flex-fill text-center bg-opacity-10 bg-white">
             <div class="fs-4 fw-bold">80%</div>
             <div class="text-muted small">SLA Compliance</div>
@@ -57,31 +57,19 @@
         </div>
 
         <h3 class="fs-6 mb-2">Key Capabilities</h3>
-        <div class="row mb-4">
-          <div class="col-md-4" style="border-right: var(--bs-border-style);border-bottom: var(--bs-border-style);border-color: var(--bs-border-color-translucent)">
-            <div class="p-3 rounded bg-card text-muted fw-semibold">Ticket lifecycles with SLA timers</div>
-          </div>
-          <div class="col-md-4" style="border-right: var(--bs-border-style);border-bottom: var(--bs-border-style);border-color: var(--bs-border-color-translucent)">
-            <div class="p-3 rounded bg-card text-muted fw-semibold">RBAC with tenant-aware scopes</div>
-          </div>
-          <div class="col-md-4" style="border-bottom: var(--bs-border-style);border-color: var(--bs-border-color-translucent)">
-            <div class="p-3 rounded bg-card text-muted fw-semibold">Audit logs, immutable events</div>
-          </div>
-          <div class="col-md-4" style="border-right: var(--bs-border-style);border-color: var(--bs-border-color-translucent)">
-            <div class="p-3 rounded bg-card text-muted fw-semibold">Automated escalation and routing</div>
-          </div>
-          <div class="col-md-4" style="border-right: var(--bs-border-style);border-color: var(--bs-border-color-translucent)">
-            <div class="p-3 rounded bg-card text-muted fw-semibold">Activity timeline & commenting</div>
-          </div>
-          <div class="col-md-4">
-            <div class="p-3 rounded bg-card text-muted fw-semibold">Integrations: Email, Webhooks, Reporting</div>
-          </div>
+        <div class="cap-grid mb-4">
+          <div class="cap">Ticket lifecycles with SLA timers</div>
+          <div class="cap">RBAC with tenant-aware scopes</div>
+          <div class="cap">Audit logs, immutable events</div>
+          <div class="cap">Automated escalation and routing</div>
+          <div class="cap">Activity timeline & commenting</div>
+          <div class="cap">Integrations: Email, Webhooks, Reporting</div>
         </div>
 
         <h3 class="fs-6 mb-2">Screenshots</h3>
 <div class="row g-3 mb-4 screenshots-grid">
   <div class="col-md-6">
-    <figure class="shot rounded">
+    <figure class="shot rounded" tabindex="0">
       <img
         class="shot-img lazy"
         alt="Ticket Board screenshot"
