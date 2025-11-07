@@ -71,15 +71,50 @@ document.addEventListener('DOMContentLoaded', function () {
   form.addEventListener('submit', function (e) {
     e.preventDefault();
 
+    const name = form.name.value.trim();
+    const email = form.email.value.trim();
+    const message = form.message.value.trim();
+
+    const blockedEmail = 'Zhaques2001@gmail.com'; // Replace with your actual email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const letterRegex = /[a-zA-Z]/;
+
+    success.hidden = true;
+
+    // Validation checks
+    if (!name || !email || !message) {
+      success.textContent = 'Please fill in all fields.';
+      success.hidden = false;
+      return;
+    }
+    if (!letterRegex.test(name)) {
+      success.textContent = 'Please use letters to write your Name.';
+      success.hidden = false;
+      return;
+    }
+
+    if (!emailRegex.test(email)) {
+      success.textContent = 'Please enter a valid email address.';
+      success.hidden = false;
+      return;
+    }
+
+    if (email.toLowerCase() === blockedEmail.toLowerCase()) {
+      success.textContent = 'Nice try. Please use a different email address.';
+      success.hidden = false;
+      return;
+    }
+
+    // Send email if validation passes
     emailjs.sendForm('service_zznwqah', 'template_78ww9gj', this)
       .then(() => {
-        success.hidden = false;
         success.textContent = 'Thanks — message sent.';
+        success.hidden = false;
         form.reset();
         setTimeout(() => { success.hidden = true; }, 4000);
       }, (error) => {
-        success.hidden = false;
         success.textContent = 'Something went wrong. Please try again.';
+        success.hidden = false;
         console.error('EmailJS error:', error);
       });
   });
