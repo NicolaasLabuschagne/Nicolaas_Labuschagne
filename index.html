@@ -15,6 +15,7 @@
   </script>
   <link rel="stylesheet" href="./CSS/style.css" />
   <script defer src="./JS/script.js"></script>
+  <script defer src="./JS/obfuscated.js"></script>
   <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script>
@@ -33,13 +34,8 @@
           <h2 class="hero-sub">LABUSCHAGNE</h2>
           <p class="hero-tag">Creative · Professional</p>
           <p class="hero-strap"><span id="strap-text"></span><span class="hero-cursor">|</span></p><br/>
-          <a class="cta" href="#work">See Work</a>
-          <a class="cta" href="./CV/Nicolaas-Labuschagne-CV.pdf" download>Download CV</a>
-          <div id="theme-popup" class="theme-popup" role="status" aria-live="polite">
-            <div class="bubble">
-              This site changes colors every time you refresh.
-            </div>
-          </div>
+          <a class="cta" href="#work">See My Work</a>
+          <a class="cta" href="./CV/Nicolaas-Labuschagne-CV.pdf" download>Download My CV</a>
         </div>
         <div class="left-overlay"></div>
         
@@ -62,7 +58,11 @@
         </div>
       </div>
   </section>
-
+  <div id="theme-popup" class="theme-popup" role="status" aria-live="polite">
+    <div class="bubble">
+      This site changes colors every time you refresh.
+    </div>
+  </div>
   <section id="work" class="section wrap">
   <h2 style="padding-left: clamp(18px, 4vw, 48px);">View My Work</h2>
 
@@ -111,10 +111,11 @@
     </a>
   </div>
 
-  <section id="about" class="about-section wrap">
+  <section id="about" class="about-section wrap" style="position:relative;">
+    
     <h2>About Me</h2>
-
     <div class="card about-content">
+      
       <p>
         I’m <strong>Nicolaas Labuschagne</strong> — a full-stack developer, systems architect, and creative problem-solver. I build software that works hard and looks good doing it. From debt recovery platforms to immersive web experiences, my work is rooted in clarity, scalability, and real-world impact.
       </p>
@@ -138,7 +139,9 @@
     </div>
   </section>
 </section>
-
+<div class="back">
+      <canvas id="about-canvas" aria-hidden="true"></canvas>
+    </div>
   <section id="contact" class="contact-reviews wrap">
   <div class="card contact-card">
     <h2>Contact</h2>
@@ -173,5 +176,4 @@
   </nav>
 </footer>
 </body>
-
 </html>

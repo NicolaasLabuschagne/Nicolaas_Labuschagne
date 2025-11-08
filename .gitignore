@@ -52,6 +52,7 @@ public/uploads/
 storage/
 files/
 test-site/
+JS/marty.js
 
 # Miscellaneous
 *.tgz
