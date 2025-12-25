@@ -15,7 +15,7 @@
   </script>
   <link rel="stylesheet" href="./CSS/style.css" />
   <script defer src="./JS/script.js"></script>
-  <script defer src="./JS/obfuscated.js"></script>
+  <script defer src="./JS/animation.js"></script>
   <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script>
@@ -23,7 +23,7 @@
 </script>
 </head>
 <body>
-
+  <a href="#work" class="skip-to-content">Skip to content</a>
   <section id="hero-poster" class="hero-poster">
       <canvas id="matrix-canvas" aria-hidden="true"></canvas> <!-- Moved here -->
       <div class="hero-left1">
@@ -38,7 +38,7 @@
           <a class="cta" href="./CV/Nicolaas-Labuschagne-CV.pdf" download>Download My CV</a>
         </div>
         <div class="left-overlay"></div>
-        
+
       </div>
       <div class="hero-left">
         <div class="photo-stack">
@@ -75,32 +75,29 @@
       </article>
     </a>
 
-    <a class="card-link-wrapper" aria-label="Open Project Board project">
-      <article class="card" role="article">
+    <div class="card-wrapper" role="article" aria-label="Project Board project">
+      <article class="card">
         <h3>Project Board</h3>
-        <p>Priority matrix, release planning, and developer handoff logic for agile squads.</p>
+        <p>A comprehensive project management tool for agile squads, featuring a priority matrix for clear task organization, release planning capabilities to streamline development cycles, and intelligent developer handoff logic to ensure smooth transitions.</p>
         <span class="tag">UX · Supabase · GitHub</span>
-        <span class="tag-left">Under Construction</span>
       </article>
-    </a>
+    </div>
 
-    <a class="card-link-wrapper  d-none" href="./projects/CinematicBackgrounds/CinematicBackgrounds.html" aria-label="Open Cinematic Backgrounds project">
+    <a class="card-link-wrapper" href="./projects/CinematicBackgrounds/CinematicBackgrounds.html" aria-label="Open Cinematic Backgrounds project">
       <article class="card" role="article">
         <h3>Cinimatic Backgrounds</h3>
-        <p>Interactive artistic gallery showcasing dynamic JavaScript backgrounds with particle systems, neural networks, and holographic effects.</p>
+        <p>An immersive and interactive artistic gallery that showcases a collection of dynamic JavaScript-powered backgrounds. Explore mesmerizing visuals created with particle systems, neural networks, and holographic effects, pushing the boundaries of creative web design.</p>
         <span class="tag">JavaScript · Canvas · Interactive Art</span>
-        <span class="tag-left">Under Construction</span>
       </article>
     </a>
 
-    <a class="card-link-wrapper" aria-label="Open Property Management Suite project">
-      <article class="card" role="article">
+    <div class="card-wrapper" role="article" aria-label="Property Management Suite project">
+      <article class="card">
         <h3>Property Management Suite</h3>
-        <p>Custom-built tools for debt recovery, tenant tracking, and portfolio oversight.</p>
+        <p>A suite of custom-built tools designed to optimize property management workflows. This comprehensive solution includes robust features for debt recovery, efficient tenant tracking, and powerful portfolio oversight, enabling data-driven decision-making.</p>
         <span class="tag">Real Estate · Razor Pages · MySQL</span>
-        <span class="tag-left">Under Construction</span>
       </article>
-    </a>
+    </div>
 
     <a class="card-link-wrapper d-none" href="./projects/UnderConstruction.html" aria-label="Template">
       <article class="card" role="article">
@@ -112,10 +109,10 @@
   </div>
 
   <section id="about" class="about-section wrap" style="position:relative;">
-    
+
     <h2>About Me</h2>
     <div class="card about-content">
-      
+
       <p>
         I’m <strong>Nicolaas Labuschagne</strong> — a full-stack developer, systems architect, and creative problem-solver. I build software that works hard and looks good doing it. From debt recovery platforms to immersive web experiences, my work is rooted in clarity, scalability, and real-world impact.
       </p>
@@ -171,8 +168,8 @@
 <footer class="site-footer wrap">
   <p>© Nicolaas Labuschagne</p>
   <nav class="footer-nav">
-    <a class="fa fa-linkedin" href="https://www.linkedin.com/in/nicolaas-labuschagne-919739286/" title="LinkedIn"></a>
-<a class="fa fa-github" href="https://github.com/NicolaasLabuschagne" title="GitHub"></a>
+    <a class="fa fa-linkedin" href="https://www.linkedin.com/in/nicolaas-labuschagne-919739286/" title="LinkedIn"><span class="sr-only">LinkedIn</span></a>
+    <a class="fa fa-github" href="https://github.com/NicolaasLabuschagne" title="GitHub"><span class="sr-only">GitHub</span></a>
   </nav>
 </footer>
 </body>
