@@ -1,199 +1,834 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nicolaas Labuschagne — Creative • Professional</title>
-
-  <!-- SEO Meta Tags -->
-  <meta name="description" content="The portfolio of Nicolaas Labuschagne, a full-stack developer, systems architect, and creative problem-solver specializing in building software that is both functional and beautiful.">
-  <meta name="keywords" content="Nicolaas Labuschagne, full-stack developer, systems architect, creative problem-solver, web development, software development, portfolio">
-  <meta name="author" content="Nicolaas Labuschagne">
-
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://nicolaaslabuschagne.github.io/Nicolaas_Labuschagne/">
-  <meta property="og:title" content="Nicolaas Labuschagne — Creative • Professional">
-  <meta property="og:description" content="The portfolio of Nicolaas Labuschagne, a full-stack developer, systems architect, and creative problem-solver.">
-  <meta property="og:image" content="https://nicolaaslabuschagne.github.io/Nicolaas_Labuschagne/images/me-website.png">
-
-  <!-- Twitter -->
-  <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="https://nicolaaslabuschagne.github.io/Nicolaas_Labuschagne/">
-  <meta property="twitter:title" content="Nicolaas Labuschagne — Creative • Professional">
-  <meta property="twitter:description" content="The portfolio of Nicolaas Labuschagne, a full-stack developer, systems architect, and creative problem-solver.">
-  <meta property="twitter:image" content="https://nicolaaslabuschagne.github.io/Nicolaas_Labuschagne/images/me-website.png">
-
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DT4LJD75X9"></script>
-  <script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3EV7DD243Y"></script>
+    <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
-    gtag('config', 'G-DT4LJD75X9');
-  </script>
-  <link rel="stylesheet" href="./CSS/style.css" />
-  <script defer src="./JS/script.js"></script>
-  <script defer src="./JS/obfuscated.js"></script>
-  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<script>
-  emailjs.init("DZWWPqVLQWRNUnLB5");
-</script>
+    gtag('config', 'G-3EV7DD243Y');
+    </script>
+
+
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "project_id");
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="images/pet-favicon.svg">
+    <title>Nicolaas Labuschagne | Systems Architect & Full Stack Developer</title>
+    <link rel="stylesheet" href="CSS/style1.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Caveat:wght@400..700&family=Inter:wght@400;700&family=Montserrat:wght@400;700;900&family=Fredoka:wght@400;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+
+    <!-- GitHub Calendar Library -->
+    <link rel="stylesheet" href="https://unpkg.com/github-calendar@latest/dist/github-calendar-responsive.css" />
+    <script src="https://unpkg.com/github-calendar@latest/dist/github-calendar.min.js"></script>
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-low": "var(--surface-low)",
+              "surface": "var(--surface)",
+              "tertiary-container": "var(--secondary-color)",
+              "inverse-surface": "var(--surface-high)",
+              "surface-dim": "var(--surface)",
+              "on-primary-container": "var(--on-primary-color)",
+              "on-secondary-container": "var(--on-secondary-color)",
+              "on-accent-container": "var(--on-accent-color)",
+              "secondary": "var(--accent-color)",
+              "surface-tint": "var(--primary-color)",
+              "outline-variant": "var(--border-color)",
+              "secondary-fixed": "var(--secondary-color)",
+              "inverse-primary": "var(--primary-color)",
+              "on-tertiary": "var(--on-secondary-color)",
+              "on-primary": "var(--on-primary-color)",
+              "on-secondary": "var(--on-secondary-color)",
+              "on-accent": "var(--on-accent-color)",
+              "on-primary-fixed-variant": "var(--on-primary-color)",
+              "surface-container-high": "var(--surface-high)",
+              "on-tertiary-fixed": "var(--on-secondary-color)",
+              "on-secondary-fixed": "var(--on-secondary-color)",
+              "tertiary": "var(--bg-color)",
+              "error": "var(--error-color)",
+              "tertiary-fixed-dim": "var(--secondary-color)",
+              "on-surface": "var(--text-color)",
+              "surface-container": "var(--surface-low)",
+              "primary": "var(--primary-color)",
+              "surface-container-highest": "var(--surface-highest)",
+              "on-primary-fixed": "var(--on-primary-color)",
+              "error-container": "var(--error-color)",
+              "surface-container-lowest": "var(--surface-lowest)",
+              "outline": "var(--text-dim)",
+              "on-surface-variant": "var(--text-dim)",
+              "on-secondary": "var(--on-secondary-color)",
+              "on-tertiary-fixed-variant": "var(--on-secondary-color)",
+              "on-tertiary-container": "var(--on-secondary-color)",
+              "primary-fixed": "var(--primary-color)",
+              "primary-fixed-dim": "var(--primary-color)",
+              "on-error": "var(--on-accent-color)",
+              "primary-container": "var(--primary-color)",
+              "surface-bright": "var(--surface-highest)",
+              "inverse-on-surface": "var(--bg-color)",
+              "on-error-container": "var(--on-accent-color)",
+              "secondary-fixed-dim": "var(--accent-color)",
+              "on-background": "var(--text-color)",
+              "secondary-container": "var(--accent-color)",
+              "on-secondary-fixed-variant": "var(--on-secondary-color)",
+              "background": "var(--bg-color)",
+              "tertiary-fixed": "var(--secondary-color)"
+            },
+            fontFamily: {
+              "headline": ["var(--font-main)"],
+              "body": ["var(--font-body)"],
+              "label": ["var(--font-mono)"],
+              "hand": ["var(--font-cursive)"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+
+    <style type="text/tailwindcss">
+        @layer utilities {
+          /* Default look */
+          .nav-link {
+            @apply text-on-surface-variant hover:text-on-surface transition-colors hover:scale-105 hover:-rotate-1;
+          }
+
+          /* Active look */
+          .nav-link.active {
+            @apply text-primary border-b-4 border-primary pb-1 shadow-[0_2px_10px_rgba(190,242,100,0.5)] transition-all duration-150;
+          }
+        }
+    </style>
 </head>
-<body>
+<body class="theme-creative">
+    <div id="scroll-progress-container" class="scroll-progress-container">
+        <div id="scroll-progress-bar" class="scroll-progress-bar"></div>
+    </div>
 
-  <section id="hero-poster" class="hero-poster">
-      <canvas id="matrix-canvas" aria-hidden="true"></canvas> <!-- Moved here -->
-      <div class="hero-left1">
-        <div class="type-wrap">
-          <div class="cloud" aria-hidden="true" role="presentation"></div>
-          <h3 class="hero-eyebrow">Fullstack developer</h3>
-          <h1 class="hero-title">NICOLAAS</h1>
-          <h2 class="hero-sub">LABUSCHAGNE</h2>
-          <p class="hero-tag">Creative · Professional</p>
-          <p class="hero-strap"><span id="strap-text"></span><span class="hero-cursor">|</span></p><br/>
-          <a class="cta" href="#work">See My Work</a>
-          <a class="cta" href="./CV/Nicolaas-Labuschagne-CV.pdf" download>Download My CV</a>
+    <!-- TopAppBar Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-b-4 border-on-surface bg-gradient-to-b from-primary/10 to-transparent shadow-[0_4px_0_0_var(--on-surface)]">
+        <div class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
+            <a href="#hero" target="_blank" class="text-2xl font-black text-primary italic tracking-tighter font-headline uppercase">
+                GLOBAL_DEV
+            </a>
+            <div class="hidden md:flex gap-8 items-center font-headline font-bold tracking-tight uppercase">
+                <a href="#journey" class="nav-link">The Narrative</a>
+                <a href="#skills" class="nav-link">Projects</a>
+                <a href="#the-lab" class="nav-link">The Lab</a>
+                <a href="#experience-map" class="nav-link">World Hub</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <button class="hidden md:inline-block material-symbols-outlined text-primary hover:scale-110 transition-transform" id="theme-toggle">terminal</button>
+                <button class="bg-primary text-on-primary font-headline font-bold uppercase px-6 py-2 rounded-full border-2 border-on-surface active:translate-y-1 transition-all">
+                    Hire Me
+                </button>
+            </div>
         </div>
-        <div class="left-overlay"></div>
+    </nav>
 
-      </div>
-      <div class="hero-left">
-        <div class="photo-stack">
-          <img src="./images/me-website.png" />
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="relative z-10 pt-32 pb-24 px-6 md:px-12 max-w-7xl mx-auto blueprint-bg animate-reveal">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <!-- Central Portrait -->
+                <div class="relative group">
+                    <div class="absolute -inset-4 bg-secondary-container opacity-20 blur-2xl group-hover:opacity-40 transition-opacity"></div>
+                    <div class="relative w-72 h-72 md:w-96 md:h-96 border-4 border-on-surface bg-surface-container-highest rounded-2xl overflow-hidden hard-shadow-pink sticker-rotate-ccw">
+                        <img src="images/myPic.png" alt="Nicolaas Portrait" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500">
+                        <div class="absolute bottom-4 left-4 bg-tertiary-container text-on-tertiary-container px-3 py-1 font-mono text-xs font-bold rounded-md border-2 border-on-surface">
+                            SYSTEM_ARCHITECT_V2
+                        </div>
+                    </div>
+                    <!-- Hand-drawn annotation -->
+                    <div class=" md:block absolute speech-bubble-hero -top-12 -right-16 sticker-rotate-cw text-on-primary">
+                        HI, I'm Nicolaas!
+                    </div>
+
+                    <!-- Floating Keyboard Command Stickers -->
+                    <div class="hidden md:block absolute top-1/4 -left-8 md:-left-12 opacity-0 group-hover:opacity-100 group-hover:-translate-y-6 transition-all duration-500 delay-75 pointer-events-none">
+                        <span class="bg-primary text-on-primary px-4 py-2 rounded-lg border-2 border-on-surface font-label font-black hard-shadow-pink -rotate-12 block">CTRL</span>
+                    </div>
+                    <div class="hidden md:block absolute top-1/2 -left-12 md:-left-20 opacity-0 group-hover:opacity-100 group-hover:-translate-y-10 transition-all duration-500 delay-150 pointer-events-none">
+                        <span class="bg-tertiary-container text-on-tertiary-container px-4 py-2 rounded-lg border-2 border-on-surface font-label font-black hard-shadow rotate-6 block">ALT</span>
+                    </div>
+                    <div class="hidden md:block absolute top-3/4 -left-8 md:-left-12 opacity-0 group-hover:opacity-100 group-hover:-translate-y-6 transition-all duration-500 delay-225 pointer-events-none">
+                        <span class="bg-secondary text-on-secondary px-4 py-2 rounded-lg border-2 border-on-surface font-label font-black hard-shadow-lime -rotate-6 block">DEL</span>
+                    </div>
+                </div>
+                <!-- Hero Text -->
+                <div class="flex-1 text-center lg:text-left">
+                    <div class="mb-4 flex flex-wrap justify-center lg:justify-start gap-2">
+                        <span class="bg-secondary text-on-secondary px-4 py-1 rounded-full font-mono text-xs font-bold tracking-widest uppercase">Intermediate Architect</span>
+                        <span class="bg-primary-fixed-dim text-on-primary-fixed px-4 py-1 rounded-full font-mono text-xs font-bold tracking-widest uppercase">Google Junky</span>
+                    </div>
+                    <h1 class="font-headline text-6xl md:text-8xl font-black text-primary-container leading-none tracking-tighter uppercase mb-6 drop-shadow-[4px_4px_0px_var(--border-color)] glow-lime">
+                        BUILDING THE <br/> <span class="text-on-primary-container italic">CYBER FUTURE</span>
+                    </h1>
+                    <p class="font-body text-xl text-on-surface-variant max-w-xl mb-10 leading-relaxed">
+                        Crafting high-performance distributed systems with a focus on scalability, resilience, and clean-sheet architectural design.
+                    </p>
+                    <div class="flex flex-wrap justify-center lg:justify-start gap-6 mb-12">
+                        <a href="CV/Nicolaas-Labuschagne-CV.pdf" target="_blank" class="bg-primary-container text-on-primary-fixed-variant px-8 py-4 rounded-xl font-headline font-bold text-xl uppercase border-4 border-on-surface hard-shadow-pink hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all">
+                            View Dossier
+                        </a>
+                        <a href="#skills" target="_blank" class="bg-surface-container-high text-on-surface px-8 py-4 rounded-xl font-headline font-bold text-xl uppercase border-4 border-on-surface hard-shadow-lime hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all">
+                            The Stack
+                        </a>
+                    </div>
+
+                    <!-- Buy Me a Coffee Standout -->
+                    <div class="relative inline-block mt-8 group ml-0 lg:ml-24">
+                        <div class="absolute inset-0 bg-secondary-container rounded-2xl blur opacity-30 group-hover:opacity-60 transition duration-1000 group-hover:duration-200 animate-pulse"></div>
+                        <a href="https://www.paypal.com/paypalme/NicolaasL" target="_blank" class="relative flex items-center bg-tertiary-container text-on-tertiary-container px-8 py-6 rounded-2xl border-4 border-on-surface hard-shadow btn-hero-coffee transition-all">
+                            <span class="text-4xl"><svg viewBox="0 0 300 225" width="75" height="56.25" fill="none" xmlns="http://www.w3.org/2000/svg" class="bmc-icon" style="width:75px;height:auto;max-width:100%"><rect width="300" height="225" fill="var(--bmc-bg,#ffde01)"/><path d="M184.61279,103.34517c0.1626,-1.47275 0.28271,-2.91372 0.48779,-4.45562c0.31055,-2.33613 1.23633,-7.63447 -2.58545,-7.74902c-2.22217,-0.06665 -5.2998,0.44092 -7.64209,0.64878c-4.35791,0.36914 -8.72168,0.64277 -13.08984,0.8209c-17.4186,0.69595 -34.86372,-0.21958 -52.11328,-2.73501c-5.23491,-0.75381 -11.89849,-1.05234 -15.56587,-5.1542c-2.22202,-2.47251 -3.34512,-5.74102 -3.11206,-9.05713c0.14326,-2.2793 1.80498,-10.23809 2.75127,-12.31069c0.65098,-1.44741 1.60225,-2.73984 2.79082,-3.7916c5.18218,-4.57324 11.05957,-2.48071 17.13779,-1.50762c3.51064,0.53027 7.03535,0.96299 10.57017,1.29785c17.41157,1.71943 34.94985,1.72559 52.36245,0.01846c1.74023,-0.17168 9.83789,-0.28887 9.49658,-2.59922c-0.67969,-4.61851 -1.78418,-9.44019 -2.96484,-13.97666c-1.02979,-3.00937 -5.37744,-3.46597 -7.92627,-3.98247c-10.125,-2.05107 -21.35156,-2.47295 -31.62773,-2.25205c-4.53677,0.09741 -20.34243,0.88638 -23.47354,2.56787c-0.21577,0.40898 -0.15454,0.26118 -0.10942,0.78765c0.45645,0.64453 1.45356,0.65713 2.29307,0.80244c12.04922,2.08667 24.82192,2.29102 37.02261,1.64971c2.43604,-0.14355 4.86914,-0.35435 7.29346,-0.63193c3.15234,-0.37104 7.3418,-1.59902 9.46729,1.40874c0.74414,1.04692 1.03271,2.35122 0.79834,3.61436c-0.83936,4.60591 -6.1333,4.15225 -9.86133,4.62803c-12.46582,1.59141 -55.47817,2.48701 -62.23198,-8.25601c-0.96021,-1.52373 -1.25083,-3.37559 -0.80347,-5.12007c0.57861,-2.32881 2.32383,-4.01045 4.34106,-5.18247c12.14692,-7.05835 45.25151,-6.56528 59.53228,-4.98398c4.36523,0.46318 8.68945,1.25625 12.93604,2.37261c3.94775,1.07124 8.4917,2.62705 10.65967,6.3646c1.89551,3.26938 2.43604,9.76655 3.06152,13.59082c0.25342,1.55405 0.44092,3.17314 1.06934,4.62964c1.76367,4.08604 7.64502,1.58174 10.90283,8.94478c1.00781,2.27637 1.40771,4.79238 1.88672,7.21948c0.6167,3.12759 1.23926,6.06372 0.34863,9.22427c-0.81885,2.91108 -2.73047,5.4895 -5.39062,6.96445c-0.76611,0.42524 -1.59521,0.80903 -2.44043,1.04985c-2.07422,0.59121 -4.48682,0.60674 -5.25146,3.03252c-0.50244,1.59067 -0.47754,3.6791 -0.64893,5.36675l-1.14258,11.19624l-5.05078,49.19736l-1.3916,13.67285c-0.41016,4.00635 -0.63721,9.31348 -2.08008,12.99316c-5.95605,15.1875 -23.52246,14.62207 -37.125,14.25439c-10.65747,-0.28711 -26.19243,0.33398 -32.26479,-10.58203c-2.49009,-4.47656 -2.66309,-11.93408 -3.19951,-17.14014l-2.14307,-20.56494l-3.352,-32.09458c-0.57158,-5.47778 -1.24277,-10.96641 -1.7061,-16.45327c-0.06797,-0.8061 -0.1916,-1.75356 0.03311,-2.53931c0.35054,-1.22549 1.42148,-2.2478 2.53491,-2.80122c1.13306,-0.56338 2.53169,-0.75601 3.74897,-0.35889c1.19048,0.38848 2.04478,1.3481 2.57769,2.44775c1.18052,2.43545 1.47949,10.27412 1.8416,13.40786c14.64624,3.18838 25.41255,0.70796 39.07178,-4.80483c5.09619,-1.9834 10.0708,-3.86719 15.55225,-4.44038c4.9585,-0.51841 8.95313,0.1689 13.72412,1.35117z" fill="var(--bmc-outline,#0c0c22)"/><path d="M116.26465,111.23921c14.64624,3.18838 25.41255,0.70796 39.07178,-4.80483c5.09619,-1.9834 10.0708,-3.86719 15.55225,-4.44038c4.9585,-0.51841 8.95313,0.1689 13.72412,1.35117l-5.50928,53.81206c-0.46143,4.47217 -0.96387,8.94434 -1.3667,13.4209c-0.27979,3.09961 -0.30908,6.38818 -1.05469,9.41455c-0.51123,2.08008 -1.60254,3.98584 -3.27246,5.35254c-5.625,4.60107 -20.06543,3.82031 -27.17285,3.68848c-3.15791,-0.05859 -6.35742,0.08789 -9.50054,-0.24756c-3.90513,-0.41602 -8.06895,-1.64795 -10.6374,-4.80762c-1.43628,-1.76514 -2.20298,-3.8833 -2.67554,-6.08496c-0.7103,-3.30908 -0.93442,-6.75732 -1.28379,-10.12207l-1.61104,-15.53613l-2.82861,-27.12393c-0.46992,-4.50396 -1.07534,-9.3832 -1.43525,-13.87222z" fill="var(--bmc-inner,#ffffff)"/><path d="M104.95693,66.4144c2.9395,-0.1519 6.8959,1.05732 9.83013,1.55493c3.10225,0.52603 6.10444,0.89487 9.22969,1.23457c14.28457,1.53442 28.6771,1.79458 43.00767,0.77739c5.66162,-0.40591 11.30713,-1.01938 16.9248,-1.8394c3.20947,-0.48794 6.39111,-1.16074 9.59473,-1.58364c2.47266,-0.32637 4.35352,0.73257 5.1665,3.10254c0.71045,2.06997 1.03711,5.29204 0.19629,7.37168c-0.52734,1.30254 -2.24121,1.99424 -3.45703,2.42739c-0.20947,0.04673 -0.41895,0.09038 -0.62842,0.13096c-4.59521,0.87627 -11.27637,1.56826 -15.95654,2.04507c-21.98437,2.30171 -44.16709,1.93242 -66.06299,-1.09966c-2.96045,-0.38218 -8.63511,-0.72964 -11.03906,-2.04902c-2.45625,-1.34824 -0.89443,-9.20522 0.70898,-11.00361c0.77212,-0.86587 1.44038,-0.95845 2.48525,-1.06919z" fill="var(--bmc-sleeve,#ffde01)"/></svg></span>
+                            <div class="text-left">
+                                <div class="font-headline font-black text-2xl leading-none uppercase">Fuel the Code</div>
+                                <div class="font-hand text-xl opacity-80 leading-none mt-1">Buy me a coffee?</div>
+                            </div>
+                        </a>
+                        <!-- Hand-drawn Arrow -->
+                        <div class="hidden md:block absolute -top-12 -left-36">
+                            <div class="font-hand text-2xl text-secondary-container rotate-12 flex flex-col items-center">
+                                <span class="mb-1">Totally worth it!</span>
+                                <svg width="60" height="60" viewBox="0 0 100 100" class="fill-none stroke-secondary-container stroke-[4]">
+                                    <path d="M10,10 Q50,10 90,90 M90,90 L70,80 M90,90 L85,60" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="marquee">
+            <div class="marquee-content">
+                <span>Systems Architect</span>
+                <span>Full Stack Developer</span>
+                <span>Creative Director</span>
+                <span>Amateur Cyclist</span>
+                <span>Problem Solver</span>
+                <span>Immersive Experiences</span>
+                <!-- Duplicate for seamless loop -->
+                <span>Systems Architect</span>
+                <span>Full Stack Developer</span>
+                <span>Creative Director</span>
+                <span>Amateur Cyclist</span>
+                <span>Problem Solver</span>
+                <span>Immersive Experiences</span>
+            </div>
         </div>
-        <div class="left-overlay"></div>
-        <div class="palette-switcher" aria-label="Palette switcher">
-          <div class="palette-question" role="note" tabindex="-1">
-            <span class="pq-label">Don’t like the colour? Why not change it!</span>
+
+        <section id="about" class="about section page my-page">
+            <div class="container section-container">
+                <div class="hidden md:block sticker sticker-lime" style="top: 100px; right: 50px; transform: rotate(-15deg);">Cyclist</div>
+                <div class="hidden md:block sticker sticker-purple" style="bottom: 5%; left: -10%; transform: rotate(10deg);">Business Minded</div>
+                <svg class="star-illustation floating-star" style="top: -20px; right: 10%; fill: var(--purple-color);" viewBox="0 0 24 24">
+                    <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" />
+                </svg>
+                <svg class="blob-bg blob-1" viewBox="0 0 200 200">
+                    <path d="M45,-60.1C58.1,-52.1,68.3,-38.4,73.4,-23.4C78.4,-8.4,78.2,7.9,73.1,22.8C68.1,37.6,58.2,50.9,45.3,60.1C32.4,69.4,16.2,74.5,0.7,73.6C-14.8,72.7,-29.6,65.8,-42.2,56C-54.8,46.1,-65.2,33.3,-69.5,18.9C-73.8,4.5,-72,-11.4,-65.3,-25.2C-58.7,-39,-47.2,-50.8,-34.1,-58.8C-21,-66.8,-10.5,-71.1,2.8,-74.9C16.1,-78.8,31.9,-68.2,45,-60.1Z" transform="translate(100 100)" />
+                </svg>
+                <h2 class="animate-reveal">ABOUT</h2>
+                <div class="about-content animate-reveal">
+                    <p>Dynamic <span class="hand-drawn-circle">systems architect
+                        <svg class="circle-svg" viewBox="0 0 250 80" preserveAspectRatio="none">
+                            <path d="M245,40 C245,60 200,75 125,75 C50,75 5,60 5,40 C5,20 50,5 125,5 C200,5 245,20 245,40 Z" />
+                        </svg>
+                    </span> & software engineer with a passion for <span class="highlight">designing</span> and constructing <span class="highlight">scalable distributed systems</span> and immersive web experiences.</p>
+                    <p>When I'm not <span class="highlight">architecting systems</span> or coding, you'll find me on my bicycle exploring the roads in the neighborhood or deep into a book. I'm an amateur cyclist with a professional's drive, and a <span class="highlight">lifelong learner</span> of business and psychology.</p>
+
+                    <div class="current-reads" style="margin-top: 40px; display: flex; gap: 20px; align-items: center;">
+                        <span style="font-weight: 800; font-size: 1.1rem;">Currently reading:</span>
+                        <div class="tags">
+                            <span title="The Bible">The Bible</span>
+                            <span title="The Psychology of Money">Psychology of Money</span>
+                            <span title="Rich Dad Poor Dad">Rich Dad Poor Dad</span>
+                            <span title="Think and Grow Rich">Think and Grow Rich</span>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="journey" class="py-24 bg-surface-container-lowest overflow-hidden animate-reveal">
+            <div class="max-w-7xl mx-auto px-6 relative">
+
+                <div class="mb-20 text-center relative">
+                    <div class="absolute -top-10 left-1/2 -translate-x-1/2 w-64 h-24 bg-primary/20 blur-3xl -z-10"></div>
+                    <h2 class="font-headline text-6xl md:text-8xl font-black uppercase tracking-tighter mb-4 inline-block relative">
+                        The Narrative
+                    </h2>
+                    <div class="flex items-center justify-center gap-2 font-mono text-sm uppercase font-bold text-on-surface-variant">
+                        <span class="w-12 h-1 bg-on-surface-variant"></span>
+                        Linear progression / chaotic growth
+                        <span class="w-12 h-1 bg-on-surface-variant"></span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 relative">
+                    <!-- Foundations -->
+                    <div class="relative group sticker-rotate-ccw stagger-1">
+                        <div class="bg-surface-container-high border-4 border-on-surface p-8 rounded-2xl hard-shadow group-hover:-translate-y-2 transition-transform h-full flex flex-col">
+                            <div class="flex justify-between items-start mb-6">
+                                <span class="bg-tertiary-container text-on-tertiary-container px-3 py-1 font-mono font-bold rounded">2022-23</span>
+                                <span class="material-symbols-outlined text-4xl text-primary-container" style="font-variation-settings: 'FILL' 1;">terminal</span>
+                            </div>
+                            <h3 class="font-headline text-3xl font-black text-on-surface uppercase mb-4 leading-tight">The Terminal<br/>Awakening</h3>
+                            <p class="font-body text-on-surface-variant mb-6 text-lg">Born at the prompt. The early days were a blur of C#, syntax errors, and the intoxicating smell of fresh logic. Building foundations brick by pixelated brick.</p>
+                            <div class="mt-auto font-hand text-secondary text-xl rotate-[-2deg]">"Hello world was just the bait..."</div>
+                        </div>
+                    </div>
+
+                    <!-- First Job -->
+                    <div class="relative group sticker-rotate-cw stagger-2 lg:mt-12">
+                        <div class="bg-surface-container-high border-4 border-on-surface p-8 rounded-2xl hard-shadow group-hover:-translate-y-2 transition-transform h-full flex flex-col">
+                            <div class="flex justify-between items-start mb-6">
+                                <span class="bg-secondary-container text-on-secondary-container px-3 py-1 font-mono font-bold rounded">2023-26</span>
+                                <span class="material-symbols-outlined text-4xl text-primary-container" style="font-variation-settings: 'FILL' 1;">developer_board</span>
+                            </div>
+                            <h3 class="font-headline text-3xl font-black text-on-surface uppercase mb-4 leading-tight">Industrial<br/>Integration</h3>
+                            <p class="font-body text-on-surface-variant mb-6 text-lg">Stepped into the professional arena as a Junior Dev. Learned that code is 20% typing and 80% navigating the human protocols of team production.</p>
+                            <div class="mt-auto font-hand text-xl rotate-[1deg] absolute bottom-4 left-4 bg-tertiary-container text-on-tertiary-container px-3 font-bold rounded-md">"Reality is a tough debugger."</div>
+                        </div>
+                    </div>
+
+                    <!-- Freelancing Phase 1 -->
+                    <div class="relative group sticker-rotate-ccw stagger-3 lg:mt-24">
+                        <div class="bg-surface-container-high border-4 border-on-surface p-8 rounded-2xl hard-shadow group-hover:-translate-y-2 transition-transform h-full flex flex-col">
+                            <div class="flex justify-between items-start mb-6">
+                                <span class="bg-primary-container text-on-primary-fixed px-3 py-1 font-mono font-bold rounded">2024</span>
+                                <span class="material-symbols-outlined text-4xl text-primary-container" style="font-variation-settings: 'FILL' 1;">rocket_launch</span>
+                            </div>
+                            <h3 class="font-headline text-3xl font-black text-on-surface uppercase mb-4 leading-tight">Rogue Ops:<br/>The Solo Run</h3>
+                            <p class="font-body text-on-surface-variant mb-6 text-lg">Trading stability for raw experience. Worked independently across the tech spectrum, honing the 'Generalist' edge and shipping products at light speed.</p>
+                            <div class="mt-auto font-hand text-primary text-xl -rotate-1">"Total freedom, total responsibility."</div>
+                        </div>
+                    </div>
+
+                    <!-- First Business -->
+                    <div class="relative group sticker-rotate-cw stagger-1 lg:-mt-6">
+                        <div class="bg-surface-container-high border-4 border-on-surface p-8 rounded-2xl hard-shadow group-hover:-translate-y-2 transition-transform h-full flex flex-col">
+                            <div class="flex justify-between items-start mb-6">
+                                <span class="bg-tertiary-container text-on-tertiary-container px-3 py-1 font-mono font-bold rounded">2024-25</span>
+                                <span class="material-symbols-outlined text-4xl text-primary-container" style="font-variation-settings: 'FILL' 1;">storefront</span>
+                            </div>
+                            <h3 class="font-headline text-3xl font-black text-on-surface uppercase mb-4 leading-tight">Agency Zero:<br/>The Venture</h3>
+                            <p class="font-body text-on-surface-variant mb-6 text-lg">Launched a boutique web studio. Built for the local market, fought for growth, and eventually closed the doors. A PhD in product-market fit failures.</p>
+                            <div class="mt-auto font-hand text-xl rotate-2 absolute bottom-4 left-4 bg-tertiary-container text-on-tertiary-container px-3 font-bold rounded-md">"Failure is just data for the next build."</div>
+                        </div>
+                    </div>
+
+                    <!-- Re-Freelancing -->
+                    <div class="relative group sticker-rotate-ccw stagger-2">
+                        <div class="bg-surface-container-high border-4 border-on-surface p-8 rounded-2xl hard-shadow group-hover:-translate-y-2 transition-transform h-full flex flex-col">
+                            <div class="flex justify-between items-start mb-6">
+                                <span class="bg-secondary-container text-on-secondary-container px-3 py-1 font-mono font-bold rounded">2025-26</span>
+                                <span class="material-symbols-outlined text-4xl text-primary-container" style="font-variation-settings: 'FILL' 1;">psychology</span>
+                            </div>
+                            <h3 class="font-headline text-3xl font-black text-on-surface uppercase mb-4 leading-tight">The Artisan<br/>Pivot</h3>
+                            <p class="font-body text-on-surface-variant mb-6 text-lg">Returning to the independent path with a surgical focus. Sharper instincts, better empathy, and a refusal to build anything that doesn't scale.</p>
+                            <div class="mt-auto font-hand text-secondary text-xl rotate-[-3deg]">"Design first, code later."</div>
+                        </div>
+                    </div>
+
+                    <!-- Future -->
+                    <div class="relative group sticker-rotate-cw stagger-3 lg:mt-12">
+                        <div class="bg-primary border-4 border-on-surface p-8 rounded-2xl hard-shadow-lime group-hover:-translate-y-2 transition-transform h-full flex flex-col">
+                            <div class="flex justify-between items-start mb-6">
+                                <span class="bg-on-primary text-primary px-3 py-1 font-mono font-bold rounded">FUTURE</span>
+                                <span class="material-symbols-outlined text-4xl text-primary-container" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                            </div>
+                            <h3 class="font-headline text-3xl font-black text-on-primary uppercase mb-4 leading-tight">Architecting<br/>The Singularity</h3>
+                            <p class="font-body text-on-primary opacity-80 mb-6 text-lg">Moving beyond features to systems. Designing software that breathes, adapts, and survives. The cyber future is autonomous, and I'm drawing the blueprints.</p>
+                            <div class="mt-auto font-hand text-xl rotate-1 font-bold text-on-surface-variant">"Evolution never stops."</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Artifact Gallery Section -->
+        <section id="skills" class="relative z-10 pt-32 pb-24 px-6 md:px-12 max-w-7xl mx-auto animate-reveal">
+            <div class="inline-block bg-secondary-container text-on-secondary-container font-label px-4 py-1 -rotate-2 mb-4 hard-shadow-pink">
+                ARTIFACT_GALLERY.v2
+            </div>
+            <h2 class="text-6xl md:text-8xl font-headline font-extrabold tracking-tighter leading-none mb-12">
+                HIGH-LOAD <br/>
+                <span class="text-primary-container italic underline decoration-secondary-container decoration-8 underline-offset-8">ARCHITECTURES</span>
+            </h2>
+            <p class="max-w-2xl text-xl font-body text-on-surface-variant leading-relaxed mb-16">
+                Building distributed systems that don't melt under pressure. Detailed technical blueprints for microservices, crafted with pixel-perfect chaos.
+            </p>
+            <!-- Bento Grid Skills -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+                <!-- PANEL 1: Main Core Stack & Frontend Logic (The Primary Tools)
+                     GUIDANCE: Use this section to highlight your primary programming languages and frontend frameworks.
+                     Focus on your proficiency in building responsive, high-performance interfaces.
+                     IDEAL CONTENT: Angular/React/Vue, TypeScript, Design Patterns (MVVM/Redux). -->
+                <div class="md:col-span-8 group">
+                    <div class="bg-surface-container-lowest border-4 border-on-surface rounded-xl p-6 overflow-hidden hard-shadow sticker-hover transition-all duration-150 cursor-pointer">
+                        <h3 class="text-4xl font-headline font-black text-primary-container mb-6">INTERFACE & LOGIC</h3>
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div>
+                                <h4 class="font-headline font-bold text-xl mb-4 text-on-surface">FRONTEND</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="bg-primary-container text-on-primary-fixed font-label text-[10px] px-2 py-1 rounded border border-on-surface">ANGULAR</span>
+                                    <span class="bg-primary-container text-on-primary-fixed font-label text-[10px] px-2 py-1 rounded border border-on-surface">ANGULAR.JS</span>
+                                    <span class="bg-primary-container text-on-primary-fixed font-label text-[10px] px-2 py-1 rounded border border-on-surface">REACT.JS</span>
+                                    <span class="bg-primary-container text-on-primary-fixed font-label text-[10px] px-2 py-1 rounded border border-on-surface">VUE.JS</span>
+                                    <span class="bg-primary-container text-on-primary-fixed font-label text-[10px] px-2 py-1 rounded border border-on-surface">IONIC</span>
+                                    <span class="bg-primary-container text-on-primary-fixed font-label text-[10px] px-2 py-1 rounded border border-on-surface">THREE.JS</span>
+                                    <span class="bg-primary-container text-on-primary-fixed font-label text-[10px] px-2 py-1 rounded border border-on-surface">REDUX</span>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-headline font-bold text-xl mb-4 text-on-surface">LANGUAGES</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="bg-secondary-container text-on-secondary-container font-label text-[10px] px-2 py-1 rounded border border-on-surface">TYPESCRIPT</span>
+                                    <span class="bg-secondary-container text-on-secondary-container font-label text-[10px] px-2 py-1 rounded border border-on-surface">JAVASCRIPT</span>
+                                    <span class="bg-secondary-container text-on-secondary-container font-label text-[10px] px-2 py-1 rounded border border-on-surface">PYTHON</span>
+                                    <span class="bg-secondary-container text-on-secondary-container font-label text-[10px] px-2 py-1 rounded border border-on-surface">C#</span>
+                                    <span class="bg-secondary-container text-on-secondary-container font-label text-[10px] px-2 py-1 rounded border border-on-surface">JAVA</span>
+                                    <span class="bg-secondary-container text-on-secondary-container font-label text-[10px] px-2 py-1 rounded border border-on-surface">SQL</span>
+                                    <span class="bg-secondary-container text-on-secondary-container font-label text-[10px] px-2 py-1 rounded border border-on-surface">HTML5/CSS3</span>
+                                </div>
+                                <div class="mt-4 flex items-center gap-2">
+                                    <div class="w-full h-1 bg-on-surface/10 rounded-full overflow-hidden">
+                                        <div class="w-[85%] h-full bg-secondary-container"></div>
+                                    </div>
+                                    <span class="text-[10px] font-mono font-bold">85%_OPTIMIZED</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PANEL 2: Strategic Systems Design (The Architectural Blueprint)
+                     GUIDANCE: Showcase high-level architectural patterns.
+                     Focus on: Microservices, Event-Driven Architectures, and SaaS Scaling. -->
+                <div class="md:col-span-4 group">
+                    <div class="h-full bg-surface-container border-4 border-on-surface rounded-xl p-6 hard-shadow sticker-hover transition-all duration-150 flex flex-col justify-between relative overflow-hidden">
+                        <div class="absolute -right-8 -top-8 w-24 h-24 border-2 border-primary/20 rounded-full"></div>
+                        <div>
+                            <div class="w-12 h-12 rounded-lg bg-secondary-container flex items-center justify-center border-2 border-on-surface mb-6">
+                                <span class="material-symbols-outlined text-on-secondary-container" style="font-variation-settings: 'FILL' 1;">bolt</span>
+                            </div>
+                            <h3 class="text-2xl font-headline font-bold mb-4 uppercase text-on-surface">Systems Design</h3>
+                            <p class="font-body text-sm text-on-surface-variant leading-relaxed mb-6">
+                                Microservices, SaaS, Event-Driven, and Domain-Driven Design (DDD). Scaling complexity through modular clarity.
+                            </p>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="font-label text-xs text-primary-container tracking-widest">BUILD_742</span>
+                            <span class="material-symbols-outlined text-on-surface-variant">arrow_outward</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PANEL 3: Data Persistence & Infrastructure Tier (The Foundation)
+                     GUIDANCE: Highlight database and infrastructure proficiency.
+                     Include: NoSQL, Relational DBs, and Caching strategies (Redis). -->
+                <div class="md:col-span-5 group rotate-1">
+                    <div class="bg-surface-container-high border-4 border-on-surface rounded-xl p-6 hard-shadow-pink sticker-hover transition-all duration-150">
+                        <h3 class="text-2xl font-headline font-bold text-on-surface mb-4 uppercase">Core Infrastructure</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="text-[10px] font-label px-2 py-1 bg-surface border border-outline-variant rounded">NODE.JS</span>
+                            <span class="text-[10px] font-label px-2 py-1 bg-surface border border-outline-variant rounded">ASP.NET CORE</span>
+                            <span class="text-[10px] font-label px-2 py-1 bg-surface border border-outline-variant rounded">POSTGRESQL</span>
+                            <span class="text-[10px] font-label px-2 py-1 bg-surface border border-outline-variant rounded">MONGODB</span>
+                            <span class="text-[10px] font-label px-2 py-1 bg-surface border border-outline-variant rounded">MS SQL SERVER</span>
+                            <span class="text-[10px] font-label px-2 py-1 bg-surface border border-outline-variant rounded">REDIS</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PANEL 4: Cloud Orchestration & Deployment Ops (The Live Environment)
+                     GUIDANCE: Showcase DevOps and Cloud Platform (Azure/Firebase) skills.
+                     Focus on: Infrastructure as Code (Terraform) and CI/CD (GitHub Actions). -->
+                <div class="md:col-span-7 group -rotate-1">
+                    <div class="bg-primary border-4 border-on-surface rounded-xl overflow-hidden hard-shadow sticker-hover transition-all duration-150 relative">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-primary-container/20 blur-3xl rounded-full"></div>
+                        <div class="p-8 relative z-10">
+                            <div class="flex justify-between items-start mb-8">
+                                <h3 class="text-3xl font-headline font-black uppercase text-on-primary">Cloud & DevOps</h3>
+                                <div class="flex gap-1">
+                                    <div class="w-3 h-3 rounded-full bg-error border border-on-surface"></div>
+                                    <div class="w-3 h-3 rounded-full bg-tertiary-container border border-on-surface"></div>
+                                    <div class="w-3 h-3 rounded-full bg-primary-container border border-on-surface"></div>
+                                </div>
+                            </div>
+                            <div class="grid md:grid-cols-2 gap-8">
+                                <div>
+                                    <p class="font-body text-sm text-on-primary mb-6 opacity-80">
+                                        Containerized orchestration with Docker & Kubernetes. Automated infrastructure provisioning with Terraform and CI/CD via GitHub Actions.
+                                    </p>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="bg-on-primary/10 text-on-primary px-2 py-1 rounded font-mono text-[10px] border border-on-primary/30 uppercase">AZURE</span>
+                                        <span class="bg-on-primary/10 text-on-primary px-2 py-1 rounded font-mono text-[10px] border border-on-primary/30 uppercase">FIREBASE</span>
+                                        <span class="bg-on-primary/10 text-on-primary px-2 py-1 rounded font-mono text-[10px] border border-on-primary/30 uppercase">TERRAFORM</span>
+                                        <span class="bg-on-primary/10 text-on-primary px-2 py-1 rounded font-mono text-[10px] border border-on-primary/30 uppercase">GITHUB PAGES</span>
+                                    </div>
+                                </div>
+                                <div class="bg-on-primary text-primary p-6 rounded-xl border-4 border-on-surface flex flex-col items-center justify-center text-center">
+                                    <div class="text-primary-container mb-2 font-headline font-black text-5xl">99.9%</div>
+                                    <div class="text-xs font-label uppercase text-on-surface-variant tracking-widest">Uptime_Metric</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PANEL 5: Data Intelligence & Analytics (The Scientific Lab)
+                     GUIDANCE: Highlight Data Science and Analytics proficiency.
+                     Focus on: Python ecosystem (Pandas, Scikit-learn) and Scientific Computing. -->
+                <div class="md:col-span-12 group">
+                    <div class="bg-surface-container border-4 border-on-surface rounded-xl p-8 hard-shadow-lime sticker-hover transition-all duration-150 relative overflow-hidden">
+                         <div class="absolute -bottom-12 -right-12 w-64 h-64 bg-secondary-container/10 blur-3xl rounded-full"></div>
+                         <div class="relative z-10">
+                            <h3 class="text-4xl font-headline font-black text-primary-container mb-6">DATA INTELLIGENCE & ANALYTICS</h3>
+                            <div class="flex flex-wrap gap-4">
+                                <div class="flex flex-col gap-2">
+                                    <span class="font-label text-xs uppercase text-on-surface-variant mb-1">Scientific Stack</span>
+                                    <div class="flex flex-wrap gap-3">
+                                        <span class="bg-surface-container-highest text-secondary-container px-4 py-2 rounded-lg border-2 border-on-surface font-mono font-bold text-sm sticker-shadow">ANACONDA</span>
+                                        <span class="bg-surface-container-highest text-secondary-container px-4 py-2 rounded-lg border-2 border-on-surface font-mono font-bold text-sm sticker-shadow">PANDAS</span>
+                                        <span class="bg-surface-container-highest text-secondary-container px-4 py-2 rounded-lg border-2 border-on-surface font-mono font-bold text-sm sticker-shadow">NUMPY</span>
+                                        <span class="bg-surface-container-highest text-secondary-container px-4 py-2 rounded-lg border-2 border-on-surface font-mono font-bold text-sm sticker-shadow">SCIPY</span>
+                                        <span class="bg-surface-container-highest text-secondary-container px-4 py-2 rounded-lg border-2 border-on-surface font-mono font-bold text-sm sticker-shadow">SCIKIT-LEARN</span>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col gap-2 ml-0 md:ml-12">
+                                    <span class="font-label text-xs uppercase text-on-surface-variant mb-1">Creative Assets</span>
+                                    <div class="flex flex-wrap gap-3">
+                                        <span class="bg-accent-color text-on-accent-color px-4 py-2 rounded-lg border-2 border-on-surface font-mono font-bold text-sm sticker-shadow">CANVA</span>
+                                    </div>
+                                </div>
+                            </div>
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- The Lab Section -->
+        <section id="the-lab" class="relative z-10 pt-32 pb-24 px-6 md:px-12 max-w-7xl mx-auto animate-reveal">
+            <header class="relative z-10 mb-20">
+                <div class="flex flex-col md:flex-row items-end gap-4 mb-4">
+                    <h1 class="text-6xl md:text-8xl font-headline font-black uppercase tracking-tighter glow-lime leading-none">The Lab</h1>
+                    <span class="font-hand text-tertiary-container text-2xl rotate-[-5deg] pb-2">/experimental_zone</span>
+                </div>
+                <p class="max-w-2xl text-xl font-body text-on-surface-variant">
+                    Where pixels get weird. Floating artifacts, broken shaders, and digital debris from the edge of my creative exploration.
+                </p>
+            </header>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 relative z-10">
+                <div class="lg:col-span-8 space-y-12">
+                    <!-- GitHub Contribution Calendar -->
+                    <div class="group relative bg-surface-container-lowest border-4 border-on-surface p-8 rounded-xl sticker-shadow hover:translate-x-[-4px] hover:translate-y-[-4px] transition-all duration-150">
+                        <!-- GitHub Achievements -->
+                        <div class="absolute -top-10 left-10 flex gap-4">
+                            
+                        </div>
+                        <div class="absolute -top-4 -right-4 bg-primary-container text-on-primary-container font-mono text-xs px-3 py-1 border-2 border-on-surface -rotate-3 uppercase font-bold">Contribution Activity</div>
+                        <h3 class="text-2xl font-headline font-bold text-primary-container mb-6 uppercase">Commit History</h3>
+                        <div class="calendar p-2 overflow-hidden rounded-lg bg-surface-container border border-on-surface/10">
+                            <!-- Loading stuff -->
+                            <div class="flex items-center justify-center p-8 font-mono text-on-surface-variant animate-pulse">
+                                Initializing digital footprint...
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- Experiment Card 1 -->
+                        <div class="hidden group relative bg-surface-container-lowest border-4 border-on-surface p-6 rounded-xl sticker-shadow hover:translate-x-[-4px] hover:translate-y-[-4px] transition-all duration-150">
+                            <div class="absolute -top-4 -right-4 bg-tertiary-container text-on-tertiary-container font-mono text-xs px-3 py-1 border-2 border-on-surface rotate-6 uppercase font-bold">Live GLSL</div>
+                            <div class="aspect-video bg-surface rounded-lg mb-6 overflow-hidden border-2 border-outline-variant flex items-center justify-center relative">
+                                <div class="absolute inset-0 bg-gradient-to-br from-primary-container/20 to-secondary-container/20 opacity-50"></div>
+                                <span class="material-symbols-outlined text-6xl text-primary-container opacity-50">blur_on</span>
+                            </div>
+                            <h3 class="text-2xl font-headline font-bold text-primary-container mb-2 uppercase">Neon Ripple v0.4</h3>
+                            <p class="text-sm font-body text-on-surface-variant mb-4">Perlin noise-based distortion field affecting local DOM elements. High GPU overhead, use with caution.</p>
+                            <div class="flex gap-2">
+                                <span class="bg-surface-container-high px-2 py-1 rounded font-mono text-[10px] text-outline uppercase tracking-tighter">React</span>
+                                <span class="bg-surface-container-high px-2 py-1 rounded font-mono text-[10px] text-outline uppercase tracking-tighter">Three.js</span>
+                            </div>
+                        </div>
+                        <!-- Experiment Card 2 -->
+                        <div class="hidden group relative bg-surface-container-lowest border-4 border-on-surface p-6 rounded-xl sticker-shadow hover:translate-x-[-4px] hover:translate-y-[-4px] transition-all duration-150 rotate-1">
+                            <div class="absolute -top-4 -right-4 bg-secondary-container text-on-secondary-fixed font-mono text-xs px-3 py-1 border-2 border-on-surface -rotate-3 uppercase font-bold">Interactive</div>
+                            <div class="aspect-video bg-surface rounded-lg mb-6 overflow-hidden border-2 border-outline-variant flex items-center justify-center relative">
+                                <span class="material-symbols-outlined text-6xl text-secondary-container opacity-50">gesture</span>
+                            </div>
+                            <h3 class="text-2xl font-headline font-bold text-secondary-container mb-2 uppercase">Doodle Physics</h3>
+                            <p class="text-sm font-body text-on-surface-variant mb-4">A custom physics engine that treats hand-drawn SVG paths as rigid bodies. Collision detection is 80% accurate.</p>
+                            <div class="flex gap-2">
+                                <span class="bg-surface-container-high px-2 py-1 rounded font-mono text-[10px] text-outline uppercase tracking-tighter">Canvas API</span>
+                                <span class="bg-surface-container-high px-2 py-1 rounded font-mono text-[10px] text-outline uppercase tracking-tighter">Math</span>
+                            </div>
+                        </div>
+                        <!-- Experiment Card 3 (Large/Wide) -->
+                        <div class="hidden md:col-span-2 group relative bg-surface-container-lowest border-4 border-on-surface p-8 rounded-xl sticker-shadow hover:translate-x-[-4px] hover:translate-y-[-4px] transition-all duration-150 -rotate-1">
+                            <div class="flex flex-col md:flex-row gap-8">
+                                <div class="md:w-1/2 aspect-video bg-surface-container rounded-lg overflow-hidden border-2 border-primary-container relative">
+                                    <div class="absolute top-2 left-2 bg-primary-container text-on-primary-fixed text-[10px] font-mono px-2 py-0.5 rounded uppercase">Artifact_092.sh</div>
+                                    <div class="p-4 font-mono text-xs text-primary-container overflow-hidden h-full">
+                                        <pre class="opacity-80">void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
+    vec2 uv = fragCoord/iResolution.xy;
+    vec3 col = 0.5 + 0.5*cos(iTime+uv.xyx+vec3(0,2,4));
+    fragColor = vec4(col,1.0);
+}</pre>
+                                    </div>
+                                </div>
+                                <div class="md:w-1/2 flex flex-col justify-center">
+                                    <h3 class="text-4xl font-headline font-black text-on-surface mb-4 uppercase leading-none">GLSL Soundscape</h3>
+                                    <p class="text-on-surface-variant mb-6 font-body">Synthesizing audio buffers directly from fragment shader color outputs. A synesthetic experiment in pure math.</p>
+                                    <button class="w-fit bg-primary-container text-on-primary px-8 py-3 rounded-lg font-headline font-bold uppercase border-2 border-on-surface sticker-shadow active:translate-x-1 active:translate-y-1 active:shadow-none">Initialize Core</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Sidebar: Upcoming Logs -->
+                <aside class="lg:col-span-4">
+                    <div class="sticky top-32 space-y-8">
+                        <div class="relative bg-surface-container-low border-4 border-on-surface p-8 rounded-xl sticker-shadow overflow-hidden">
+                            <div class="absolute -top-24 -left-24 w-48 h-48 bg-primary-container/20 blur-[60px] rounded-full"></div>
+                            <div class="absolute -bottom-24 -right-24 w-48 h-48 bg-secondary-container/20 blur-[60px] rounded-full"></div>
+                            <div class="relative z-10">
+                                <h2 class="text-3xl font-headline font-black text-on-surface mb-6 uppercase border-b-4 border-on-surface pb-2">Upcoming Logs</h2>
+                                <div class="space-y-6">
+                                    <div class="group cursor-pointer">
+                                        <div class="flex items-center justify-between mb-1">
+                                            <span class="font-mono text-[10px] text-secondary-container font-bold">RE_HELPDESK</span>
+                                            <span class="font-mono text-[10px] text-outline">MVP_PHASE</span>
+                                        </div>
+                                        <h4 class="font-headline font-bold text-lg group-hover:text-primary-container transition-colors text-on-surface">Shipping the REHelpdesk MVP</h4>
+                                        <div class="font-hand text-tertiary-container mt-1">Finalizing core logic.</div>
+                                    </div>
+                                    <div class="group cursor-pointer">
+                                        <div class="flex items-center justify-between mb-1">
+                                            <span class="font-mono text-[10px] text-primary-container font-bold">Undisclosed_Business</span>
+                                            <span class="font-mono text-[10px] text-outline">REFINE_PHASE</span>
+                                        </div>
+                                        <h4 class="font-headline font-bold text-lg group-hover:text-primary-container transition-colors text-on-surface">Operational Systems Overhaul</h4>
+                                        <div class="font-hand text-tertiary-container mt-1">Refining workflows.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+        <!-- Global Reach World Map Section -->
+        <section id="experience-map" class="py-24 relative animate-reveal">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="bg-surface-container border-4 border-on-surface rounded-3xl p-8 md:p-12 overflow-hidden relative">
+                    <div class="relative z-10 flex flex-col md:flex-row justify-between items-end gap-12">
+                        <div class="max-w-xl">
+                            <div class="inline-flex items-center gap-2 bg-secondary-container text-on-secondary-container px-4 py-1 rounded-full mb-6 font-mono text-xs font-bold uppercase">
+                                <span class="material-symbols-outlined text-sm">public</span>
+                                Network Status: Active
+                            </div>
+                            <h2 class="font-headline text-5xl md:text-7xl font-black uppercase text-primary-container mb-6">Global Reach</h2>
+                            <p class="font-body text-lg text-on-surface-variant leading-relaxed">
+                                Deploying solutions across multiple continents. From startups to enterprise hubs, the architecture remains robust and boundaryless.
+                            </p>
+                        </div>
+                        <div class="flex flex-col gap-4 w-full md:w-auto">
+                            <!-- Bento Map Stat Cards -->
+                            <div class="bg-surface-container-highest border-2 border-on-surface p-4 rounded-xl flex items-center gap-4 sticker-rotate-cw">
+                                <div class="w-12 h-12 rounded-lg bg-primary-container flex items-center justify-center text-on-primary-fixed">
+                                    <span class="material-symbols-outlined">map</span>
+                                </div>
+                                <div>
+                                    <div class="font-mono text-2xl font-bold text-secondary-container">4+</div>
+                                    <div class="font-label text-xs uppercase opacity-60 text-secondary-container">Global Hubs</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex flex-col lg:flex-row gap-8 mt-12">
+                        <div id="map" class="map-box flex-1 animate-reveal" style="border: var(--border-width-thick) solid var(--border-color); border-radius: 20px; box-shadow: 10px 10px 0px 0px var(--border-color);"></div>
+
+                        <!-- Languages Sidebar (Hidden on Mobile) -->
+                        <aside class="hidden lg:flex flex-col gap-6 w-72 animate-reveal">
+                            <h3 class="font-headline text-4xl font-black uppercase text-secondary-container tracking-tighter mb-2 border-b-4 border-on-surface pb-2">Languages</h3>
+
+                            <!-- Afrikaans -->
+                            <div class="bg-surface-container-highest border-4 border-on-surface p-5 rounded-xl hard-shadow-lime rotate-2 hover:rotate-0 transition-transform">
+                                <div class="font-headline font-bold text-xl text-secondary-container mb-2 uppercase tracking-tight">Afrikaans</div>
+                                <div class="flex gap-2 text-on-surface-variant text-xl">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                            </div>
+
+                            <!-- English -->
+                            <div class="bg-surface-container-highest border-4 border-on-surface p-5 rounded-xl hard-shadow-pink -rotate-1 hover:rotate-0 transition-transform">
+                                <div class="font-headline font-bold text-xl text-secondary-container mb-2 uppercase tracking-tight">English</div>
+                                <div class="flex gap-2 text-on-surface-variant text-xl">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                            </div>
+
+                            <!-- Dutch -->
+                            <div class="bg-surface-container-highest border-4 border-on-surface p-5 rounded-xl hard-shadow rotate-1 hover:rotate-0 transition-transform">
+                                <div class="font-headline font-bold text-xl text-secondary-container mb-2 uppercase tracking-tight">Dutch</div>
+                                <div class="flex gap-2 text-on-surface-variant text-xl">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star-o"></i>
+                                    <i class="fa fa-star-o"></i>
+                                </div>
+                            </div>
+                        </aside>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Speech Bubbles -->
+<section id="testimonials" class="py-20 border-on-surface animate-reveal">
+  <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-16">
+    <!-- Bubble 1 -->
+    <div class="relative pt-10">
+      <div class=" absolute inset-0"></div>
+      <div class="speech-bubble bg-on-surface text-surface p-8 rounded-2xl relative border-4 border-on-surface">
+        <p class="font-headline font-bold text-xl leading-tight">"Switching to the decentralized workflow made our DevOps so much smoother."</p>
+        <div class="mt-4 flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-secondary-container border-2 border-surface"></div>
+          <div>
+            <p class="font-mono text-xs font-bold text-surface">@void_runner</p>
+            <p class="font-mono text-[10px] opacity-70 text-surface">Neo‑Seoul Team</p>
           </div>
+        </div>
+      </div>
+    </div>
 
-          <div class="palette-buttons" role="group" aria-label="Colour options">
-            <button class="palette-btn" data-theme="red" style="background:#FF0033;" title="red" aria-label="red"></button>
-            <button class="palette-btn" data-theme="copper" style="background:#ff7b00;" title="Copper" aria-label="Copper"></button>
-            <button class="palette-btn" data-theme="purple" style="background:#6A0DAD;" title="Purple" aria-label="Purple"></button>
+    <!-- Bubble 2 -->
+    <div class="relative pt-10 md:mt-12">
+      <div class="absolute inset-0"></div>
+      <div class="speech-bubble bg-on-surface text-surface p-8 rounded-2xl relative border-4 border-on-surface rotate-2">
+        <p class="font-headline font-bold text-xl leading-tight">"Finally a hub that actually matches how our sprints feel — chaotic, creative, and useful."</p>
+        <div class="mt-4 flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-primary-container border-2 border-surface"></div>
+          <div>
+            <p class="font-mono text-xs font-bold text-surface">@cyber_punk</p>
+            <p class="font-mono text-[10px] opacity-70 text-surface">Berlin Nodes</p>
           </div>
         </div>
       </div>
-  </section>
-  <div id="theme-popup" class="theme-popup" role="status" aria-live="polite">
-    <div class="bubble">
-      This site changes colors every time you refresh.
     </div>
-  </div>
-  <section id="work" class="section wrap">
-  <h2 style="padding-left: clamp(18px, 4vw, 48px);">View My Work</h2>
 
-  <div class="cards">
-    <a class="card-link-wrapper" href="./projects/Helpdesk/HelpDesk.html" aria-label="Open Helpdesk System project">
-      <article class="card" role="article">
-        <h3>Helpdesk System</h3>
-        <p>Modular ticketing, RBAC, audit logs, and escalation flows for property teams.</p>
-        <span class="tag">Full-stack · Angular · ABP</span>
-      </article>
-    </a>
-
-    <a class="card-link-wrapper" aria-label="Open Project Board project">
-      <article class="card" role="article">
-        <h3>Project Board</h3>
-        <p>Priority matrix, release planning, and developer handoff logic for agile squads.</p>
-        <span class="tag">UX · Supabase · GitHub</span>
-        <span class="tag-left">Under Construction</span>
-      </article>
-    </a>
-
-    <a class="card-link-wrapper  d-none" href="./projects/CinematicBackgrounds/CinematicBackgrounds.html" aria-label="Open Cinematic Backgrounds project">
-      <article class="card" role="article">
-        <h3>Cinimatic Backgrounds</h3>
-        <p>Interactive artistic gallery showcasing dynamic JavaScript backgrounds with particle systems, neural networks, and holographic effects.</p>
-        <span class="tag">JavaScript · Canvas · Interactive Art</span>
-        <span class="tag-left">Under Construction</span>
-      </article>
-    </a>
-
-    <a class="card-link-wrapper" aria-label="Open Property Management Suite project">
-      <article class="card" role="article">
-        <h3>Property Management Suite</h3>
-        <p>Custom-built tools for debt recovery, tenant tracking, and portfolio oversight.</p>
-        <span class="tag">Real Estate · Razor Pages · MySQL</span>
-        <span class="tag-left">Under Construction</span>
-      </article>
-    </a>
-
-    <a class="card-link-wrapper d-none" href="./projects/UnderConstruction.html" aria-label="Template">
-      <article class="card" role="article">
-        <h3>Template</h3>
-        <p>Custom-built template for new projects. Made easy to copy and paste</p>
-        <span class="tag">Just Awesomeness</span>
-      </article>
-    </a>
-  </div>
-
-  <section id="about" class="about-section wrap" style="position:relative;">
-
-    <h2>About Me</h2>
-    <div class="card about-content">
-
-      <p>
-        I’m <strong>Nicolaas Labuschagne</strong> — a full-stack developer, systems architect, and creative problem-solver. I build software that works hard and looks good doing it. From debt recovery platforms to immersive web experiences, my work is rooted in clarity, scalability, and real-world impact.
-      </p>
-      <p>
-        I’ve written custom tools for industries like property management, mining, and freelance design — always with clean code, strategic thinking, and a deep respect for the people using it. Whether I’m crafting a helpdesk system, automating workflows, or designing cinematic backgrounds, I bring curiosity, persistence, and a hands-on mindset.
-      </p>
-      <p>
-        I think in grids, motion, and modular logic. I believe software should feel alive — not just functional. I’m currently working with Estate Recoveries, refining systems that help teams move faster and smarter. I’m also exploring real estate and property development, building tools that support portfolio oversight, tenant tracking, and financial recovery.
-      </p>
-      <p class="d-none">
-        Explore my real estate development interests and software portfolio
-        <a href="./projects/UnderConstruction.html">here</a>.
-      </p>
-      <p>
-        Want the full picture? <a href="./CV/Nicolaas-Labuschagne-CV.pdf" download>Download my CV</a>.
-      </p>
-
-      <p class="typewriter">
-        <span id="type-text"></span><span class="cursor">|</span>
-      </p>
-    </div>
-  </section>
-</section>
-<div class="back">
-      <canvas id="about-canvas" aria-hidden="true"></canvas>
-    </div>
-  <section id="contact" class="contact-reviews wrap">
-  <div class="card contact-card">
-    <h2>Contact</h2>
-    <p class="contact-sub">Have an idea? Let’s hear it. Reach out below.</p>
-    <form class="contact-form" id="contact-form" novalidate>
-      <input type="text" name="name" placeholder="Your name" required />
-      <input type="email" name="email" placeholder="Your email" required />
-      <textarea name="message" placeholder="Brief message" rows="5" required></textarea>
-      <div class="form-row">
-        <button type="submit" class="cta">Send</button>
-        <div id="contact-success" class="contact-success" aria-live="polite" hidden>Thanks — message sent.</div>
+    <!-- Bubble 3 -->
+    <div class="relative pt-10">
+      <div class="absolute inset-0"></div>
+      <div class="speech-bubble bg-on-surface text-surface p-8 rounded-2xl relative border-4 border-on-surface -rotate-1">
+        <p class="font-headline font-bold text-xl leading-tight">"Fast, secure, and the best terminal themes we've used — seriously impressive."</p>
+        <div class="mt-4 flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-tertiary-container border-2 border-surface"></div>
+          <div>
+            <p class="font-mono text-xs font-bold text-surface">@ghost_in_shell</p>
+            <p class="font-mono text-[10px] opacity-70 text-surface">Austin Hub</p>
+          </div>
+        </div>
       </div>
-    </form>
+    </div>
   </div>
+</section>
 
-  <section class="review-chat" aria-label="Testimonials">
-  <div class="reviews-inner wrap">
-    <div class="reviews-header">
-      <h2>Testimonials</h2>
+        <!-- Final CTA / Contact Section -->
+        <section id="contact" class="section animate-reveal">
+  <div class="container bg-primary p-12 border-4 border-background hard-shadow relative overflow-hidden text-center">
+    <div class="absolute inset-0 bg-white/10 opacity-50 mix-blend-overlay"></div>
+
+    <h2 class="text-on-primary italic tracking-tighter mb-8 relative z-10">READY TO LINK UP?</h2>
+
+    <div class="flex flex-col md:flex-row justify-center gap-6 relative z-10">
+        <a href="mailto:NJ.Labuschagne@outlook.com" class="btn-action bg-background text-on-background hover:scale-105">HIRE ME!</a>
     </div>
 
-    <div id="chat-feed" class="chat-feed" tabindex="0" aria-live="polite" aria-atomic="true"></div>
+    <!-- Social icon row -->
+    <div class="mt-6 flex justify-center items-center gap-4 relative z-10" aria-hidden="false">
+      <a href="https://linkedin.com/in/nicolaas-labuschagne-919739286" target="_blank" rel="noopener noreferrer"
+         class="inline-flex items-center justify-center w-10 h-10 rounded-full border border-background text-on-primary bg-transparent hover:bg-background hover:text-on-background transition-transform transform hover:scale-105"
+         aria-label="Open LinkedIn profile" title="LinkedIn">
+        <i class="fa fa-linkedin" aria-hidden="true"></i>
+      </a>
+
+      <a href="https://github.com/NicolaasLabuschagne" target="_blank" rel="noopener noreferrer"
+         class="inline-flex items-center justify-center w-10 h-10 rounded-full border border-background text-on-primary bg-transparent hover:bg-background hover:text-on-background transition-transform transform hover:scale-105"
+         aria-label="Open GitHub profile" title="GitHub">
+        <i class="fa fa-github" aria-hidden="true"></i>
+      </a>
+
+      <a href="mailto:NJ.Labuschagne@outlook.com"
+         class="inline-flex items-center justify-center w-10 h-10 rounded-full border border-background text-on-primary bg-transparent hover:bg-background hover:text-on-background transition-transform transform hover:scale-105"
+         aria-label="Send email" title="Email">
+        <i class="fa fa-envelope" aria-hidden="true"></i>
+      </a>
+    </div>
+
+    <div class="mt-8 font-hand text-2xl text-on-primary-fixed-variant rotate-1">Don't be a stranger, we don't bite (mostly).</div>
   </div>
 </section>
-</section>
+    </main>
 
-<footer class="site-footer wrap">
-  <p>© Nicolaas Labuschagne</p>
-  <nav class="footer-nav">
-    <a class="fa fa-linkedin" href="https://www.linkedin.com/in/nicolaas-labuschagne-919739286/" title="LinkedIn"></a>
-<a class="fa fa-github" href="https://github.com/NicolaasLabuschagne" title="GitHub"></a>
-  </nav>
-</footer>
+    <!-- Footer -->
+    <footer class="w-full py-12 px-8 border-t-4 border-on-surface bg-surface-lowest">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-6 w-full max-w-7xl mx-auto">
+            <div class="text-lg font-bold text-primary font-headline uppercase">NICOLAAS DEV.</div>
+            <div class="flex gap-8 font-label text-xs uppercase tracking-widest text-on-surface-variant">
+                <a class="hover:text-primary transition-all hover:scale-110" href="https://github.com/NicolaasLabuschagne" target="_blank">GitHub</a>
+                <a class="hover:text-primary transition-all hover:scale-110" href="https://linkedin.com/in/nicolaas-labuschagne-919739286" target="_blank">LinkedIn</a>
+            </div>
+            <div class="text-on-surface-variant font-label text-xs uppercase tracking-widest">
+                © 2026 NICOLAAS DEV. STICKERED IN CYBERSPACE.
+            </div>
+        </div>
+    </footer>
+    
+
+    <!-- Interactive Pet Element -->
+    <div id="interactive-pet" class="hidden md:block pet-element" title="Click me to change the vibe!">🐾</div>
+
+    <script src="JS/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof GitHubCalendar !== 'undefined') {
+                GitHubCalendar(".calendar", "NicolaasLabuschagne", { responsive: true, global_stats: false });
+            }
+        });
+    </script>
 </body>
 </html>

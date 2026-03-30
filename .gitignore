@@ -18,6 +18,7 @@ pids
 # Environment variables
 .env
 .env.*.local
+next-env.d.ts
 
 # OS-specific junk
 .DS_Store
@@ -27,6 +28,7 @@ Thumbs.db
 .vscode/
 .idea/
 .vs/
+.next
 *.swp
 *.swo
 
@@ -51,8 +53,6 @@ uploads/
 public/uploads/
 storage/
 files/
-test-site/
-JS/marty.js
 
 # Miscellaneous
 *.tgz
