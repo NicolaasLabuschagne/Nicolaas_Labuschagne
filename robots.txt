@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nicolaaslabuschagne.github.io/Nicolaas_Labuschagne/sitemap.xml
