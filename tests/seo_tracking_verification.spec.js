@@ -25,6 +25,14 @@ test('Verify SEO meta tags', async ({ page }) => {
   expect(await page.getAttribute('meta[property="twitter:title"]', 'content')).toBe('Nicolaas Labuschagne | Systems Architect & Full Stack Developer');
 });
 
+test('Verify default theme is Fun', async ({ page }) => {
+  const filePath = `file://${path.resolve(__dirname, '../index.html')}`;
+  await page.goto(filePath);
+
+  const bodyClass = await page.getAttribute('body', 'class');
+  expect(bodyClass).toContain('theme-fun');
+});
+
 test('Verify click tracking listener presence', async ({ page }) => {
   const filePath = `file://${path.resolve(__dirname, '../index.html')}`;
   await page.goto(filePath);
