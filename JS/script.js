@@ -254,7 +254,8 @@ const PortfolioEngine = {
         };
 
         const savedMode = localStorage.getItem('theme');
-
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+        
         if (savedMode) {
             applyTheme(savedMode);
         } else {
@@ -272,6 +273,7 @@ const PortfolioEngine = {
                 applyTheme(e.matches ? 'dark' : 'light');
             }
         });
+        
     },
 
     initScrollInteractions() {
