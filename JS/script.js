@@ -124,24 +124,35 @@ const AnalyticsEngine = {
     },
 
     trackClicks() {
+        // Track specific important elements
         document.addEventListener('click', (e) => {
             const target = e.target.closest('a, button');
-            if (!target) return;
+            if (target) {
+                const text = target.innerText.trim().toUpperCase();
+                const href = target.getAttribute('href');
 
-            const text = target.innerText.trim().toUpperCase();
-            const href = target.getAttribute('href');
-
-            if (text.includes('HIRE ME')) {
-                this.logEvent('click_hire_me', { location: href && href.includes('mailto') ? 'email' : 'nav' });
-            } else if (text === 'VIEW DOSSIER') {
-                this.logEvent('click_view_dossier');
-            } else if (text === 'THE STACK') {
-                this.logEvent('click_the_stack');
-            } else if (target.classList.contains('btn-hero-coffee') || target.closest('.btn-hero-coffee')) {
-                this.logEvent('click_paypal_coffee');
-            } else if (target.id === 'interactive-pet' || target.closest('#interactive-pet')) {
-                this.logEvent('click_interactive_pet');
+                if (text.includes('HIRE ME')) {
+                    this.logEvent('click_hire_me', { location: href && href.includes('mailto') ? 'email' : 'nav' });
+                } else if (text === 'VIEW DOSSIER') {
+                    this.logEvent('click_view_dossier');
+                } else if (text === 'THE STACK') {
+                    this.logEvent('click_the_stack');
+                } else if (target.classList.contains('btn-hero-coffee') || target.closest('.btn-hero-coffee')) {
+                    this.logEvent('click_paypal_coffee');
+                } else if (target.id === 'interactive-pet' || target.closest('#interactive-pet')) {
+                    this.logEvent('click_interactive_pet');
+                }
             }
+
+            // Track all clicks for future development (heatmap/behavioral analysis)
+            const rawTarget = e.target;
+            this.logEvent('raw_click', {
+                tag: rawTarget.tagName,
+                id: rawTarget.id || 'none',
+                class: rawTarget.className || 'none',
+                x: e.pageX,
+                y: e.pageY
+            });
         });
     },
 
