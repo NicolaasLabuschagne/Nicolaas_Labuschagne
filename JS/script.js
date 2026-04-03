@@ -642,7 +642,7 @@ const VibeEngine = {
     handleSwipe(startX, startY, endX, endY) {
         const deltaX = Math.abs(startX - endX);
         const deltaY = Math.abs(startY - endY);
-        const thresholdX = 200;
+        const thresholdX = 150;
 
         // Ensure horizontal swipe is dominant and above threshold to avoid accidental triggers
         if (deltaX > thresholdX && deltaX > 2 * deltaY) {
