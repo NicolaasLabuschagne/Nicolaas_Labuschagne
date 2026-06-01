@@ -433,7 +433,7 @@ const PortfolioEngine = {
   };
 
   // Fetch and load world GeoJSON
-  fetch('https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json')
+  fetch("https://cdn.jsdelivr.net/gh/johan/world.geo.json/countries.geo.json")
     .then(response => response.json())
     .then(data => {
       geojsonLayer = L.geoJSON(data, {
