@@ -190,7 +190,7 @@ const PortfolioEngine = {
         this.initThemeSystem();
         this.initScrollInteractions();
         this.initScrollSpy();
-        this.initMap();
+        this.initGitHubProjects();
         this.initSkillAnimations();
         VibeEngine.init();
         AnalyticsEngine.init();
@@ -217,7 +217,7 @@ const PortfolioEngine = {
     },
 
     initObservers() {
-        const revealObserver = new IntersectionObserver((entries) => {
+        this.revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
@@ -230,7 +230,7 @@ const PortfolioEngine = {
         }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
 
         document.querySelectorAll('.animate-reveal, .highlight, .scribble-underline, .hand-drawn-circle')
-                .forEach(el => revealObserver.observe(el));
+                .forEach(el => this.revealObserver.observe(el));
     },
 
     initThemeSystem() {
@@ -255,7 +255,7 @@ const PortfolioEngine = {
 
         const savedMode = localStorage.getItem('theme');
         const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-        
+
         if (savedMode) {
             applyTheme(savedMode);
         } else {
@@ -273,7 +273,7 @@ const PortfolioEngine = {
                 applyTheme(e.matches ? 'dark' : 'light');
             }
         });
-        
+
     },
 
     initScrollInteractions() {
@@ -302,188 +302,60 @@ const PortfolioEngine = {
         });
     },
 
-    initMap() {
-  const mapElement = document.getElementById('map');
-  if (!mapElement) return;
+    initGitHubProjects() {
+        const grid = document.getElementById('github-projects-grid');
+        if (!grid) return;
 
-  // Initialize map
-  const map = L.map('map', {
-    scrollWheelZoom: false,
-    zoomControl: true,
-    attributionControl: false
-  }).setView([15, 20], 2);
+        fetch('https://api.github.com/users/NicolaasLabuschagne/repos?sort=updated&per_page=20')
+            .then(res => res.json())
+            .then(repos => {
+                if (!Array.isArray(repos)) throw new Error('Invalid API response');
 
-  const workHistory = ['AGO', 'AUS', 'BWA', 'ZAF'];
-  let geojsonLayer;
+                const filteredRepos = repos
+                    .filter(repo => !repo.fork)
+                    .slice(0, 3);
 
-  // Helper: read CSS variable with fallback
-  const cssVar = (name, fallback) => {
-    const v = getComputedStyle(document.body).getPropertyValue(name);
-    return (v && v.trim()) ? v.trim() : fallback;
-  };
+                if (filteredRepos.length === 0) {
+                    grid.innerHTML = '<div class="col-span-full text-center p-20 font-mono text-on-surface-variant">No original repositories found.</div>';
+                    return;
+                }
 
-  // Style function: dark = grey/white, light = black/grey
-  const getStyle = (feature) => {
-    const isDark = document.documentElement.classList.contains('dark') ||
-                   document.documentElement.getAttribute('data-theme') === 'dark';
-    const isWorkRegion = workHistory.includes(feature.id);
-    const bodyClass = document.body.className || '';
-    const isProfessional = bodyClass.includes('theme-professional');
+                grid.innerHTML = filteredRepos.map(repo => `
+                    <div class="group relative bg-surface-container border-4 border-on-surface p-6 rounded-xl hard-shadow hover:-translate-y-2 transition-all flex flex-col animate-reveal">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="bg-primary-container text-on-primary-fixed px-3 py-1 font-mono text-[10px] font-bold rounded border border-on-surface uppercase tracking-tighter">
+                                ${repo.language || 'Code'}
+                            </span>
+                            <div class="flex gap-4 font-mono text-[10px] font-bold opacity-60">
+                                <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">star</span> ${repo.stargazers_count}</span>
+                                <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">fork_left</span> ${repo.forks_count}</span>
+                            </div>
+                        </div>
+                        <h3 class="font-mono text-xl font-black text-primary-container mb-4 break-all lowercase">~/projects/${repo.name}</h3>
+                        <p class="font-body text-sm text-on-surface-variant mb-8 line-clamp-3">
+                            ${repo.description || 'No description provided for this repository.'}
+                        </p>
+                        <div class="mt-auto">
+                            <a href="${repo.html_url}" target="_blank" class="font-headline font-bold text-xs uppercase tracking-widest text-on-surface hover:text-primary transition-colors flex items-center gap-2">
+                                VIEW ON GITHUB <span class="material-symbols-outlined text-sm">arrow_outward</span>
+                            </a>
+                        </div>
+                    </div>
+                `).join('');
 
-    // resolve tokens to actual colors (never pass 'var(...)' strings to Leaflet)
-    const primaryColor = cssVar('--primary-color', '#bef264');
-    const accentColor = cssVar('--accent-color', '#ff4a8d');
-    const borderColor = cssVar('--border-color', '#999999');
-
-    // ONLY override for professional mode — neutral palette
-    if (isProfessional) {
-    if (isDark) {
-      return {
-        fillColor: isWorkRegion ? '#ffffff' : 'transparent',
-        fillOpacity: isWorkRegion ? 0.18 : 0,
-        color: isWorkRegion ? '#bdbdbd' : '#6b6b6b',
-        weight: isWorkRegion ? 2.5 : 1.0,
-        dashArray: isWorkRegion ? '' : '3,6',
-        className: '' // no neon outlines in professional mode
-      };
-    } else {
-      return {
-        fillColor: isWorkRegion ? '#000000' : 'transparent',
-        fillOpacity: isWorkRegion ? 0.18 : 0,
-        color: isWorkRegion ? '#4a4a4a' : '#9a9a9a',
-        weight: isWorkRegion ? 2.5 : 1.0,
-        dashArray: isWorkRegion ? '' : '3,6',
-        className: ''
-      };
-    }
-  }
-
-  // Non-professional behavior: unchanged from your original logic
-  if (isDark) {
-    return {
-      fillColor: isWorkRegion ? primaryColor : 'transparent',
-      fillOpacity: isWorkRegion ? (isProfessional ? 0.8 : 1) : 0,
-      color: accentColor,
-      weight: isWorkRegion ? 3 : 1.2,
-      className: '', // keep class toggling out of initial style
-      dashArray: ''
-    };
-  } else {
-    return {
-      fillColor: isWorkRegion ? primaryColor : 'transparent',
-      fillOpacity: isWorkRegion ? 0.4 : 0,
-      color: isWorkRegion ? accentColor : '#999999',
-      weight: isWorkRegion ? 2.5 : 1.2,
-      dashArray: isWorkRegion ? '' : '3, 6',
-      className: ''
-    };
-  }
-};
-
-    const updateLayerClasses = () => {
-  if (!geojsonLayer) return;
-  const isDark = document.documentElement.classList.contains('dark') ||
-                 document.documentElement.getAttribute('data-theme') === 'dark';
-  const isProfessional = document.body.classList.contains('theme-professional');
-
-  geojsonLayer.eachLayer(layer => {
-    const path = layer._path || (layer.getElement && layer.getElement());
-    if (!path) return;
-
-    // always remove neon class first
-    path.classList.remove('neon-map-outline');
-
-    // Only add neon in non-professional dark mode (if you want neon there)
-    const isWorkRegion = workHistory.includes(layer.feature.id);
-    if (!isProfessional && isDark && isWorkRegion) {
-      // uncomment the next line if you want neon outlines in dark non-professional mode
-      // path.classList.add('neon-map-outline');
-    }
-
-    // clean up any inline vars/styles so setStyle can reapply correct values
-    path.style.removeProperty('--primary-color');
-    path.style.removeProperty('--accent-color');
-    path.style.removeProperty('stroke');
-    path.style.removeProperty('fill');
-    path.style.removeProperty('stroke-width');
-    path.style.removeProperty('stroke-dasharray');
-  });
-};
-
-  // Utility: remove any inline CSS variables set on the map element (if you set them elsewhere)
-  const clearMapInlineVars = () => {
-    if (!mapElement || !mapElement.style) return;
-    mapElement.style.removeProperty('--primary-color');
-    mapElement.style.removeProperty('--accent-color');
-  };
-
-  // Utility: clean up per-layer DOM path (remove classes and inline styles)
-  const cleanupLayerPath = (layer) => {
-    if (!layer) return;
-    const path = layer._path || (layer.getElement && layer.getElement());
-    if (path) {
-      path.classList.remove('neon-map-outline');
-      path.style.removeProperty('--primary-color');
-      path.style.removeProperty('--accent-color');
-      path.style.removeProperty('stroke');
-      path.style.removeProperty('fill');
-      path.style.removeProperty('stroke-width');
-      path.style.removeProperty('stroke-dasharray');
-    }
-  };
-
-  // Fetch and load world GeoJSON
-  fetch("https://cdn.jsdelivr.net/gh/johan/world.geo.json/countries.geo.json")
-    .then(response => response.json())
-    .then(data => {
-      geojsonLayer = L.geoJSON(data, {
-        style: getStyle,
-        onEachFeature: (feature, layer) => {
-          if (workHistory.includes(feature.id)) {
-            layer.bindPopup(`
-              <div class="font-headline font-bold uppercase text-primary-container">
-                Project Territory: ${feature.properties.name}
-              </div>
-              <div class="font-mono text-xs mt-1 text-on-surface-variant">
-                Strategic Industrial Integration
-              </div>
-            `);
-
-            layer.on('mouseover', function() {
-              this.setStyle({
-                fillOpacity: 0.4,
-                weight: 4
-              });
+                grid.querySelectorAll('.animate-reveal').forEach(el => this.revealObserver.observe(el));
+            })
+            .catch(err => {
+                console.error('GitHub Fetch Error:', err);
+                grid.innerHTML = `
+                    <div class="col-span-full text-center p-20 border-4 border-error/20 rounded-3xl">
+                        <div class="material-symbols-outlined text-6xl text-error mb-4">error</div>
+                        <p class="font-mono text-xl text-error">Failed to synchronize with GitHub API.</p>
+                        <button onclick="location.reload()" class="mt-4 font-mono text-xs underline uppercase opacity-60">Retry Connection</button>
+                    </div>
+                `;
             });
-
-            layer.on('mouseout', function() {
-              if (geojsonLayer) geojsonLayer.resetStyle(this);
-            });
-          }
-        }
-      }).addTo(map);
-
-      // Defensive re-style and class update to ensure initial render is correct
-      setTimeout(() => {
-        if (geojsonLayer) {
-          clearMapInlineVars();
-          geojsonLayer.eachLayer(layer => cleanupLayerPath(layer));
-          geojsonLayer.setStyle(getStyle);
-          updateLayerClasses();
-        }
-      }, 30);
-
-      // When theme changes, clear inline vars and reapply styles + classes
-      window.addEventListener('themeChanged', () => {
-        clearMapInlineVars();
-        if (!geojsonLayer) return;
-        geojsonLayer.eachLayer(layer => cleanupLayerPath(layer));
-        geojsonLayer.setStyle(getStyle);
-        updateLayerClasses();
-      });
-    })
-    .catch(err => console.error('Map loading failed:', err));
-},
+    },
 
     initSkillAnimations() {
         const skillTags = document.querySelectorAll('.tags span');
@@ -500,101 +372,8 @@ const PortfolioEngine = {
                 }, 1000);
             }, 3000);
         }
-        this.initDigitalDebris();
     },
 
-    initDigitalDebris() {
-        const labSection = document.getElementById('the-lab');
-        if (!labSection) return;
-
-        const debrisChars = ['{ }', '[]', '</>', '01', '!', '??', '#', '/* */', '=>', '&&', '||'];
-        const debrisCount = 12;
-
-        window.addEventListener('themeChanged', () => {
-            const debrisItems = document.querySelectorAll('.digital-debris');
-            const primary = getComputedStyle(document.body).getPropertyValue('--primary-color');
-            const border = getComputedStyle(document.body).getPropertyValue('--border-color');
-            debrisItems.forEach(item => {
-                item.style.color = primary;
-                item.style.filter = `drop-shadow(2px 2px 0px ${border})`;
-            });
-        });
-
-        for (let i = 0; i < debrisCount; i++) {
-            const debris = document.createElement('div');
-            debris.className = 'digital-debris debris-animate';
-            debris.textContent = debrisChars[Math.floor(Math.random() * debrisChars.length)];
-
-            // Random positioning
-            const top = Math.random() * 80 + 10; // 10% to 90%
-            const left = Math.random() * 80 + 10; // 10% to 90%
-            const rot = (Math.random() - 0.5) * 60; // -30 to 30 deg
-
-            debris.style.top = `${top}%`;
-            debris.style.left = `${left}%`;
-            debris.style.setProperty('--rot', `${rot}deg`);
-            debris.style.setProperty('--delay', `${Math.random() * 5}s`);
-            debris.style.transform = `rotate(${rot}deg)`;
-
-            this.makeDraggable(debris);
-            labSection.appendChild(debris);
-        }
-    },
-
-    makeDraggable(el) {
-        let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-
-        el.onmousedown = dragMouseDown;
-        el.ontouchstart = dragMouseDown;
-
-        function dragMouseDown(e) {
-            e.preventDefault();
-            el.classList.add('dragging');
-            el.classList.remove('debris-animate');
-
-            if (e.type === 'touchstart') {
-                pos3 = e.touches[0].clientX;
-                pos4 = e.touches[0].clientY;
-            } else {
-                pos3 = e.clientX;
-                pos4 = e.clientY;
-            }
-
-            document.onmouseup = closeDragElement;
-            document.ontouchend = closeDragElement;
-            document.onmousemove = elementDrag;
-            document.ontouchmove = elementDrag;
-        }
-
-        function elementDrag(e) {
-            e.preventDefault();
-            let clientX, clientY;
-
-            if (e.type === 'touchmove') {
-                clientX = e.touches[0].clientX;
-                clientY = e.touches[0].clientY;
-            } else {
-                clientX = e.clientX;
-                clientY = e.clientY;
-            }
-
-            pos1 = pos3 - clientX;
-            pos2 = pos4 - clientY;
-            pos3 = clientX;
-            pos4 = clientY;
-
-            el.style.top = (el.offsetTop - pos2) + "px";
-            el.style.left = (el.offsetLeft - pos1) + "px";
-        }
-
-        function closeDragElement() {
-            el.classList.remove('dragging');
-            document.onmouseup = null;
-            document.ontouchend = null;
-            document.onmousemove = null;
-            document.ontouchmove = null;
-        }
-    }
 };
 
 /* ===========================
