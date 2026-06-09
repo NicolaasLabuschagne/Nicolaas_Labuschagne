@@ -313,7 +313,7 @@ const PortfolioEngine = {
 
                 const filteredRepos = repos
                     .filter(repo => !repo.fork)
-                    .slice(0, 6);
+                    .slice(0, 3);
 
                 if (filteredRepos.length === 0) {
                     grid.innerHTML = '<div class="col-span-full text-center p-20 font-mono text-on-surface-variant">No original repositories found.</div>';
