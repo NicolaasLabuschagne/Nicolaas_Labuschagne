@@ -1783,27 +1783,27 @@ a, button, [role="button"] {
     transform: scale(1.2) rotate(10deg);
 }
 
-/* theme-fun: Heavily Neu-brutalist / High Contrast */
+/* theme-fun: Heavily Neu-brutalist / Americana Retro / Atomic Age UI */
 body.theme-fun {
-    --bg-color: #fff8eb;
-    --bg-color-rgb: 255, 248, 235;
+    --bg-color: #F5F2EB; /* Toasted Cream */
+    --bg-color-rgb: 245, 242, 235;
     --surface: #ffffff;
-    --surface-low: #fffaf0;
-    --surface-high: #ffeaa7;
-    --surface-highest: #fdcb6e;
+    --surface-low: #FBF9F6;
+    --surface-high: #E5A93B; /* Mustard Gold */
+    --surface-highest: #2E6F7F; /* Diner Turquoise */
     --text-color: #111111;
     --text-color-rgb: 17, 17, 17;
-    --text-dim: #2d3436;
+    --text-dim: #2B2D42; /* Deep Charcoal */
     --border-color: #111111;
     --border-color-rgb: 17, 17, 17;
-    --primary-color: #bef264; /* Lime Green */
-    --primary-color-rgb: 190, 242, 100;
-    --on-primary-color: #111111;
-    --secondary-color: #ffda35; /* Yellow */
-    --secondary-color-rgb: 255, 218, 53;
+    --primary-color: #2E6F7F; /* Diner Turquoise */
+    --primary-color-rgb: 46, 111, 127;
+    --on-primary-color: #ffffff;
+    --secondary-color: #E5A93B; /* Mustard Gold */
+    --secondary-color-rgb: 229, 169, 59;
     --on-secondary-color: #111111;
-    --accent-color: #ff4a8d; /* Pink */
-    --accent-color-rgb: 255, 74, 141;
+    --accent-color: #C82333; /* Americana Cherry Red */
+    --accent-color-rgb: 200, 35, 51;
     --on-accent-color: #ffffff;
     --border-width: 6px;
     --radius-lg: 0px;
@@ -1815,21 +1815,21 @@ body.theme-fun {
 }
 
 [data-theme="dark"] body.theme-fun {
-    --bg-color: #0b0c10;
-    --bg-color-rgb: 11, 12, 16;
-    --surface: #1f2833;
-    --surface-low: #151a21;
-    --surface-high: #c5a880;
+    --bg-color: #1B1E24; /* Dark Slate Blue-Gray */
+    --bg-color-rgb: 27, 30, 36;
+    --surface: #242933;
+    --surface-low: #15181C;
+    --surface-high: #E5A93B;
     --text-color: #ffffff;
     --text-color-rgb: 255, 255, 255;
-    --text-dim: #c5a880;
-    --border-color: #bef264;
-    --border-color-rgb: 190, 242, 100;
-    --on-primary-color: #0b0c10;
-    --on-secondary-color: #0b0c10;
-    --on-accent-color: #0b0c10;
-    --shadow-brutal: 10px 10px 0px 0px #bef264;
-    --hard-shadow-color: #bef264;
+    --text-dim: #9FA8BC;
+    --border-color: #2E6F7F; /* Diner Turquoise */
+    --border-color-rgb: 46, 111, 127;
+    --on-primary-color: #ffffff;
+    --on-secondary-color: #111111;
+    --on-accent-color: #ffffff;
+    --shadow-brutal: 10px 10px 0px 0px #2E6F7F;
+    --hard-shadow-color: #2E6F7F;
 }
 
 /* Force Sharp Corners and Heavy Borders on everything under theme-fun */
