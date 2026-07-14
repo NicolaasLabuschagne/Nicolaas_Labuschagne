@@ -1783,76 +1783,199 @@ a, button, [role="button"] {
     transform: scale(1.2) rotate(10deg);
 }
 
-/* theme-fun: Cartoony / Playful */
+/* theme-fun: Heavily Neu-brutalist / High Contrast */
 body.theme-fun {
     --bg-color: #fff8eb;
     --bg-color-rgb: 255, 248, 235;
     --surface: #ffffff;
-    --surface-low: #fffbeb;
-    --surface-high: #fef3c7;
-    --surface-highest: #fde68a;
-    --text-color: #590028;
-    --text-color-rgb: 89, 0, 40;
-    --text-dim: #92400e;
-    --border-color: #590028;
-    --border-color-rgb: 89, 0, 40;
-    --primary-color: #bef264;
+    --surface-low: #fffaf0;
+    --surface-high: #ffeaa7;
+    --surface-highest: #fdcb6e;
+    --text-color: #111111;
+    --text-color-rgb: 17, 17, 17;
+    --text-dim: #2d3436;
+    --border-color: #111111;
+    --border-color-rgb: 17, 17, 17;
+    --primary-color: #bef264; /* Lime Green */
     --primary-color-rgb: 190, 242, 100;
-    --on-primary-color: #590028;
-    --secondary-color: #ffda35;
+    --on-primary-color: #111111;
+    --secondary-color: #ffda35; /* Yellow */
     --secondary-color-rgb: 255, 218, 53;
-    --on-secondary-color: #590028;
-    --accent-color: #e11d48; /* Darker Pink for contrast */
-    --accent-color-rgb: 225, 29, 72;
+    --on-secondary-color: #111111;
+    --accent-color: #ff4a8d; /* Pink */
+    --accent-color-rgb: 255, 74, 141;
     --on-accent-color: #ffffff;
-    --border-width: 4px;
-    --radius-lg: 40px;
-    --radius-md: 20px;
-    --font-main: 'Fredoka', sans-serif;
-    --font-body: 'Fredoka', sans-serif;
-    --shadow-brutal: 8px 8px 0px 0px var(--secondary-color);
-    --hard-shadow-color: var(--secondary-color);
+    --border-width: 6px;
+    --radius-lg: 0px;
+    --radius-md: 0px;
+    --font-main: 'Space Grotesk', sans-serif;
+    --font-body: 'Space Grotesk', sans-serif;
+    --shadow-brutal: 12px 12px 0px 0px #111111;
+    --hard-shadow-color: #111111;
 }
 
 [data-theme="dark"] body.theme-fun {
-    --bg-color: #1a0f08;
-    --bg-color-rgb: 26, 15, 8;
-    --surface: #2d1b0d;
-    --surface-low: #1a0f08;
-    --surface-high: #3d2b1d;
-    --text-color: #ffd1dc;
-    --text-color-rgb: 255, 209, 220;
-    --text-dim: #ff8fa3;
-    --border-color: #ff4a8d;
-    --border-color-rgb: 255, 74, 141;
-    --on-primary-color: #1a0f08;
-    --on-secondary-color: #1a0f08;
-    --on-accent-color: #1a0f08; /* Dark text for better contrast */
-    --shadow-brutal: 8px 8px 0px 0px #3d001b;
-    --hard-shadow-color: #3d001b;
+    --bg-color: #0b0c10;
+    --bg-color-rgb: 11, 12, 16;
+    --surface: #1f2833;
+    --surface-low: #151a21;
+    --surface-high: #c5a880;
+    --text-color: #ffffff;
+    --text-color-rgb: 255, 255, 255;
+    --text-dim: #c5a880;
+    --border-color: #bef264;
+    --border-color-rgb: 190, 242, 100;
+    --on-primary-color: #0b0c10;
+    --on-secondary-color: #0b0c10;
+    --on-accent-color: #0b0c10;
+    --shadow-brutal: 10px 10px 0px 0px #bef264;
+    --hard-shadow-color: #bef264;
 }
 
-body.theme-fun .card-bento, body.theme-fun .btn-action, body.theme-fun .nav {
-    border-radius: var(--radius-lg) !important;
+/* Force Sharp Corners and Heavy Borders on everything under theme-fun */
+body.theme-fun,
+body.theme-fun *,
+body.theme-fun .card-bento,
+body.theme-fun .btn-action,
+body.theme-fun .nav,
+body.theme-fun .profile-card-neo,
+body.theme-fun .timeline-content,
+body.theme-fun .skills-category,
+body.theme-fun .tags span,
+body.theme-fun .tech-stack-tags span,
+body.theme-fun .contact-box,
+body.theme-fun .theme-toggle,
+body.theme-fun .logo,
+body.theme-fun .nav-cta .btn-nav,
+body.theme-fun .sticker,
+body.theme-fun .btn,
+body.theme-fun .floating-icon,
+body.theme-fun .education-card,
+body.theme-fun .language-item,
+body.theme-fun .contact-links a {
+    border-radius: 0px !important;
+    border-width: var(--border-width) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Dot Grid Background with Paper Noise Override for Theme Fun */
+body.theme-fun.my-page,
+body.theme-fun .my-page,
+body.theme-fun .about,
+body.theme-fun .footer,
+body.theme-fun main,
+body.theme-fun section {
+    background-image:
+        radial-gradient(var(--border-color) 1.5px, transparent 1.5px),
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paperNoise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.04' numOctaves='5' stitchTiles='stitch'/%3E%3CfeComposite operator='in' in2='SourceGraphic'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paperNoise)' opacity='0.08'/%3E%3C/svg%3E") !important;
+    background-size: 24px 24px, auto !important;
+}
+
+/* Massively heavy offset shadows for Headings */
+body.theme-fun h1,
+body.theme-fun h2,
+body.theme-fun h3 {
+    text-shadow: 4px 4px 0px var(--secondary-color), 8px 8px 0px var(--accent-color);
+    font-weight: 900;
+}
+
+[data-theme="dark"] body.theme-fun h1,
+[data-theme="dark"] body.theme-fun h2,
+[data-theme="dark"] body.theme-fun h3 {
+    text-shadow: 4px 4px 0px var(--surface-low);
+}
+
+/* Beautiful Navigation Badges */
+body.theme-fun .nav-link {
+    font-weight: 900;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: var(--border-width) solid transparent !important;
+}
+
+body.theme-fun .nav-link:hover {
+    background-color: var(--secondary-color);
+    color: var(--on-secondary-color);
+    border-color: var(--border-color) !important;
+    box-shadow: 4px 4px 0px 0px var(--border-color);
+    transform: translate(-2px, -2px);
+}
+
+body.theme-fun .nav-link.active {
+    background-color: var(--primary-color);
+    color: var(--on-primary-color);
+    border-color: var(--border-color) !important;
+    box-shadow: 4px 4px 0px 0px var(--border-color);
+    transform: translate(-2px, -2px);
+}
+
+/* Satisfying Tactile Interactive / Hover Press-in responses */
+body.theme-fun .card-bento,
+body.theme-fun .btn-action,
+body.theme-fun .nav,
+body.theme-fun .profile-card-neo,
+body.theme-fun .timeline-content,
+body.theme-fun .skills-category,
+body.theme-fun .tags span,
+body.theme-fun .tech-stack-tags span,
+body.theme-fun .contact-box,
+body.theme-fun .theme-toggle,
+body.theme-fun .nav-cta .btn-nav,
+body.theme-fun .sticker,
+body.theme-fun .btn,
+body.theme-fun .education-card,
+body.theme-fun .language-item,
+body.theme-fun .contact-links a {
     box-shadow: var(--shadow-brutal) !important;
+    transition: transform 0.15s cubic-bezier(0, 0, 0.2, 1), box-shadow 0.15s cubic-bezier(0, 0, 0.2, 1);
 }
 
-body.theme-fun .btn-action:hover {
-    animation: wiggle 0.4s ease-in-out infinite;
+body.theme-fun .card-bento:hover,
+body.theme-fun .btn-action:hover,
+body.theme-fun .profile-card-neo:hover,
+body.theme-fun .timeline-content:hover,
+body.theme-fun .skills-category:hover,
+body.theme-fun .tags span:hover,
+body.theme-fun .tech-stack-tags span:hover,
+body.theme-fun .contact-box:hover,
+body.theme-fun .theme-toggle:hover,
+body.theme-fun .nav-cta .btn-nav:hover,
+body.theme-fun .sticker:hover,
+body.theme-fun .btn:hover,
+body.theme-fun .education-card:hover,
+body.theme-fun .language-item:hover,
+body.theme-fun .contact-links a:hover {
+    transform: translate(6px, 6px);
+    box-shadow: 4px 4px 0px 0px var(--border-color) !important;
 }
 
-body.theme-fun h1, body.theme-fun h2, body.theme-fun h3 {
-    color: var(--accent-color);
-}
-
-body.theme-fun .text-on-surface-variant {
-    color: var(--text-dim);
+body.theme-fun .card-bento:active,
+body.theme-fun .btn-action:active,
+body.theme-fun .profile-card-neo:active,
+body.theme-fun .timeline-content:active,
+body.theme-fun .skills-category:active,
+body.theme-fun .tags span:active,
+body.theme-fun .tech-stack-tags span:active,
+body.theme-fun .contact-box:active,
+body.theme-fun .theme-toggle:active,
+body.theme-fun .nav-cta .btn-nav:active,
+body.theme-fun .sticker:active,
+body.theme-fun .btn:active,
+body.theme-fun .education-card:active,
+body.theme-fun .language-item:active,
+body.theme-fun .contact-links a:active {
+    transform: translate(12px, 12px);
+    box-shadow: 0px 0px 0px 0px var(--border-color) !important;
 }
 
 body.theme-fun .marquee {
     background: var(--accent-color);
     color: var(--on-accent-color);
     transform: rotate(2deg);
+}
+
+body.theme-fun .text-on-surface-variant {
+    color: var(--text-dim);
 }
 
 body.theme-fun .text-on-surface {
