@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en" class="dark" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-3EV7DD243Y"></script>
@@ -65,10 +65,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Caveat:wght@400..700&family=Inter:wght@400;700&family=Montserrat:wght@400;700;900&family=Fredoka:wght@400;700&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-
-    <!-- GitHub Calendar Library -->
-    <link rel="stylesheet" href="https://unpkg.com/github-calendar@latest/dist/github-calendar-responsive.css" />
-    <script src="https://unpkg.com/github-calendar@latest/dist/github-calendar.min.js"></script>
 
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script id="tailwind-config">
@@ -138,8 +134,6 @@
         },
       }
     </script>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
 
     <style type="text/tailwindcss">
@@ -151,7 +145,7 @@
 
           /* Active look */
           .nav-link.active {
-            @apply text-primary border-b-4 border-primary pb-1 shadow-[0_2px_10px_rgba(190,242,100,0.5)] transition-all duration-150;
+            @apply text-primary pb-1  transition-all duration-150;
           }
         }
     </style>
@@ -174,7 +168,8 @@
                 <a href="#contact" class="nav-link">Contact</a>
             </div>
             <div class="flex items-center gap-4">
-                <button class="hidden md:inline-block material-symbols-outlined text-primary hover:scale-110 transition-transform" id="theme-toggle">terminal</button>
+                <button class="material-symbols-outlined nav-link hover:scale-110 transition-transform" id="terminal-trigger" title="Open terminal" aria-label="Open terminal">terminal</button>
+                <button class="hidden md:inline-block material-symbols-outlined nav-link hover:scale-110 transition-transform" id="theme-toggle">terminal</button>
                 <a href="#contact" class="bg-primary text-on-primary font-headline font-bold uppercase px-6 py-2 rounded-full border-2 border-on-surface active:translate-y-1 transition-all">
                     Hire Me
                 </a>
@@ -187,7 +182,7 @@
         <section id="hero" class="relative z-10 pt-32 pb-24 px-6 md:px-12 max-w-7xl mx-auto blueprint-bg animate-reveal">
             <div class="flex flex-col lg:flex-row items-center gap-16">
                 <!-- Central Portrait -->
-                <div class="relative group">
+                <div class="relative group" id="hero-portrait">
                     <div class="absolute -inset-4 bg-secondary-container opacity-20 blur-2xl group-hover:opacity-40 transition-opacity"></div>
                     <div class="relative w-72 h-72 md:w-96 md:h-96 border-4 border-on-surface bg-surface-container-highest rounded-2xl overflow-hidden hard-shadow-pink sticker-rotate-ccw">
                         <img src="images/myPic.png" alt="Nicolaas Portrait" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500">
@@ -217,16 +212,16 @@
                         <span class="bg-secondary text-on-secondary px-4 py-1 rounded-full font-mono text-xs font-bold tracking-widest uppercase">Intermediate Architect</span>
                     </div>
                     <h1 class="font-headline text-5xl md:text-7xl font-black text-primary-container leading-none tracking-tighter uppercase mb-6 drop-shadow-[4px_4px_0px_var(--border-color)] glow-lime">
-                        I DESIGN & BUILD <br/> <span class="text-on-primary-container italic">DISTRIBUTED BACKENDS</span>
+                        I DESIGN & BUILD <br/> <span class="text-on-surface italic">DISTRIBUTED BACKENDS</span>
                     </h1>
-                    <p class="font-body text-xl text-on-surface-variant max-w-xl mb-10 leading-relaxed">
+                    <p class="type-target font-body text-xl text-on-surface-variant max-w-xl mb-10 leading-relaxed">
                         Focused on SaaS architectures and full-stack products — navigating the 0&rarr;1 phase where decisions actually matter.
                     </p>
                     <div class="flex flex-wrap justify-center lg:justify-start gap-6 mb-12">
                         <a href="./CV/Nicolaas_Labuschagne_Resume.pdf" target="_blank" class="bg-primary-container text-on-primary-fixed-variant px-8 py-4 rounded-xl font-headline font-bold text-xl uppercase border-4 border-on-surface hard-shadow-pink hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all">
                             View Dossier
                         </a>
-                        <a href="#skills" class="bg-surface-container-high text-on-surface px-8 py-4 rounded-xl font-headline font-bold text-xl uppercase border-4 border-on-surface hard-shadow-lime hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all">
+                        <a href="#skills" class="bg-tertiary-fixed text-on-tertiary-fixed px-8 py-4 rounded-xl font-headline font-bold text-xl uppercase border-4 border-on-surface hard-shadow-lime hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all">
                             Core Stack
                         </a>
                     </div>
@@ -235,42 +230,25 @@
             </div>
         </section>
 
-        <div class="marquee">
-            <div class="marquee-content">
-                <span>Systems Architect</span>
-                <span>Full Stack Developer</span>
-                <span>Creative Director</span>
-                <span>Amateur Cyclist</span>
-                <span>Problem Solver</span>
-                <span>Immersive Experiences</span>
-                <!-- Duplicate for seamless loop -->
-                <span>Systems Architect</span>
-                <span>Full Stack Developer</span>
-                <span>Creative Director</span>
-                <span>Amateur Cyclist</span>
-                <span>Problem Solver</span>
-                <span>Immersive Experiences</span>
-            </div>
-        </div>
-
         <section id="about" class="about section page my-page">
             <div class="container section-container">
-                <div class="hidden md:block sticker" style="top: 100px; right: 50px; transform: rotate(-15deg);">Cyclist</div>
-                <div class="hidden md:block sticker sticker-purple" style="bottom: 5%; left: -10%; transform: rotate(10deg);">Business Minded</div>
-                <svg class="star-illustation floating-star" style="top: -20px; right: 10%; fill: var(--purple-color);" viewBox="0 0 24 24">
+                <div class="hidden md:block sticker" style="top: 100px; right: 50px; --rot: -15deg; animation-delay: 0.3s;">Cyclist</div>
+                <div class="hidden md:block sticker sticker-purple" style="bottom: 5%; left: -10%; --rot: 10deg; animation-delay: 1.2s;">Business Minded</div>
+                <svg class="star-illustation floating-star" style="top: -20px; right: 10%; fill: var(--primary-color);" viewBox="0 0 24 24">
                     <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" />
                 </svg>
                 <svg class="blob-bg blob-1" viewBox="0 0 200 200">
                     <path d="M45,-60.1C58.1,-52.1,68.3,-38.4,73.4,-23.4C78.4,-8.4,78.2,7.9,73.1,22.8C68.1,37.6,58.2,50.9,45.3,60.1C32.4,69.4,16.2,74.5,0.7,73.6C-14.8,72.7,-29.6,65.8,-42.2,56C-54.8,46.1,-65.2,33.3,-69.5,18.9C-73.8,4.5,-72,-11.4,-65.3,-25.2C-58.7,-39,-47.2,-50.8,-34.1,-58.8C-21,-66.8,-10.5,-71.1,2.8,-74.9C16.1,-78.8,31.9,-68.2,45,-60.1Z" transform="translate(100 100)" />
                 </svg>
+
                 <h2 class="animate-reveal">ABOUT</h2>
                 <div class="about-content animate-reveal">
-                    <p>Dynamic <span class="hand-drawn-circle">systems architect
+                    <p class="type-target">Dynamic <span class="hand-drawn-circle">systems architect
                         <svg class="circle-svg" viewBox="0 0 250 80" preserveAspectRatio="none">
                             <path d="M245,40 C245,60 200,75 125,75 C50,75 5,60 5,40 C5,20 50,5 125,5 C200,5 245,20 245,40 Z" />
                         </svg>
                     </span> & software engineer with a passion for <span class="highlight">designing</span> and constructing <span class="highlight">scalable distributed systems</span> and immersive web experiences.</p>
-                    <p>When I'm not <span class="highlight">architecting systems</span> or coding, you'll find me on my bicycle exploring the roads in the neighborhood or deep into a book. I'm an amateur cyclist with a professional's drive, and a <span class="highlight">lifelong learner</span> of business and psychology.</p>
+                    <p class="type-target">When I'm not <span class="highlight">architecting systems</span> or coding, you'll find me on my bicycle exploring the roads in the neighborhood or deep into a book. I'm an amateur cyclist with a professional's drive, and a <span class="highlight">lifelong learner</span> of business and psychology.</p>
 
                     <div class="current-reads" style="margin-top: 40px; display: flex; gap: 20px; align-items: center;">
                         <span style="font-weight: 800; font-size: 1.1rem;">Currently reading:</span>
@@ -304,40 +282,40 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 relative">
                     <!-- Foundations -->
                     <div class="relative group sticker-rotate-ccw stagger-1">
-                        <div class="bg-surface-container-high border-4 border-on-surface p-8 rounded-2xl hard-shadow group-hover:-translate-y-2 transition-transform h-full flex flex-col">
+                        <div class="border-4 border-on-surface p-8 rounded-2xl hard-shadow group-hover:-translate-y-2 transition-transform h-full flex flex-col">
                             <div class="flex justify-between items-start mb-6">
                                 <span class="bg-tertiary-container text-on-tertiary-container px-3 py-1 font-mono font-bold rounded">2022-23</span>
                                 <span class="material-symbols-outlined text-4xl text-primary-container" style="font-variation-settings: 'FILL' 1;">terminal</span>
                             </div>
                             <h3 class="font-headline text-3xl font-black text-on-surface uppercase mb-4 leading-tight">System<br/>Foundations</h3>
                             <p class="font-body text-on-surface-variant mb-6 text-lg">Mastered C# and .NET fundamentals while building distributed logic for local industrial applications. Focused on data integrity and system reliability.</p>
-                            <div class="mt-auto font-hand text-secondary text-xl rotate-[-2deg]">"Hello world was just the bait..."</div>
+                            <div class="mt-auto font-hand text-xl rotate-[-2deg]">"Hello world was just the bait..."</div>
                         </div>
                     </div>
 
                     <!-- First Job -->
                     <div class="relative group sticker-rotate-cw stagger-2 lg:mt-12">
-                        <div class="bg-surface-container-high border-4 border-on-surface p-8 rounded-2xl hard-shadow group-hover:-translate-y-2 transition-transform h-full flex flex-col">
+                        <div class="border-4 border-on-surface p-8 rounded-2xl hard-shadow group-hover:-translate-y-2 transition-transform h-full flex flex-col bg-tertiary-container">
                             <div class="flex justify-between items-start mb-6">
-                                <span class="bg-secondary-container text-on-secondary-container px-3 py-1 font-mono font-bold rounded">2023-24</span>
+                                <span class="px-3 py-1 font-mono font-bold rounded text-tertiary-container bg-on-primary">2023-24</span>
                                 <span class="material-symbols-outlined text-4xl text-primary-container" style="font-variation-settings: 'FILL' 1;">developer_board</span>
                             </div>
-                            <h3 class="font-headline text-3xl font-black text-on-surface uppercase mb-4 leading-tight">Enterprise<br/>Integration</h3>
-                            <p class="font-body text-on-surface-variant mb-6 text-lg">Shipped production-grade internal tools as a Full-Stack Engineer. Collaborated with multi-disciplinary teams to integrate legacy systems into modern cloud-native architectures.</p>
+                            <h3 class="font-headline text-3xl font-black text-on-tertiary-fixed uppercase mb-4 leading-tight">Enterprise<br/>Integration</h3>
+                            <p class="font-body mb-6 text-lg text-on-tertiary-fixed">Shipped production-grade internal tools as a Full-Stack Engineer. Collaborated with multi-disciplinary teams to integrate legacy systems into modern cloud-native architectures.</p>
                             <div class="mt-auto font-hand text-xl rotate-[1deg] absolute bottom-4 left-4 bg-tertiary-container text-on-tertiary-container px-3 font-bold rounded-md">"Reality is a tough debugger."</div>
                         </div>
                     </div>
 
                     <!-- Freelancing Phase 1 -->
                     <div class="relative group sticker-rotate-ccw stagger-3 lg:mt-24">
-                        <div class="bg-surface-container-high border-4 border-on-surface p-8 rounded-2xl hard-shadow group-hover:-translate-y-2 transition-transform h-full flex flex-col">
+                        <div class="border-4 border-on-surface p-8 rounded-2xl hard-shadow group-hover:-translate-y-2 transition-transform h-full flex flex-col bg-secondary">
                             <div class="flex justify-between items-start mb-6">
-                                <span class="bg-primary-container text-on-primary-fixed px-3 py-1 font-mono font-bold rounded">2024</span>
+                                <span class="bg-primary-container px-3 py-1 font-mono font-bold rounded text-on-secondary-container">2024</span>
                                 <span class="material-symbols-outlined text-4xl text-primary-container" style="font-variation-settings: 'FILL' 1;">rocket_launch</span>
                             </div>
-                            <h3 class="font-headline text-3xl font-black text-on-surface uppercase mb-4 leading-tight">Rapid MVP<br/>Development</h3>
+                            <h3 class="font-headline text-3xl font-black text-on-secondary uppercase mb-4 leading-tight">Rapid MVP<br/>Development</h3>
                             <p class="font-body text-on-surface-variant mb-6 text-lg">Delivered end-to-end web products for high-growth startups. Specialized in reducing time-to-market by architecting modular, scalable SaaS frontends and backends.</p>
-                            <div class="mt-auto font-hand text-primary text-xl -rotate-1">"Total freedom, total responsibility."</div>
+                            <div class="mt-auto font-hand text-xl rotate-[1deg] absolute bottom-4 left-4 px-3 font-bold rounded-md text-primary bg-on-primary">"Total freedom, total responsibility."</div>
                         </div>
                     </div>
 
@@ -356,14 +334,14 @@
 
                     <!-- Re-Freelancing -->
                     <div class="relative group sticker-rotate-ccw stagger-2">
-                        <div class="bg-surface-container-high border-4 border-on-surface p-8 rounded-2xl hard-shadow group-hover:-translate-y-2 transition-transform h-full flex flex-col">
+                        <div class="border-4 border-on-surface p-8 rounded-2xl hard-shadow group-hover:-translate-y-2 transition-transform h-full flex flex-col bg-on-primary">
                             <div class="flex justify-between items-start mb-6">
                                 <span class="bg-secondary-container text-on-secondary-container px-3 py-1 font-mono font-bold rounded">2025-26</span>
                                 <span class="material-symbols-outlined text-4xl text-primary-container" style="font-variation-settings: 'FILL' 1;">psychology</span>
                             </div>
-                            <h3 class="font-headline text-3xl font-black text-on-surface uppercase mb-4 leading-tight">Advanced<br/>Systems Design</h3>
-                            <p class="font-body text-on-surface-variant mb-6 text-lg">Architecting high-load distributed backends for complex SaaS platforms. Implementing Domain-Driven Design (DDD) to tackle business complexity with clean, maintainable codebases.</p>
-                            <div class="mt-auto font-hand text-secondary text-xl rotate-[-3deg]">"Design first, code later."</div>
+                            <h3 class="font-headline text-3xl font-black text-primary uppercase mb-4 leading-tight">Advanced<br/>Systems Design</h3>
+                            <p class="font-body mb-6 text-lg text-secondary">Architecting high-load distributed backends for complex SaaS platforms. Implementing Domain-Driven Design (DDD) to tackle business complexity with clean, maintainable codebases.</p>
+                            <div class="mt-auto font-hand text-xl rotate-[-3deg] text-primary">"Design first, code later."</div>
                         </div>
                     </div>
 
@@ -372,7 +350,7 @@
                         <div class="bg-primary border-4 border-on-surface p-8 rounded-2xl hard-shadow-lime group-hover:-translate-y-2 transition-transform h-full flex flex-col">
                             <div class="flex justify-between items-start mb-6">
                                 <span class="bg-on-primary text-primary px-3 py-1 font-mono font-bold rounded">PRESENT</span>
-                                <span class="material-symbols-outlined text-4xl text-primary-container" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                                <span class="material-symbols-outlined text-4xl text-on-primary" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
                             </div>
                             <h3 class="font-headline text-3xl font-black text-on-primary uppercase mb-4 leading-tight">0 &rarr; 1 <br/>Product Engineering</h3>
                             <p class="font-body text-on-primary opacity-80 mb-6 text-lg">Engineering the future of autonomous systems. Building resilient, scalable, and secure infrastructures that empower the next generation of SaaS ventures.</p>
@@ -392,33 +370,33 @@
                 HIGH-LOAD <br/>
                 <span class="text-primary-container italic underline decoration-secondary-container decoration-8 underline-offset-8">ARCHITECTURES</span>
             </h2>
-            <p class="max-w-2xl text-xl font-body text-on-surface-variant leading-relaxed mb-16">
+            <p class="type-target max-w-2xl text-xl font-body text-on-surface-variant leading-relaxed mb-16">
                 Building distributed systems that don't melt under pressure. Detailed technical blueprints for microservices, crafted with pixel-perfect chaos.
             </p>
             <!-- Core Stack List -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 font-label">
                 <div class="bg-surface-container border-4 border-on-surface p-6 rounded-xl hard-shadow transition-all">
-                    <h3 class="text-2xl font-black text-primary-container mb-2 uppercase">PostgreSQL</h3>
+                    <h3 class="text-2xl font-black text-on-surface mb-2 uppercase">PostgreSQL</h3>
                     <p class="text-on-surface-variant text-sm">Schema design and performance tuning for multi-tenant SaaS applications.</p>
                 </div>
                 <div class="bg-surface-container border-4 border-on-surface p-6 rounded-xl hard-shadow transition-all">
-                    <h3 class="text-2xl font-black text-primary-container mb-2 uppercase">Node.js / ASP.NET Core</h3>
+                    <h3 class="text-2xl font-black text-on-surface mb-2 uppercase">Node.js / ASP.NET Core</h3>
                     <p class="text-on-surface-variant text-sm">Building REST & event-driven APIs that scale in production environments.</p>
                 </div>
                 <div class="bg-surface-container border-4 border-on-surface p-6 rounded-xl hard-shadow transition-all">
-                    <h3 class="text-2xl font-black text-primary-container mb-2 uppercase">Azure / Cloud Ops</h3>
+                    <h3 class="text-2xl font-black text-on-surface mb-2 uppercase">Azure / Cloud Ops</h3>
                     <p class="text-on-surface-variant text-sm">Orchestrating resilient infrastructure with containerized deployments.</p>
                 </div>
                 <div class="bg-surface-container border-4 border-on-surface p-6 rounded-xl hard-shadow transition-all">
-                    <h3 class="text-2xl font-black text-primary-container mb-2 uppercase">TypeScript</h3>
+                    <h3 class="text-2xl font-black text-on-surface mb-2 uppercase">TypeScript</h3>
                     <p class="text-on-surface-variant text-sm">Strictly typed full-stack development for maintainable enterprise codebases.</p>
                 </div>
                 <div class="bg-surface-container border-4 border-on-surface p-6 rounded-xl hard-shadow transition-all">
-                    <h3 class="text-2xl font-black text-primary-container mb-2 uppercase">Systems Architecture</h3>
+                    <h3 class="text-2xl font-black text-on-surface mb-2 uppercase">Systems Architecture</h3>
                     <p class="text-on-surface-variant text-sm">Designing modular microservices using Domain-Driven Design (DDD) principles.</p>
                 </div>
                 <div class="bg-surface-container border-4 border-on-surface p-6 rounded-xl hard-shadow transition-all">
-                    <h3 class="text-2xl font-black text-primary-container mb-2 uppercase">Python / Data Analytics</h3>
+                    <h3 class="text-2xl font-black text-on-surface mb-2 uppercase">Python / Data Analytics</h3>
                     <p class="text-on-surface-variant text-sm">Leveraging Pandas and Scikit-learn for automated business intelligence.</p>
                 </div>
             </div>
@@ -437,7 +415,7 @@
             </header>
 
             <!-- Projects Grid -->
-            <div id="github-projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div id="github-projects-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <!-- Loading State -->
                 <div class="col-span-full flex flex-col items-center justify-center p-20 border-4 border-dashed border-on-surface/20 rounded-3xl">
                     <div class="material-symbols-outlined text-6xl animate-spin text-primary mb-4">sync</div>
@@ -499,18 +477,23 @@
             </div>
         </div>
     </footer>
-    
 
-    <!-- Interactive Pet Element -->
-    <div id="interactive-pet" class="hidden md:block pet-element" title="Click me to change the vibe!">🐾</div>
+    <!-- Terminal Overlay -->
+    <div id="terminal-overlay" class="terminal-overlay hidden" aria-hidden="true">
+        <div id="terminal-window" class="terminal-window" role="dialog" aria-modal="true" aria-label="Interactive terminal">
+            <div class="terminal-titlebar">
+                <div class="terminal-dots">
+                    <span class="terminal-dot terminal-dot-red"></span>
+                    <span class="terminal-dot terminal-dot-yellow"></span>
+                    <span class="terminal-dot terminal-dot-green"></span>
+                </div>
+                <span class="terminal-titlebar-label">guest@nicolaas-portfolio: ~</span>
+                <button id="terminal-close" class="terminal-close" aria-label="Close terminal">&times;</button>
+            </div>
+            <div id="terminal-output" class="terminal-output"></div>
+        </div>
+    </div>
 
     <script src="JS/script.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            if (typeof GitHubCalendar !== 'undefined') {
-                GitHubCalendar(".calendar", "NicolaasLabuschagne", { responsive: true, global_stats: false });
-            }
-        });
-    </script>
 </body>
 </html>
