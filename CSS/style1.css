@@ -36,7 +36,6 @@
     --sticker-bg: #ffffff;
     --sticker-text: var(--success-color);
     --hard-shadow-color: #353535;
-    --map-border: #131313;
     --glow-color: rgba(190, 242, 100, 0.6);
     --glow-pink-color: rgba(255, 0, 127, 0.6);
 
@@ -132,7 +131,6 @@
     --sticker-bg: #222222;
     --sticker-text: #4ade80;
     --hard-shadow-color: #000000;
-    --map-border: #bef264;
 
     /* Surfaces */
     --surface: #1e1e1e;
@@ -140,13 +138,6 @@
     --surface-high: #2a2a2a;
     --surface-highest: #333333;
     --surface-lowest: #0a0a0a;
-}
-
-[data-theme="dark"] .desk-scene {
-    background-image:
-        linear-gradient(var(--overlay-bg), var(--overlay-bg-heavy)),
-        url('../images/background5.jpg');
-    filter: saturate(0.5) brightness(0.6);
 }
 
 [data-theme="dark"] .my-page {
@@ -182,6 +173,20 @@
     box-sizing: border-box;
 }
 
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+#hero-portrait {
+    transition: transform 0.3s ease-out;
+    will-change: transform;
+}
+
 html, body {
     margin: 0;
     padding: 0;
@@ -190,7 +195,7 @@ html, body {
 
 body {
     background-color: var(--bg-color);
-    color: var(--text-color);
+    color: var(--primary-color);
     font-family: var(--font-main);
     line-height: 1.6;
     position: relative;
@@ -227,7 +232,7 @@ body::after {
     height: 14px;
     background: var(--bg-color);
     z-index: 2000;
-    border-bottom: var(--border-width) solid var(--border-color);
+    border-bottom: var(--border-width) solid var(--primary-color);
 }
 
 .scroll-progress-bar {
@@ -236,7 +241,7 @@ body::after {
     background: var(--secondary-color);
     position: relative;
     transition: width 0.1s ease-out;
-    border-right: var(--border-width) solid var(--border-color);
+    border-right: var(--border-width) solid var(--primary-color);
 }
 
 .bike-icon {
@@ -247,7 +252,9 @@ body::after {
     transform: scaleX(-1);
     filter: drop-shadow(2px 2px 0px var(--border-color));
 }
-
+.border-on-surface {
+    border-color: var(--primary-color) !important;
+}
 /* ===========================
    Navigation
    =========================== */
@@ -286,7 +293,12 @@ main {
     border: var(--border-width) solid var(--border-color);
     border-radius: 0px;
 }
-
+.nav-link{
+    color: color-mix(in srgb, var(--primary-color) 50%, black) !important; 
+}
+.nav-link.active {
+    color: var(--primary-color) !important; 
+}
 .nav-links {
     display: flex;
     list-style: none;
@@ -569,13 +581,14 @@ main {
     background-position: 0 80%;
     padding: 0 5px;
     font-weight: 800;
-    border: 2px solid var(--border-color);
+    border: 2px solid transparent;
     border-radius: 4px;
-    transition: background-size 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+    transition: background-size 0.8s cubic-bezier(0.645, 0.045, 0.355, 1), border-color 0.4s ease 0.4s;
 }
 
 .highlight.active {
     background-size: 100% 100%;
+    border-color: var(--border-color);
 }
 
 .hero-socials {
@@ -772,6 +785,7 @@ main {
     box-shadow: 4px 4px 0px 0px var(--border-color);
     z-index: 10;
     text-transform: uppercase;
+    animation: float 7s ease-in-out infinite;
 }
 
 .sticker-yellow { background: var(--secondary-color); }
@@ -968,10 +982,11 @@ main {
     fill: var(--accent-color);
     opacity: 0.3;
     filter: invert(var(--invert-amount));
+    animation: floating-bg 14s ease-in-out infinite;
 }
 
 .blob-1 { top: 10%; right: -50px; width: 300px; height: 300px; }
-.blob-2 { bottom: 10%; left: -50px; width: 350px; height: 350px; fill: var(--purple-color); }
+.blob-2 { bottom: 10%; left: -50px; width: 350px; height: 350px; fill: var(--purple-color); animation-delay: 3s; animation-direction: reverse; }
 
 .star-illustation {
     position: absolute;
@@ -994,63 +1009,12 @@ main {
 }
 
 /* ===========================
-   Marquee
-   =========================== */
-.marquee {
-    background: var(--secondary-color);
-    color: var(--on-secondary-color);
-    padding: 15px 0;
-    border-top: var(--border-width-thick) solid var(--border-color);
-    border-bottom: var(--border-width-thick) solid var(--border-color);
-    overflow: hidden;
-    white-space: nowrap;
-    display: flex;
-    transform: rotate(-1deg);
-    width: calc(100% + 10px);
-    margin-left: -5px;
-    z-index: 100;
-    box-shadow: 0 10px 0 var(--shadow-color);
-}
-
-.marquee-content {
-    display: flex;
-    animation: marquee 20s linear infinite;
-}
-
-.marquee-content span {
-    font-size: 2.5rem;
-    font-weight: 900;
-    text-transform: uppercase;
-    padding: 0 40px;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-@media (max-width: 768px) {
-    .marquee-content span {
-        font-size: 1.5rem;
-        padding: 0 20px;
-    }
-}
-
-.marquee-content span::after {
-    content: '★';
-    color: var(--primary-color);
-}
-
-@keyframes marquee {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-}
-
-/* ===========================
    About Section
    =========================== */
 .about {
     background: var(--bg-color);
-    border-top: var(--border-width) solid var(--border-color);
-    border-bottom: var(--border-width) solid var(--border-color);
+    border-top: var(--border-width) solid var(--primary-color);
+    border-bottom: var(--border-width) solid var(--primary-color);
 }
 
 .about-content p {
@@ -1218,23 +1182,6 @@ main {
 .tags span:nth-child(5n+3):hover { background-color: var(--purple-color); }
 .tags span:nth-child(5n+4):hover { background-color: var(--success-color); }
 .tags span:nth-child(5n+5):hover { background-color: var(--error-color); }
-
-/* ===========================
-   Map Section
-   =========================== */
-.map-box {
-    height: 500px;
-    width: 100%;
-    border: var(--border-width) solid var(--border-color);
-    border-radius: 20px;
-    box-shadow: 10px 10px 0px 0px var(--border-color);
-    overflow: hidden;
-    z-index: 1;
-}
-
-[data-theme="dark"] .leaflet-tile {
-    filter: brightness(0.6) invert(1) contrast(3) hue-rotate(200deg) saturate(0.3) brightness(0.7);
-}
 
 /* ===========================
    Education & Languages
@@ -1494,6 +1441,23 @@ a, button, [role="button"] {
     transform: translateY(0);
 }
 
+/* Typewriter: text types itself out once, the moment its section becomes active */
+.type-target.is-typing::after {
+    content: '';
+    display: inline-block;
+    width: 0.5em;
+    height: 0.85em;
+    margin-left: 3px;
+    background: currentColor;
+    vertical-align: -0.08em;
+    animation: type-cursor-blink 0.8s step-end infinite;
+}
+
+@keyframes type-cursor-blink {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+}
+
 /* New Design System Utility Classes */
 .hard-shadow {
     box-shadow: var(--hard-shadow-standard);
@@ -1679,9 +1643,6 @@ a, button, [role="button"] {
 }
 
 @media (max-width: 768px) {
-    #map {
-        height: 300px !important;
-    }
     .footer-content {
         flex-direction: column;
         text-align: center;
@@ -1764,211 +1725,53 @@ a, button, [role="button"] {
     border-color: var(--text-color) transparent transparent transparent;
 }
 
-/* ===========================
-   Interactive Pet & Theme Styles
-   =========================== */
-.pet-element {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    font-size: 3rem;
-    cursor: pointer;
-    z-index: 1000;
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    user-select: none;
-    filter: drop-shadow(4px 4px 0px var(--shadow-color));
-}
-
-.pet-element:hover {
-    transform: scale(1.2) rotate(10deg);
-}
-
-/* theme-fun: Cartoony / Playful */
-body.theme-fun {
-    --bg-color: #fff8eb;
-    --bg-color-rgb: 255, 248, 235;
-    --surface: #ffffff;
-    --surface-low: #fffbeb;
-    --surface-high: #fef3c7;
-    --surface-highest: #fde68a;
-    --text-color: #590028;
-    --text-color-rgb: 89, 0, 40;
-    --text-dim: #92400e;
-    --border-color: #590028;
-    --border-color-rgb: 89, 0, 40;
-    --primary-color: #bef264;
-    --primary-color-rgb: 190, 242, 100;
-    --on-primary-color: #590028;
-    --secondary-color: #ffda35;
-    --secondary-color-rgb: 255, 218, 53;
-    --on-secondary-color: #590028;
-    --accent-color: #e11d48; /* Darker Pink for contrast */
-    --accent-color-rgb: 225, 29, 72;
-    --on-accent-color: #ffffff;
-    --border-width: 4px;
-    --radius-lg: 40px;
-    --radius-md: 20px;
-    --font-main: 'Fredoka', sans-serif;
-    --font-body: 'Fredoka', sans-serif;
-    --shadow-brutal: 8px 8px 0px 0px var(--secondary-color);
-    --hard-shadow-color: var(--secondary-color);
-}
-
-[data-theme="dark"] body.theme-fun {
-    --bg-color: #1a0f08;
-    --bg-color-rgb: 26, 15, 8;
-    --surface: #2d1b0d;
-    --surface-low: #1a0f08;
-    --surface-high: #3d2b1d;
-    --text-color: #ffd1dc;
-    --text-color-rgb: 255, 209, 220;
-    --text-dim: #ff8fa3;
-    --border-color: #ff4a8d;
-    --border-color-rgb: 255, 74, 141;
-    --on-primary-color: #1a0f08;
-    --on-secondary-color: #1a0f08;
-    --on-accent-color: #1a0f08; /* Dark text for better contrast */
-    --shadow-brutal: 8px 8px 0px 0px #3d001b;
-    --hard-shadow-color: #3d001b;
-}
-
-body.theme-fun .card-bento, body.theme-fun .btn-action, body.theme-fun .nav {
-    border-radius: var(--radius-lg) !important;
-    box-shadow: var(--shadow-brutal) !important;
-}
-
-body.theme-fun .btn-action:hover {
-    animation: wiggle 0.4s ease-in-out infinite;
-}
-
-body.theme-fun h1, body.theme-fun h2, body.theme-fun h3 {
-    color: var(--accent-color);
-}
-
-body.theme-fun .text-on-surface-variant {
-    color: var(--text-dim);
-}
-
-body.theme-fun .marquee {
-    background: var(--accent-color);
-    color: var(--on-accent-color);
-    transform: rotate(2deg);
-}
-
-body.theme-fun .text-on-surface {
-    color: var(--text-color);
-}
-
-body.theme-fun .text-on-primary {
-    color: var(--on-primary-color);
-}
-
-/* theme-professional: Serious / Clean */
-body.theme-professional {
-    --bg-color: #ffffff;
-    --bg-color-rgb: 255, 255, 255;
-    --text-color: #131313;
-    --text-color-rgb: 19, 19, 19;
-    --text-dim: #666666;
-    --border-color: #e5e5e5;
-    --border-color-rgb: 229, 229, 229;
-    --primary-color: #131313;
-    --primary-color-rgb: 19, 19, 19;
-    --on-primary-color: #ffffff;
-    --secondary-color: #f5f5f5;
-    --secondary-color-rgb: 245, 245, 245;
-    --on-secondary-color: #131313;
-    --accent-color: #4d7c0f;
-    --accent-color-rgb: 77, 124, 15;
-    --on-accent-color: #ffffff;
-    --surface: #ffffff;
-    --surface-low: #f5f5f5;
-    --surface-high: #eeeeee;
-    --border-width: 1px;
-    --radius-lg: 12px;
-    --radius-md: 6px;
-    --font-main: 'Inter', sans-serif;
-    --font-body: 'Inter', sans-serif;
-    --shadow-brutal: 0 10px 30px -10px rgba(0,0,0,0.05);
-    --hard-shadow-color: rgba(0,0,0,0.1);
-}
-
-[data-theme="dark"] body.theme-professional {
-    --bg-color: #131313;
-    --bg-color-rgb: 19, 19, 19;
-    --text-color: #e5e5e5;
-    --text-color-rgb: 229, 229, 229;
-    --text-dim: #8f8f8f;
-    --border-color: #262626;
-    --border-color-rgb: 38, 38, 38;
-    --primary-color: #b9b9b9;
-    --primary-color-rgb: 229, 229, 229;
-    --on-primary-color: #131313;
-    --on-secondary-color: #131313;
-    --on-accent-color: #131313;
-    --surface: #262626;
-    --surface-low: #131313;
-    --surface-high: #404040;
-}
-
-body.theme-professional .card-bento, body.theme-professional .btn-action, body.theme-professional .nav {
-    box-shadow: var(--shadow-brutal) !important;
-    border: 1px solid var(--border-color) !important;
-    border-radius: var(--radius-lg) !important;
-}
-
-body.theme-professional .btn-action {
-    background: var(--primary-color) !important;
-    color: var(--on-primary-color) !important;
-}
-
-body.theme-professional .marquee {
-    background: var(--surface-low);
-    color: var(--text-dim);
-    transform: none;
-    /*border-y: 1px solid var(--border-color);*/
-}
-
-
-
-body.theme-professional .text-on-surface-variant {
-    color: var(--text-dim);
-}
-
-body.theme-professional .text-on-surface {
-    color: var(--text-color);
-}
-
-/* theme-creative: Experimental / Expressive */
+/* theme-creative: Experimental / Expressive (permanent site theme) */
 body.theme-creative {
-    --bg-color: #f0f0f0;
-    --bg-color-rgb: 240, 240, 240;
-    --text-color: #1a1a1a;
-    --text-color-rgb: 26, 26, 26;
-    --text-dim: #333;
-    --border-color: #bef264;
-    --border-color-rgb: 190, 242, 100;
-    --primary-color: #bef264;
-    --primary-color-rgb: 190, 242, 100;
-    --on-primary-color: #1a1a1a;
-    --secondary-color: #ffd93d;
-    --secondary-color-rgb: 255, 217, 61;
-    --on-secondary-color: #1a1a1a;
-    --accent-color: #db2777; /* Darker pink */
-    --accent-color-rgb: 219, 39, 119;
-    --on-accent-color: #ffffff;
-    --surface: #ffffff;
-    --surface-low: #e8e8e8;
-    --surface-high: #d8d8d8;
+    /* Soft cream/pastel palette (light mode) */
+    --bg-color: #FAFAF7; /* Cloud White */
+    --bg-color-rgb: 250, 250, 247;
+    --text-color: #4A4A4A;
+    --text-color-rgb: 74, 74, 74;
+    /* Sage Gray-Green, darkened from the original #A7B8A8 for actual text use —
+       the light version measured 1.56-2.00:1 contrast against every background
+       in this palette (WCAG AA needs 4.5:1 normal / 3:1 large). This darker
+       value clears 4.5:1+ against all of them while staying the same hue.
+       --border-color keeps the original lighter tone (borders aren't held to
+       the same text-contrast bar, and it's a bigger look change to darken). */
+    --text-dim: #52614F; /* Sage Gray-Green (soft text) */
+    --border-color: #A7B8A8; /* Sage Gray-Green (softened border) */
+    --border-color-rgb: 167, 184, 168;
+    --primary-color: #F7E87B; /* Banana Yellow */
+    --primary-color-rgb: 247, 232, 123;
+    --on-primary-color: #52614F; /* Sage Gray-Green */
+    --secondary-color: #DFF4E3; /* Mint Dust */
+    --secondary-color-rgb: 223, 244, 227;
+    --on-secondary-color: #52614F; /* Sage Gray-Green */
+    --accent-color: #F9D9C1; /* Peach Mist */
+    --accent-color-rgb: 249, 217, 193;
+    --on-accent-color: #4A4A4A;
+    --purple-color: #DCD6F7; /* Lavender Fog (decorative) */
+    --success-color: #C9D7F8; /* Periwinkle Whisper (decorative) */
+    --surface: #FFF4C7; /* Buttercream: nav / hero / buttons */
+    --surface-low: #F2EDE4; /* Warm Linen: subtle section separation */
+    --surface-high: #FFF4C7; /* Buttercream: cards */
+    --surface-highest: #FFF4C7; /* Buttercream: hero portrait */
+    --surface-lowest: #F2EDE4; /* Warm Linen: section separation */
     --border-width: 4px;
     --radius-lg: 0px;
     --font-main: 'Space Grotesk', sans-serif;
     --font-body: 'Space Mono', monospace;
-    --shadow-brutal: 10px 10px 0px 0px #1a1a1a;
-    --hard-shadow-color: #1a1a1a;
+    --shadow-brutal: 8px 8px 24px 0px rgba(74, 74, 74, 0.15);
+    --hard-shadow-color: rgba(74, 74, 74, 0.18);
+    --hard-shadow-standard: 8px 8px 0px 0px rgba(74, 74, 74, 0.18);
+    --hard-shadow-pink: 6px 6px 0px 0px rgba(74, 74, 74, 0.18);
+    --hard-shadow-lime: 6px 6px 0px 0px rgba(74, 74, 74, 0.18);
+    --glow-color: rgba(247, 232, 123, 0.35);
+    --glow-pink-color: rgba(249, 217, 193, 0.35);
 }
 
 [data-theme="dark"] body.theme-creative {
+    /* Original vivid neon-on-black palette (dark mode, unchanged) */
     --bg-color: #0a0a0a;
     --bg-color-rgb: 10, 10, 10;
     --text-color: #bef264;
@@ -1976,14 +1779,29 @@ body.theme-creative {
     --text-dim: #5f910a;
     --border-color: #bef264;
     --border-color-rgb: 190, 242, 100;
+    --primary-color: #bef264; /* Vivid lime (dark mode) */
+    --primary-color-rgb: 190, 242, 100;
     --on-primary-color: #0a0a0a;
+    --secondary-color: #ffd93d; /* Vivid yellow (dark mode) */
+    --secondary-color-rgb: 255, 217, 61;
     --on-secondary-color: #0a0a0a;
+    --accent-color: #ff6b9d; /* Vivid pink (dark mode) */
+    --accent-color-rgb: 255, 107, 157;
     --on-accent-color: #0a0a0a;
+    --purple-color: #c084fc;
+    --success-color: #4ade80;
     --surface: #111111;
     --surface-low: #0a0a0a;
     --surface-high: #222222;
+    --surface-highest: #333333;
+    --surface-lowest: #0a0a0a;
     --shadow-brutal: 8px 8px 15px 0px rgba(190, 242, 100, 0.4);
     --hard-shadow-color: rgba(190, 242, 100, 0.4);
+    --hard-shadow-standard: 8px 8px 0px 0px #353535;
+    --hard-shadow-pink: 6px 6px 0px 0px #ff4a8d;
+    --hard-shadow-lime: 6px 6px 0px 0px #bef264;
+    --glow-color: rgba(190, 242, 100, 0.6);
+    --glow-pink-color: rgba(255, 0, 127, 0.6);
 }
 
 [data-theme="dark"] body.theme-creative .card-bento {
@@ -2015,11 +1833,6 @@ body.theme-creative h1, body.theme-creative h2, body.theme-creative h3 {
     letter-spacing: -0.05em;
 }
 
-body.theme-creative .marquee {
-    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-    color: var(--on-secondary-color);
-    transform: rotate(-2deg);
-}
 .d-none{
     display: none !important;
 }
@@ -2032,7 +1845,36 @@ body.theme-creative .text-on-surface-variant {
 }
 
 body.theme-creative .text-on-surface {
-    color: var(--text-color);
+    color: color-mix(in srgb, var(--primary-color) 80%, black);
+}
+
+/* Light mode only: the yellow-tinted defaults above (and the plain "body"
+   color) measured well under WCAG AA against this theme's pastel backgrounds
+   at their original blend ratios. Darkening the mix keeps the same tinted
+   look while actually being readable. Dark mode is untouched — its vivid
+   lime against near-black backgrounds already has plenty of contrast. */
+[data-theme="light"] body {
+    color: color-mix(in srgb, var(--primary-color) 35%, black);
+}
+
+[data-theme="light"] body.theme-creative .text-on-surface {
+    color: color-mix(in srgb, var(--primary-color) 35%, black) !important;
+}
+
+/* Same fix, targeted at the handful of spots that use a brand color directly
+   as text sitting on the plain page background (nav/footer wordmark, the
+   decorative "ARCHITECTURES" word, the "/github_repos" label) rather than on
+   a card/badge fill — those measured 1.1-1.2:1. Left unscoped classes like
+   .text-primary/.text-primary-container alone since most of their other uses
+   are light text on a colored card, which already has good contrast. */
+[data-theme="light"] nav a.text-primary,
+[data-theme="light"] footer .text-primary,
+[data-theme="light"] .text-primary-container.underline {
+    color: color-mix(in srgb, var(--primary-color) 35%, black) !important;
+}
+
+[data-theme="light"] .font-hand.text-tertiary-container {
+    color: color-mix(in srgb, var(--secondary-color) 35%, black) !important;
 }
 
 /* Universal Overrides based on CSS Variables */
@@ -2065,18 +1907,6 @@ body.theme-creative .btn-hero-coffee:hover {
 
 [data-theme="dark"] body.theme-creative .btn-hero-coffee:hover {
     box-shadow: 18px 18px 0px 0px var(--accent-color) !important;
-}
-
-body.theme-fun .card-bento:hover,
-body.theme-fun .btn-action:hover {
-    transform: scale(1.02);
-    box-shadow: 12px 12px 0px 0px var(--secondary-color) !important;
-}
-
-body.theme-fun .btn-hero-coffee:hover {
-    animation: wiggle 0.4s ease-in-out infinite;
-    transform: scale(1.02) rotate(0deg) translate(0, 0); /* Reset base for wiggle */
-    box-shadow: 12px 12px 0px 0px var(--secondary-color) !important;
 }
 
 /* Digital Debris Interaction Area */
@@ -2122,59 +1952,158 @@ body.theme-fun .btn-hero-coffee:hover {
     animation-delay: var(--delay);
 }
 
-/* Map Overhaul */
-.neon-map-outline {
-    filter: drop-shadow(0 0 1px var(--accent-color)) drop-shadow(0 0 1px var(--accent-color));
-    stroke-opacity: 0.1;
+/* ===========================
+   Terminal Overlay (deliberately theme-independent — always classic black/lime)
+   =========================== */
+.terminal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    overscroll-behavior: contain;
+    transition: background 0.3s ease, backdrop-filter 0.3s ease;
 }
 
-#map {
-    background: transparent !important;
+/* While the matrix effect plays: clear the dark backdrop and hide the window
+   itself so the falling-character canvas is the only thing visible. */
+.terminal-overlay.matrix-active {
+    background: transparent;
+    backdrop-filter: none;
 }
 
-[data-theme="dark"] #map {
-    background: var(--surface-lowest) !important;
+.terminal-overlay.matrix-active .terminal-window {
+    visibility: hidden;
 }
 
-/* Leaflet Popup Styling */
-.leaflet-popup-content-wrapper {
-    background: var(--surface) !important;
-    color: var(--text-color) !important;
-    border: var(--border-width) solid var(--border-color) !important;
-    border-radius: 0px !important;
-    box-shadow: 6px 6px 0px 0px var(--border-color) !important;
+.terminal-overlay.hidden {
+    display: none;
+}
+
+.terminal-window {
+    width: 100%;
+    max-width: 720px;
+    height: min(600px, 80vh);
+    background: #0a0a0a;
+    border: 3px solid var(--primary-color);
+    border-radius: 10px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(190, 242, 100, 0.15);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
     font-family: var(--font-mono);
 }
 
-.leaflet-popup-tip {
-    background: var(--surface) !important;
-    border: var(--border-width) solid var(--border-color);
+.terminal-titlebar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    background: #111111;
+    border-bottom: 2px solid #222222;
+    flex-shrink: 0;
 }
 
-[data-theme="dark"] .leaflet-popup-content-wrapper {
-    background: var(--surface-low) !important;
-    border-color: var(--border-color) !important;
-    box-shadow: 6px 6px 0px 0px var(--border-color) !important;
+.terminal-dots {
+    display: flex;
+    gap: 7px;
 }
 
-[data-theme="dark"] .leaflet-popup-tip {
-    background: var(--surface-low) !important;
-    border-color: var(--border-color);
+.terminal-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
 }
 
-/* Vibe Specific Map Overrides */
-body.theme-fun .leaflet-popup-content-wrapper {
-    border-radius: 20px !important;
-    box-shadow: 8px 8px 0px 0px var(--secondary-color) !important;
+.terminal-dot-red { background: #ff5f56; }
+.terminal-dot-yellow { background: #ffbd2e; }
+.terminal-dot-green { background: #27c93f; }
+
+.terminal-titlebar-label {
+    flex: 1;
+    text-align: center;
+    color: #7d7d7d;
+    font-size: 0.8rem;
 }
 
-body.theme-professional .leaflet-popup-content-wrapper {
-    border-radius: 8px !important;
-    box-shadow: 0 4px 12px var(--shadow-color) !important;
-    border: 1px solid var(--border-color) !important;
+.terminal-close {
+    background: none;
+    border: none;
+    color: #7d7d7d;
+    font-size: 1.3rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0 4px;
 }
 
-.leaflet-popup-content {
-    margin: 15px 20px !important;
-    line-height: 1.4 !important;
+.terminal-close:hover {
+    color: #ff5f56;
+}
+
+.terminal-output {
+    flex: 1;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 16px 18px;
+    color: #bef264;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.terminal-output::-webkit-scrollbar {
+    width: 8px;
+}
+.terminal-output::-webkit-scrollbar-thumb {
+    background: #333333;
+    border-radius: 4px;
+}
+
+.terminal-line-error { color: #ff6b9d; }
+.terminal-line-dim { color: #5f910a; }
+.terminal-line-echo { color: #ffffff; }
+
+.terminal-prompt {
+    color: #ffd93d;
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+/* Live prompt line, printed inline in the scrolling buffer — not a separate
+   fixed bar — so it reads as one continuous terminal like the real thing. */
+.terminal-prompt-line {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+}
+
+.terminal-input-inline,
+.terminal-input-inline:focus {
+    flex: 1;
+    background: transparent !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    color: #bef264 !important;
+    caret-color: #bef264;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    padding: 0;
+    min-width: 4ch;
+}
+
+html.terminal-open,
+body.terminal-open {
+    overflow: hidden;
+}
+
+@media (max-width: 640px) {
+    .terminal-window { height: 90vh; }
+    .terminal-titlebar-label { display: none; }
 }
