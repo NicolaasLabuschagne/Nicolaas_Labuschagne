@@ -2069,6 +2069,27 @@ body.theme-creative .btn-hero-coffee:hover {
 .terminal-line-dim { color: #5f910a; }
 .terminal-line-echo { color: #ffffff; }
 
+/* help listing: command name vs. its description, visibly distinct colors so
+   they don't blur together — flex-wrap drops the description to its own line
+   on narrow screens instead of wrapping confusingly mid-sentence. */
+.terminal-command-line {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 12px;
+    row-gap: 0;
+}
+
+.terminal-command-name {
+    color: #ffd93d;
+    font-weight: bold;
+    min-width: 190px;
+    white-space: pre;
+}
+
+.terminal-command-desc {
+    color: #5f910a;
+}
+
 .terminal-prompt {
     color: #ffd93d;
     font-size: 0.9rem;
