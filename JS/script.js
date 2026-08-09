@@ -477,6 +477,27 @@ const TerminalEngine = {
         this.output.scrollTop = this.output.scrollHeight;
     },
 
+    // Command name and its description printed in two distinct colors instead
+    // of one plain line — on a narrow/wrapped mobile line it's otherwise hard
+    // to tell where "what to type" ends and "what it does" begins.
+    printCommandLine(command, description) {
+        const line = document.createElement('div');
+        line.className = 'terminal-command-line';
+
+        const cmdSpan = document.createElement('span');
+        cmdSpan.className = 'terminal-command-name';
+        cmdSpan.textContent = `  ${command}`;
+
+        const descSpan = document.createElement('span');
+        descSpan.className = 'terminal-command-desc';
+        descSpan.textContent = description;
+
+        line.appendChild(cmdSpan);
+        line.appendChild(descSpan);
+        this.output.appendChild(line);
+        this.output.scrollTop = this.output.scrollHeight;
+    },
+
     // Types the boot lines out one at a time with randomized per-character and
     // per-line timing, so it reads like it's actually being typed rather than
     // dumped on screen. Falls back to instant text under reduced-motion.
@@ -745,6 +766,7 @@ const TerminalEngine = {
                     ['whoami', 'quick identity check'],
                     ['fetch', 'live GitHub stats'],
                     ['commits', 'my latest public commits, live'],
+                    ['calendar', 'recent activity heatmap, live'],
                     ['resume', 'open my CV'],
                     ['contact', 'open my email'],
                     ['coffee', 'buy me a coffee'],
@@ -757,7 +779,7 @@ const TerminalEngine = {
                     ['history', 'past commands this session'],
                     ['clear', 'clear the screen'],
                     ['exit', 'close this terminal'],
-                ].forEach(([c, d]) => this.print(`  ${c.padEnd(20)} ${d}`));
+                ].forEach(([c, d]) => this.printCommandLine(c, d));
             },
             whoami: () => this.print('Nicolaas Labuschagne — systems architect, full-stack engineer, amateur cyclist.'),
             resume: () => {
@@ -787,10 +809,7 @@ const TerminalEngine = {
                 ];
                 this.print(jokes[Math.floor(Math.random() * jokes.length)]);
             },
-            matrix: () => {
-                this.print('Wake up, Neo...', 'terminal-line-dim');
-                return this.runMatrixEffect();
-            },
+            matrix: () => this.runMatrixIntro(),
             history: () => {
                 if (!this.history.length) {
                     this.print('No commands yet this session.', 'terminal-line-dim');
@@ -803,6 +822,8 @@ const TerminalEngine = {
             fetch: () => this.runFetch(),
             neofetch: () => this.runFetch(),
             commits: () => this.runCommits(),
+            calendar: () => this.runCalendar(),
+            'github-calendar': () => this.runCalendar(),
             reset: () => {
                 RainbowEngine.stop();
                 HueShiftEngine.reset();
@@ -917,6 +938,116 @@ const TerminalEngine = {
                 this.print('--------------------------------');
             })
             .catch(() => this.print('Could not reach GitHub API.', 'terminal-line-error'));
+    },
+
+    // GitHub's real contribution graph needs an authenticated GraphQL call or
+    // scraping the profile page — neither is safe/reliable from a static
+    // client-side site. This builds a genuine heatmap instead from the same
+    // public Events API `commits` uses, which only covers recent activity
+    // (GitHub caps it at ~90 days / 300 events) — labelled honestly as such
+    // rather than pretending to be the full year.
+    runCalendar() {
+        this.print('Fetching recent activity...', 'terminal-line-dim');
+        return GitHubCache.fetch('https://api.github.com/users/NicolaasLabuschagne/events/public')
+            .then(events => {
+                const counts = {}; // 'YYYY-MM-DD' -> commit count
+                events.forEach(e => {
+                    if (e.type === 'PushEvent' && Array.isArray(e.payload?.commits)) {
+                        const day = e.created_at.slice(0, 10);
+                        counts[day] = (counts[day] || 0) + e.payload.commits.length;
+                    }
+                });
+
+                const totalDays = 70; // 10 weeks, keeps every line short enough for mobile
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+
+                const dates = [];
+                for (let i = totalDays - 1; i >= 0; i--) {
+                    const d = new Date(today);
+                    d.setDate(d.getDate() - i);
+                    dates.push(d);
+                }
+
+                // Pad so the grid's first column starts on a Sunday, like GitHub's own graph
+                const padded = new Array(dates[0].getDay()).fill(null).concat(dates);
+                const weeks = [];
+                for (let i = 0; i < padded.length; i += 7) {
+                    weeks.push(padded.slice(i, i + 7));
+                }
+
+                const blocks = [' ', '░', '▒', '▓', '█'];
+                const levelOf = (n) => {
+                    if (!n) return 0;
+                    if (n === 1) return 1;
+                    if (n <= 3) return 2;
+                    if (n <= 6) return 3;
+                    return 4;
+                };
+
+                const dayLabels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+                this.print('--------------------------------');
+                for (let dow = 0; dow < 7; dow++) {
+                    let row = '';
+                    weeks.forEach((week) => {
+                        const d = week[dow];
+                        row += d ? blocks[levelOf(counts[d.toISOString().slice(0, 10)])] : ' ';
+                    });
+                    this.print(`${dayLabels[dow]}  ${row}`);
+                }
+                this.print(`Less ${blocks.join('')} More`);
+
+                const total = Object.values(counts).reduce((a, b) => a + b, 0);
+                this.print(`${total} commits in the last ${totalDays} days (recent public activity only, not the full year)`, 'terminal-line-dim');
+                this.print('--------------------------------');
+            })
+            .catch(() => this.print('Could not reach GitHub API.', 'terminal-line-error'));
+    },
+
+    // Types the intro line out, then cycles the same "." / ".." / "..." loading
+    // sequence as `coffee` before the falling-character effect actually starts.
+    // Chains into runMatrixEffect()'s own promise so the next prompt waits for
+    // the typing, the dots, AND the full effect, not just the first two.
+    runMatrixIntro() {
+        const baseText = 'Wake up, Neo';
+
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            this.print(`${baseText}...`, 'terminal-line-dim');
+            return this.runMatrixEffect();
+        }
+
+        return new Promise((resolve) => {
+            const el = document.createElement('div');
+            el.className = 'terminal-line-dim type-target is-typing';
+            this.output.appendChild(el);
+
+            let charIndex = 0;
+            const typeChar = () => {
+                charIndex++;
+                el.textContent = baseText.slice(0, charIndex);
+                this.output.scrollTop = this.output.scrollHeight;
+                if (charIndex < baseText.length) {
+                    setTimeout(typeChar, 18 + Math.random() * 45);
+                } else {
+                    el.classList.remove('is-typing');
+                    this.animateMatrixDots(el, baseText, 0, resolve);
+                }
+            };
+            typeChar();
+        });
+    },
+
+    animateMatrixDots(el, baseText, tick, resolve) {
+        const dotStates = ['.', '..', '...'];
+        const totalTicks = dotStates.length * 3; // 3 full cycles, same as coffee
+        if (tick >= totalTicks) {
+            el.textContent = `${baseText}...`;
+            this.runMatrixEffect().then(resolve);
+            return;
+        }
+        el.textContent = baseText + dotStates[tick % dotStates.length];
+        this.output.scrollTop = this.output.scrollHeight;
+        setTimeout(() => this.animateMatrixDots(el, baseText, tick + 1, resolve), 130);
     },
 
     // Self-contained canvas overlay — sits just below the terminal window so the
