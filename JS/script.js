@@ -1299,9 +1299,12 @@ const PortfolioEngine = {
                             ${repo.description || 'No description provided for this repository.'}
                         </p>
                         <div class="mt-auto flex flex-col gap-3">
-                            ${repo.homepage ? `
+                            ${repo.homepage && repo.name !== 'Nicolaas_Labuschagne' ? `
                             <a href="${repo.homepage}" target="_blank" rel="noopener noreferrer" class="font-headline font-bold text-sm uppercase tracking-widest text-on-primary bg-primary px-4 py-2 rounded-lg border-2 border-on-surface text-center hover:-translate-y-0.5 transition-transform flex items-center justify-center gap-2">
                                 VIEW LIVE <span class="material-symbols-outlined text-sm">arrow_outward</span>
+                            </a>` : repo.name !== 'Nicolaas_Labuschagne' ? `
+                            <a href="mailto:NJ.Labuschagne@outlook.com?subject=${encodeURIComponent(repo.name + ' demo request')}" class="font-headline font-bold text-sm uppercase tracking-widest text-on-surface border-2 border-on-surface px-4 py-2 rounded-lg text-center hover:-translate-y-0.5 transition-transform flex items-center justify-center gap-2">
+                                REQUEST A DEMO <span class="material-symbols-outlined text-sm">mail</span>
                             </a>` : ''}
                             <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="font-headline font-bold text-xs uppercase tracking-widest text-on-surface hover:text-primary transition-colors flex items-center gap-2">
                                 VIEW ON GITHUB <span class="material-symbols-outlined text-sm">arrow_outward</span>
