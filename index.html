@@ -64,7 +64,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Caveat:wght@400..700&family=Inter:wght@400;700&family=Montserrat:wght@400;700;900&family=Fredoka:wght@400;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Caveat:wght@400..700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -192,7 +192,7 @@
                         </div>
                     </div>
                     <!-- Hand-drawn annotation -->
-                    <div class=" md:block absolute speech-bubble-hero -top-12 -right-16 sticker-rotate-cw text-on-primary">
+                    <div class="block absolute speech-bubble-hero -top-10 -right-6 sticker-rotate-cw text-on-primary">
                         HI, I'm Nicolaas!
                     </div>
 
@@ -234,7 +234,7 @@
         <section id="about" class="about section page my-page">
             <div class="container section-container">
                 <div class="hidden md:block sticker" style="top: 100px; right: 50px; --rot: -15deg; animation-delay: 0.3s;">Cyclist</div>
-                <div class="hidden md:block sticker sticker-purple" style="bottom: 5%; left: -10%; --rot: 10deg; animation-delay: 1.2s;">Business Minded</div>
+                <div class="hidden md:block sticker sticker-purple" style="top: 260px; right: 40px; --rot: 10deg; animation-delay: 1.2s;">Business Minded</div>
                 <svg class="star-illustation floating-star" style="top: -20px; right: 10%; fill: var(--primary-color);" viewBox="0 0 24 24">
                     <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" />
                 </svg>
@@ -242,7 +242,7 @@
                     <path d="M45,-60.1C58.1,-52.1,68.3,-38.4,73.4,-23.4C78.4,-8.4,78.2,7.9,73.1,22.8C68.1,37.6,58.2,50.9,45.3,60.1C32.4,69.4,16.2,74.5,0.7,73.6C-14.8,72.7,-29.6,65.8,-42.2,56C-54.8,46.1,-65.2,33.3,-69.5,18.9C-73.8,4.5,-72,-11.4,-65.3,-25.2C-58.7,-39,-47.2,-50.8,-34.1,-58.8C-21,-66.8,-10.5,-71.1,2.8,-74.9C16.1,-78.8,31.9,-68.2,45,-60.1Z" transform="translate(100 100)" />
                 </svg>
 
-                <h2 class="animate-reveal">ABOUT</h2>
+                <h2 class="animate-reveal font-headline text-4xl md:text-5xl font-black uppercase tracking-tighter text-on-surface mb-8">ABOUT</h2>
                 <div class="about-content animate-reveal">
                     <p class="type-target">Dynamic <span class="hand-drawn-circle">systems architect
                         <svg class="circle-svg" viewBox="0 0 250 80" preserveAspectRatio="none">
@@ -265,7 +265,7 @@
             </div>
         </section>
 
-        <section id="journey" class="py-24 bg-surface-container-lowest overflow-hidden animate-reveal">
+        <section id="journey" class="pt-32 pb-24 bg-surface-container-lowest overflow-hidden animate-reveal">
             <div class="max-w-7xl mx-auto px-6 relative">
 
                 <div class="mb-20 text-center relative">
@@ -285,11 +285,11 @@
                     <div class="relative group sticker-rotate-ccw stagger-1">
                         <div class="border-4 border-on-surface p-8 rounded-2xl hard-shadow group-hover:-translate-y-2 transition-transform h-full flex flex-col">
                             <div class="flex justify-between items-start mb-6">
-                                <span class="bg-tertiary-container text-on-tertiary-container px-3 py-1 font-mono font-bold rounded">2022-23</span>
+                                <span class="bg-tertiary-container text-on-tertiary-container px-3 py-1 font-mono font-bold rounded">2021-22</span>
                                 <span class="material-symbols-outlined text-4xl text-primary-container" style="font-variation-settings: 'FILL' 1;">terminal</span>
                             </div>
-                            <h3 class="font-headline text-3xl font-black text-on-surface uppercase mb-4 leading-tight">System<br/>Foundations</h3>
-                            <p class="font-body text-on-surface-variant mb-6 text-lg">Mastered C# and .NET fundamentals while building distributed logic for local industrial applications. Focused on data integrity and system reliability.</p>
+                            <h3 class="font-headline text-3xl font-black text-on-surface uppercase mb-4 leading-tight">Full-Cycle<br/>Foundations</h3>
+                            <p class="font-body text-on-surface-variant mb-6 text-lg">Split time between running daily operations and maintaining a company's website and internal systems — first experience taking a project from idea through design to final delivery.</p>
                             <div class="mt-auto font-hand text-xl rotate-[-2deg]">"Hello world was just the bait..."</div>
                         </div>
                     </div>
@@ -298,11 +298,11 @@
                     <div class="relative group sticker-rotate-cw stagger-2 lg:mt-12">
                         <div class="border-4 border-on-surface p-8 rounded-2xl hard-shadow group-hover:-translate-y-2 transition-transform h-full flex flex-col bg-tertiary-container">
                             <div class="flex justify-between items-start mb-6">
-                                <span class="px-3 py-1 font-mono font-bold rounded text-tertiary-container bg-on-primary">2023-24</span>
+                                <span class="px-3 py-1 font-mono font-bold rounded text-tertiary-container bg-on-primary">2022 &rarr;</span>
                                 <span class="material-symbols-outlined text-4xl text-primary-container" style="font-variation-settings: 'FILL' 1;">developer_board</span>
                             </div>
-                            <h3 class="font-headline text-3xl font-black text-on-tertiary-fixed uppercase mb-4 leading-tight">Enterprise<br/>Integration</h3>
-                            <p class="font-body mb-6 text-lg text-on-tertiary-fixed">Shipped production-grade internal tools as a Full-Stack Engineer. Collaborated with multi-disciplinary teams to integrate legacy systems into modern cloud-native architectures.</p>
+                            <h3 class="font-headline text-3xl font-black text-on-tertiary-fixed uppercase mb-4 leading-tight">Built From<br/>Scratch</h3>
+                            <p class="font-body mb-6 text-lg text-on-tertiary-fixed">Built an IT ticketing system from the ground up as a freelance full-stack developer — role-based access control, audit trails, and a drag-and-drop interface using Draggable.js.</p>
                             <div class="mt-auto font-hand text-xl rotate-[1deg] absolute bottom-4 left-4 bg-tertiary-container text-on-tertiary-container px-3 font-bold rounded-md">"Reality is a tough debugger."</div>
                         </div>
                     </div>
@@ -314,9 +314,9 @@
                                 <span class="bg-primary-container px-3 py-1 font-mono font-bold rounded text-on-secondary-container">2024</span>
                                 <span class="material-symbols-outlined text-4xl text-primary-container" style="font-variation-settings: 'FILL' 1;">rocket_launch</span>
                             </div>
-                            <h3 class="font-headline text-3xl font-black text-on-secondary uppercase mb-4 leading-tight">Rapid MVP<br/>Development</h3>
-                            <p class="font-body text-on-surface-variant mb-6 text-lg">Delivered end-to-end web products for high-growth startups. Specialized in reducing time-to-market by architecting modular, scalable SaaS frontends and backends.</p>
-                            <div class="mt-auto font-hand text-xl rotate-[1deg] absolute bottom-4 left-4 px-3 font-bold rounded-md text-primary bg-on-primary">"Total freedom, total responsibility."</div>
+                            <h3 class="font-headline text-3xl font-black text-on-secondary uppercase mb-4 leading-tight">6 Months &rarr;<br/>12 Days</h3>
+                            <p class="font-body text-on-surface-variant mb-6 text-lg">Helped build automation tooling in C#/.NET and Python at Estate Recovery Solutions — a team effort that took the entire estate recovery process from roughly six months down to about twelve days.</p>
+                            <div class="mt-auto font-hand text-xl rotate-[1deg] absolute bottom-4 left-4 px-3 font-bold rounded-md text-primary bg-on-primary">"Manual work was the real bottleneck."</div>
                         </div>
                     </div>
 
@@ -324,12 +324,12 @@
                     <div class="relative group sticker-rotate-cw stagger-1 lg:-mt-6">
                         <div class="bg-surface-container-high border-4 border-on-surface p-8 rounded-2xl hard-shadow group-hover:-translate-y-2 transition-transform h-full flex flex-col">
                             <div class="flex justify-between items-start mb-6">
-                                <span class="bg-tertiary-container text-on-tertiary-container px-3 py-1 font-mono font-bold rounded">2024-25</span>
-                                <span class="material-symbols-outlined text-4xl text-primary-container" style="font-variation-settings: 'FILL' 1;">storefront</span>
+                                <span class="bg-tertiary-container text-on-tertiary-container px-3 py-1 font-mono font-bold rounded">2025</span>
+                                <span class="material-symbols-outlined text-4xl text-primary-container" style="font-variation-settings: 'FILL' 1;">database</span>
                             </div>
-                            <h3 class="font-headline text-3xl font-black text-on-surface uppercase mb-4 leading-tight">Venture<br/>Architecture</h3>
-                            <p class="font-body text-on-surface-variant mb-6 text-lg">Founded a boutique digital agency. Directed technical strategy and delivered bespoke operational systems for local enterprises, managing the full product lifecycle from discovery to deployment.</p>
-                            <div class="mt-auto font-hand text-xl rotate-2 absolute bottom-4 left-4 bg-tertiary-container text-on-tertiary-container px-3 font-bold rounded-md">"Failure is just data for the next build."</div>
+                            <h3 class="font-headline text-3xl font-black text-on-surface uppercase mb-4 leading-tight">400K Records,<br/>Under 5 Seconds</h3>
+                            <p class="font-body text-on-surface-variant mb-6 text-lg">Worked with the team to replace a manual search through a 400,000+ record MySQL database — previously taking several weeks — with Python scraping scripts and SQL doing the heavy lifting. Results now return in under five seconds.</p>
+                            <div class="mt-auto font-hand text-xl rotate-2 absolute bottom-4 left-4 bg-tertiary-container text-on-tertiary-container px-3 font-bold rounded-md">"If it's slow, it's not finished."</div>
                         </div>
                     </div>
 
@@ -337,12 +337,12 @@
                     <div class="relative group sticker-rotate-ccw stagger-2">
                         <div class="border-4 border-on-surface p-8 rounded-2xl hard-shadow group-hover:-translate-y-2 transition-transform h-full flex flex-col bg-on-primary">
                             <div class="flex justify-between items-start mb-6">
-                                <span class="bg-secondary-container text-on-secondary-container px-3 py-1 font-mono font-bold rounded">2025-26</span>
+                                <span class="bg-secondary-container text-on-secondary-container px-3 py-1 font-mono font-bold rounded">2023-26</span>
                                 <span class="material-symbols-outlined text-4xl text-primary-container" style="font-variation-settings: 'FILL' 1;">psychology</span>
                             </div>
-                            <h3 class="font-headline text-3xl font-black text-primary uppercase mb-4 leading-tight">Advanced<br/>Systems Design</h3>
-                            <p class="font-body mb-6 text-lg text-secondary">Architecting high-load distributed backends for complex SaaS platforms. Implementing Domain-Driven Design (DDD) to tackle business complexity with clean, maintainable codebases.</p>
-                            <div class="mt-auto font-hand text-xl rotate-[-3deg] text-primary">"Design first, code later."</div>
+                            <h3 class="font-headline text-3xl font-black text-primary uppercase mb-4 leading-tight">Production<br/>Debugging</h3>
+                            <p class="font-body mb-6 text-lg text-secondary">Tracked down recurring issues in a production C#/.NET codebase and brought error rates down — chasing real bottlenecks in the performance metrics instead of guessing, while keeping data integrity intact across live systems.</p>
+                            <div class="mt-auto font-hand text-xl rotate-[-3deg] text-primary">"Metrics don't lie. Guesses do."</div>
                         </div>
                     </div>
 
@@ -351,10 +351,10 @@
                         <div class="bg-primary border-4 border-on-surface p-8 rounded-2xl hard-shadow-lime group-hover:-translate-y-2 transition-transform h-full flex flex-col">
                             <div class="flex justify-between items-start mb-6">
                                 <span class="bg-on-primary text-primary px-3 py-1 font-mono font-bold rounded">PRESENT</span>
-                                <span class="material-symbols-outlined text-4xl text-on-primary" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                                <span class="material-symbols-outlined text-4xl text-on-primary" style="font-variation-settings: 'FILL' 1;">trending_up</span>
                             </div>
-                            <h3 class="font-headline text-3xl font-black text-on-primary uppercase mb-4 leading-tight">0 &rarr; 1 <br/>Product Engineering</h3>
-                            <p class="font-body text-on-primary opacity-80 mb-6 text-lg">Engineering the future of autonomous systems. Building resilient, scalable, and secure infrastructures that empower the next generation of SaaS ventures.</p>
+                            <h3 class="font-headline text-3xl font-black text-on-primary uppercase mb-4 leading-tight">4x Client<br/>Growth</h3>
+                            <p class="font-body text-on-primary opacity-80 mb-6 text-lg">Freelance client base has grown from 1 to 5 since 2022 — including a restaurant client whose weekly foot traffic went from about 100 to 400+ after a new SEO-optimized web presence. Handles production issues directly with clients so downtime stays short.</p>
                             <div class="mt-auto font-hand text-xl rotate-1 font-bold text-on-surface-variant">"Evolution never stops."</div>
                         </div>
                     </div>
@@ -376,27 +376,27 @@
             </p>
             <!-- Core Stack List -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 font-label">
-                <div class="bg-surface-container border-4 border-on-surface p-6 rounded-xl hard-shadow transition-all">
-                    <h3 class="text-2xl font-black text-on-surface mb-2 uppercase">PostgreSQL</h3>
-                    <p class="text-on-surface-variant text-sm">Schema design and performance tuning for multi-tenant SaaS applications.</p>
+                <div class="bg-surface-container border-4 border-on-surface p-6 rounded-xl hard-shadow transition-transform hover:-translate-y-2">
+                    <h3 class="text-2xl font-black text-on-surface mb-2 uppercase">Process Automation</h3>
+                    <p class="text-on-surface-variant text-sm">C#/.NET and Python tooling that took a six-month manual process down to about twelve days.</p>
                 </div>
-                <div class="bg-surface-container border-4 border-on-surface p-6 rounded-xl hard-shadow transition-all">
+                <div class="bg-surface-container border-4 border-on-surface p-6 rounded-xl hard-shadow transition-transform hover:-translate-y-2">
                     <h3 class="text-2xl font-black text-on-surface mb-2 uppercase">Node.js / ASP.NET Core</h3>
                     <p class="text-on-surface-variant text-sm">Building REST & event-driven APIs that scale in production environments.</p>
                 </div>
-                <div class="bg-surface-container border-4 border-on-surface p-6 rounded-xl hard-shadow transition-all">
-                    <h3 class="text-2xl font-black text-on-surface mb-2 uppercase">Azure / Cloud Ops</h3>
-                    <p class="text-on-surface-variant text-sm">Orchestrating resilient infrastructure with containerized deployments.</p>
+                <div class="bg-surface-container border-4 border-on-surface p-6 rounded-xl hard-shadow transition-transform hover:-translate-y-2">
+                    <h3 class="text-2xl font-black text-on-surface mb-2 uppercase">SQL / Relational Databases</h3>
+                    <p class="text-on-surface-variant text-sm">Production experience with MySQL, SQL Server, and Supabase — including querying and optimizing a 400,000+ record MySQL database.</p>
                 </div>
-                <div class="bg-surface-container border-4 border-on-surface p-6 rounded-xl hard-shadow transition-all">
+                <div class="bg-surface-container border-4 border-on-surface p-6 rounded-xl hard-shadow transition-transform hover:-translate-y-2">
                     <h3 class="text-2xl font-black text-on-surface mb-2 uppercase">TypeScript</h3>
                     <p class="text-on-surface-variant text-sm">Strictly typed full-stack development for maintainable enterprise codebases.</p>
                 </div>
-                <div class="bg-surface-container border-4 border-on-surface p-6 rounded-xl hard-shadow transition-all">
+                <div class="bg-surface-container border-4 border-on-surface p-6 rounded-xl hard-shadow transition-transform hover:-translate-y-2">
                     <h3 class="text-2xl font-black text-on-surface mb-2 uppercase">Systems Architecture</h3>
                     <p class="text-on-surface-variant text-sm">Designing modular microservices using Domain-Driven Design (DDD) principles.</p>
                 </div>
-                <div class="bg-surface-container border-4 border-on-surface p-6 rounded-xl hard-shadow transition-all">
+                <div class="bg-surface-container border-4 border-on-surface p-6 rounded-xl hard-shadow transition-transform hover:-translate-y-2">
                     <h3 class="text-2xl font-black text-on-surface mb-2 uppercase">Python / Data Analytics</h3>
                     <p class="text-on-surface-variant text-sm">Leveraging Pandas and Scikit-learn for automated business intelligence.</p>
                 </div>
@@ -411,21 +411,57 @@
                     <span class="font-hand text-tertiary-container text-2xl rotate-[-5deg] pb-2">/github_repos</span>
                 </div>
                 <p class="max-w-2xl text-xl font-body text-on-surface-variant">
-                    Source code artifacts and architectural experiments. Dynamically synchronized with my latest GitHub activity.
+                    Source code artifacts, architectural experiments, and case studies from client work. Public repos sync live from GitHub.
                 </p>
             </header>
 
             <!-- Projects Grid -->
             <div id="github-projects-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Loading State -->
-                <div class="col-span-full flex flex-col items-center justify-center p-20 border-4 border-dashed border-on-surface/20 rounded-3xl">
-                    <div class="material-symbols-outlined text-6xl animate-spin text-primary mb-4">sync</div>
-                    <p class="font-mono text-xl text-on-surface-variant animate-pulse">Syncing with remote repository...</p>
+                <!-- Manually curated: closed-source client work, shown as a case study rather than a public repo link -->
+                <div class="group relative bg-surface-container border-4 border-on-surface p-6 rounded-xl hard-shadow hover:-translate-y-2 transition-all flex flex-col animate-reveal">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="bg-primary-container text-on-primary-fixed px-3 py-1 font-mono text-[10px] font-bold rounded border border-on-surface uppercase tracking-tighter">
+                            Case Study
+                        </span>
+                    </div>
+                    <h3 class="font-mono text-xl font-black text-on-surface mb-4 break-all lowercase">~/projects/ticketing-system</h3>
+                    <p class="font-body text-sm text-on-surface-variant mb-8">
+                        Built an IT ticketing system from scratch for a freelance client — role-based access control, audit trails, and a drag-and-drop interface using Draggable.js. Closed-source client work, so it's shown here rather than linked to a public repo.
+                    </p>
+                    <div class="mt-auto">
+                        <a href="mailto:NJ.Labuschagne@outlook.com?subject=TicketingSystem%20demo%20request" class="font-headline font-bold text-xs uppercase tracking-widest text-on-surface hover:text-primary transition-colors flex items-center gap-2">
+                            REQUEST A DEMO <span class="material-symbols-outlined text-sm">mail</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="github-projects-dynamic" class="contents">
+                    <!-- Loading State -->
+                    <div class="col-span-full flex flex-col items-center justify-center p-20 border-4 border-dashed border-on-surface/20 rounded-3xl">
+                        <div class="material-symbols-outlined text-6xl animate-spin text-primary mb-4">sync</div>
+                        <p class="font-mono text-xl text-on-surface-variant animate-pulse">Syncing with remote repository...</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-
+        <!-- Testimonial Section -->
+        <section id="testimonial" class="relative z-10 pb-24 px-6 md:px-12 max-w-5xl mx-auto animate-reveal">
+            <div class="inline-block bg-secondary-container text-on-secondary-container font-label px-4 py-1 -rotate-2 mb-8 hard-shadow-pink">
+                FROM_THE_FIELD
+            </div>
+            <div class="border-4 border-on-surface p-10 md:p-14 rounded-2xl hard-shadow bg-surface-container relative">
+                <p class="font-headline text-2xl md:text-3xl font-bold text-on-surface leading-snug mb-8">
+                    &ldquo;Nicolaas brought something to the role that cannot be taught: a real love for development. He picked up complex, unfamiliar tasks quickly and worked them through to completion without needing to be managed closely.&rdquo;
+                </p>
+                <div class="flex items-center gap-4">
+                    <span class="material-symbols-outlined text-3xl text-primary-container" style="font-variation-settings: 'FILL' 1;">verified</span>
+                    <div>
+                        <div class="font-label font-bold uppercase tracking-wide text-on-surface">CEO, Estate Recovery Solutions</div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!-- Final CTA / Contact Section -->
         <section id="contact" class="section animate-reveal">
@@ -475,7 +511,7 @@
             </div>
             <div class="text-on-surface-variant font-label text-xs uppercase tracking-widest text-center md:text-right">
                 © 2026 NICOLAAS DEV. STICKERED IN CYBERSPACE.
-                <div class="opacity-70 mt-1">References available on request.</div>
+                <div class="opacity-70 mt-1">Additional references available on request.</div>
             </div>
         </div>
     </footer>
