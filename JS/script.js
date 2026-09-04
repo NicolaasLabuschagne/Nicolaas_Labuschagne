@@ -206,6 +206,10 @@ const GitHubCache = {
     }
 };
 
+// Shared between the Projects grid and the terminal's `commits`/`calendar`
+// commands — one list to edit, not two that can drift apart.
+const FEATURED_REPOS = ['Nicolaas_Labuschagne', 'Tailor.ai', 'Job-Logger'];
+
 /* ===========================
    Contrast Engine: auto text color from brand color luminance
    =========================== */
@@ -908,25 +912,29 @@ const TerminalEngine = {
         setTimeout(() => this.animateCoffeeDots(el, baseText, url, tick + 1, resolve), 130);
     },
 
+    // GitHub's Events API stopped including `payload.commits` for this account
+    // (confirmed via direct API testing, not a rate-limit issue), so both this
+    // and `runCalendar` pull real commit history straight from each featured
+    // repo's /commits endpoint instead — slower (one request per repo) but
+    // actually returns data.
     runCommits() {
         this.print('Fetching recent commits...', 'terminal-line-dim');
-        return GitHubCache.fetch('https://api.github.com/users/NicolaasLabuschagne/events/public')
-            .then(events => {
-                const commits = [];
-                events.forEach(e => {
-                    if (e.type === 'PushEvent' && Array.isArray(e.payload?.commits)) {
-                        e.payload.commits.forEach(c => {
-                            commits.push({
-                                repo: e.repo.name.split('/')[1],
-                                message: c.message.split('\n')[0],
-                                date: e.created_at,
-                            });
-                        });
-                    }
-                });
+        return Promise.all(
+            FEATURED_REPOS.map(name =>
+                GitHubCache.fetch(`https://api.github.com/repos/NicolaasLabuschagne/${name}/commits?per_page=10`)
+                    .then(commits => commits.map(c => ({
+                        repo: name,
+                        message: c.commit.message.split('\n')[0],
+                        date: c.commit.author.date,
+                    })))
+                    .catch(() => [])
+            )
+        )
+            .then(perRepo => {
+                const commits = perRepo.flat().sort((a, b) => new Date(b.date) - new Date(a.date));
 
                 if (!commits.length) {
-                    this.print('No recent public commits found.', 'terminal-line-dim');
+                    this.print('No recent commits found.', 'terminal-line-dim');
                     return;
                 }
 
@@ -942,20 +950,24 @@ const TerminalEngine = {
 
     // GitHub's real contribution graph needs an authenticated GraphQL call or
     // scraping the profile page — neither is safe/reliable from a static
-    // client-side site. This builds a genuine heatmap instead from the same
-    // public Events API `commits` uses, which only covers recent activity
-    // (GitHub caps it at ~90 days / 300 events) — labelled honestly as such
-    // rather than pretending to be the full year.
+    // client-side site. This builds a genuine heatmap instead from real commit
+    // dates on each featured repo (see the note on runCommits — the Events API
+    // this used to read from stopped including commit payloads for this
+    // account). Still only covers the featured repos' recent history, not a
+    // full year — labelled honestly as such rather than pretending otherwise.
     runCalendar() {
         this.print('Fetching recent activity...', 'terminal-line-dim');
-        return GitHubCache.fetch('https://api.github.com/users/NicolaasLabuschagne/events/public')
-            .then(events => {
+        return Promise.all(
+            FEATURED_REPOS.map(name =>
+                GitHubCache.fetch(`https://api.github.com/repos/NicolaasLabuschagne/${name}/commits?per_page=100`)
+                    .catch(() => [])
+            )
+        )
+            .then(perRepo => {
                 const counts = {}; // 'YYYY-MM-DD' -> commit count
-                events.forEach(e => {
-                    if (e.type === 'PushEvent' && Array.isArray(e.payload?.commits)) {
-                        const day = e.created_at.slice(0, 10);
-                        counts[day] = (counts[day] || 0) + e.payload.commits.length;
-                    }
+                perRepo.flat().forEach(c => {
+                    const day = c.commit.author.date.slice(0, 10);
+                    counts[day] = (counts[day] || 0) + 1;
                 });
 
                 const totalDays = 70; // 10 weeks, keeps every line short enough for mobile
@@ -1251,15 +1263,14 @@ const PortfolioEngine = {
     },
 
     initGitHubProjects() {
-        const grid = document.getElementById('github-projects-grid');
+        // Only the GitHub-sourced cards live here — the closed-source case-study
+        // card sits as static HTML in #github-projects-grid, outside this
+        // container, so it's never touched by the innerHTML replacement below.
+        const grid = document.getElementById('github-projects-dynamic');
         if (!grid) return;
 
-        // Edit this list to control exactly which repos appear, and in what order.
-        // Fetched by exact name (not by recent activity), so order here is final.
-        const featuredRepos = [ 'Nicolaas_Labuschagne', 'Tailor.ai', 'JAT', 'TicketingSystem'];
-
         Promise.all(
-            featuredRepos.map(name =>
+            FEATURED_REPOS.map(name =>
                 GitHubCache.fetch(`https://api.github.com/repos/NicolaasLabuschagne/${name}`)
                     .catch(() => null)
             )
@@ -1287,8 +1298,12 @@ const PortfolioEngine = {
                         <p class="font-body text-sm text-on-surface-variant mb-8 line-clamp-3">
                             ${repo.description || 'No description provided for this repository.'}
                         </p>
-                        <div class="mt-auto">
-                            <a href="${repo.html_url}" target="_blank" class="font-headline font-bold text-xs uppercase tracking-widest text-on-surface hover:text-primary transition-colors flex items-center gap-2">
+                        <div class="mt-auto flex flex-col gap-3">
+                            ${repo.homepage ? `
+                            <a href="${repo.homepage}" target="_blank" rel="noopener noreferrer" class="font-headline font-bold text-sm uppercase tracking-widest text-on-primary bg-primary px-4 py-2 rounded-lg border-2 border-on-surface text-center hover:-translate-y-0.5 transition-transform flex items-center justify-center gap-2">
+                                VIEW LIVE <span class="material-symbols-outlined text-sm">arrow_outward</span>
+                            </a>` : ''}
+                            <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="font-headline font-bold text-xs uppercase tracking-widest text-on-surface hover:text-primary transition-colors flex items-center gap-2">
                                 VIEW ON GITHUB <span class="material-symbols-outlined text-sm">arrow_outward</span>
                             </a>
                         </div>
