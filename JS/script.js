@@ -208,7 +208,24 @@ const GitHubCache = {
 
 // Shared between the Projects grid and the terminal's `commits`/`calendar`
 // commands — one list to edit, not two that can drift apart.
-const FEATURED_REPOS = ['Nicolaas_Labuschagne', 'Tailor.ai', 'Job-Logger'];
+const FEATURED_REPOS = ['Nicolaas_Labuschagne', 'Tailor.ai', 'LinenTag', 'Job-Logger'];
+// Stage order along the projects route. Keys are each card's data-project:
+// the repo name for GitHub cards, or the slug set in index.html for case studies.
+const ROUTE_ORDER = ['ticketing-system', 'Nicolaas_Labuschagne', 'Tailor.ai', 'bloom', 'LinenTag', 'Job-Logger'];
+
+// How many project stages the route shows before the "Keep riding" button.
+const ROUTE_VISIBLE_STAGES = 5;
+
+// Corner stickers on project cards. `burst` gets the starburst shape.
+const PROJECT_STICKERS = {
+    'LinenTag': { text: 'New!', burst: true },
+    'Nicolaas_Labuschagne': { text: 'You are here' }
+};
+
+// Used when a repo has no description set on GitHub.
+const REPO_DESCRIPTIONS = {
+    'LinenTag': 'Tap a phone on a washable NFC tag sewn into a sheet to see what it is, which set it belongs to, and how often it has been washed. Node + TypeScript API on PostgreSQL, React Native (Expo) app, Next.js site.'
+};
 
 /* ===========================
    Contrast Engine: auto text color from brand color luminance
@@ -1113,6 +1130,143 @@ const TerminalEngine = {
 };
 
 /* ===========================
+   Route Map: projects as checkpoints on a winding cycling route
+   =========================== */
+const RouteMap = {
+    ready: false,
+
+    init() {
+        if (this.ready) return;
+        this.route = document.getElementById('github-projects-grid');
+        if (!this.route || !this.route.classList.contains('project-route')) return;
+        this.svg = this.route.querySelector('.route-svg');
+        this.road = this.svg.querySelector('.route-road');
+        this.ridden = this.svg.querySelector('.route-ridden');
+        this.markers = this.svg.querySelector('.route-markers');
+        this.bike = this.svg.querySelector('.route-bike');
+        this.ready = true;
+
+        // Card heights shift as fonts load, cards reveal and the GitHub fetch
+        // lands, so redraw whenever the route box changes size.
+        let pending = null;
+        const schedule = () => {
+            if (pending) return;
+            pending = requestAnimationFrame(() => { pending = null; this.refresh(); });
+        };
+        new ResizeObserver(schedule).observe(this.route);
+        window.addEventListener('load', schedule);
+
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+            if (ticking) return;
+            ticking = true;
+            requestAnimationFrame(() => { ticking = false; this.moveBike(); });
+        }, { passive: true });
+    },
+
+    // Points the road passes through: start flag, one checkpoint per card
+    // (on the card's inner edge, level with its heading), then the finish.
+    computePoints() {
+        const w = this.route.clientWidth;
+        const mobile = window.innerWidth < 768;
+        const centerX = mobile ? 22 : w / 2;
+        const sway = mobile ? 6 : 46;
+        const points = [{ x: centerX, y: 0 }];
+        const cards = [...this.route.querySelectorAll('.project-card')].filter(c => !c.classList.contains('route-hidden'));
+        cards.forEach((card, i) => {
+            const dir = card.dataset.side === 'left' ? -1 : 1;
+            points.push({
+                x: centerX + dir * sway,
+                y: card.offsetTop + 70,
+                stage: i + 1,
+                side: card.dataset.side,
+                color: getComputedStyle(card).getPropertyValue('--card-accent').trim(),
+                edgeX: mobile ? card.offsetLeft : (dir < 0 ? card.offsetLeft + card.offsetWidth : card.offsetLeft)
+            });
+        });
+        const finish = this.route.querySelector('.route-finish');
+        points.push({ x: centerX, y: finish ? finish.offsetTop + finish.offsetHeight / 2 : this.route.offsetHeight });
+        return { points, mobile };
+    },
+
+    refresh() {
+        if (!this.ready) return;
+        const { points, mobile } = this.computePoints();
+        const h = this.route.offsetHeight;
+        this.svg.setAttribute('viewBox', `0 0 ${this.route.clientWidth} ${h}`);
+        this.svg.setAttribute('height', h);
+
+        // Smooth S-curves: control points sit straight above/below each point,
+        // which also keeps y increasing along the path (moveBike relies on it).
+        let d = `M ${points[0].x} ${points[0].y}`;
+        for (let i = 1; i < points.length; i++) {
+            const a = points[i - 1], b = points[i];
+            const dy = (b.y - a.y) / 2;
+            d += ` C ${a.x} ${a.y + dy}, ${b.x} ${b.y - dy}, ${b.x} ${b.y}`;
+        }
+        this.road.setAttribute('d', d);
+        this.ridden.setAttribute('d', d);
+        this.length = this.road.getTotalLength();
+        this.ridden.style.strokeDasharray = `${this.length}`;
+
+        const ns = 'http://www.w3.org/2000/svg';
+        this.markers.replaceChildren();
+        points.forEach(p => {
+            if (!p.stage) return;
+            const g = document.createElementNS(ns, 'g');
+            g.setAttribute('class', 'route-marker');
+            g.style.setProperty('--marker-color', p.color || 'var(--accent-color)');
+            const spur = document.createElementNS(ns, 'line');
+            spur.setAttribute('class', 'route-spur');
+            spur.setAttribute('x1', p.x); spur.setAttribute('y1', p.y);
+            spur.setAttribute('x2', p.edgeX); spur.setAttribute('y2', p.y);
+            const dot = document.createElementNS(ns, 'circle');
+            dot.setAttribute('cx', p.x); dot.setAttribute('cy', p.y);
+            dot.setAttribute('r', mobile ? 15 : 19);
+            const num = document.createElementNS(ns, 'text');
+            num.setAttribute('x', p.x); num.setAttribute('y', p.y);
+            num.setAttribute('text-anchor', 'middle');
+            num.setAttribute('dominant-baseline', 'central');
+            num.textContent = String(p.stage).padStart(2, '0');
+            g.append(spur, dot, num);
+            if (!mobile) {
+                const label = document.createElementNS(ns, 'text');
+                label.setAttribute('class', 'route-stage-label');
+                // Label goes on the open side of the road, away from the card
+                const dir = p.side === 'left' ? 1 : -1;
+                label.setAttribute('x', p.x + dir * 30);
+                label.setAttribute('y', p.y + 1);
+                label.setAttribute('text-anchor', dir > 0 ? 'start' : 'end');
+                label.setAttribute('dominant-baseline', 'central');
+                label.textContent = `STAGE ${String(p.stage).padStart(2, '0')}`;
+                g.append(label);
+            }
+            this.markers.append(g);
+        });
+        this.moveBike();
+    },
+
+    // The bike sits where the road crosses the middle of the viewport.
+    // y only ever increases along the path, so a binary search on length works.
+    moveBike() {
+        if (!this.ready || !this.length) return;
+        const rect = this.route.getBoundingClientRect();
+        const targetY = window.innerHeight * 0.55 - rect.top;
+        let lo = 0, hi = this.length;
+        for (let i = 0; i < 22; i++) {
+            const mid = (lo + hi) / 2;
+            if (this.road.getPointAtLength(mid).y < targetY) lo = mid; else hi = mid;
+        }
+        const pt = this.road.getPointAtLength(lo);
+        const ahead = this.road.getPointAtLength(Math.min(this.length, lo + 4));
+        // The icon faces right; mirror it while the road heads left
+        const flip = ahead.x < pt.x - 0.2 ? -1 : 1;
+        this.bike.setAttribute('transform', `translate(${pt.x} ${pt.y}) scale(${flip} 1)`);
+        this.ridden.style.strokeDashoffset = `${this.length - lo}`;
+    }
+};
+
+/* ===========================
    Performance-Optimized Portfolio Engine
    =========================== */
 document.documentElement.classList.add('js-enabled');
@@ -1268,6 +1422,7 @@ const PortfolioEngine = {
         // container, so it's never touched by the innerHTML replacement below.
         const grid = document.getElementById('github-projects-dynamic');
         if (!grid) return;
+        this.decorateProjectCards(); // static case-study cards, before the fetch lands
 
         Promise.all(
             FEATURED_REPOS.map(name =>
@@ -1284,7 +1439,8 @@ const PortfolioEngine = {
                 }
 
                 grid.innerHTML = filteredRepos.map(repo => `
-                    <div class="group relative bg-surface-container border-4 border-on-surface p-6 rounded-xl hard-shadow hover:-translate-y-2 transition-all flex flex-col animate-reveal">
+                    <div data-project="${repo.name}" class="project-card group relative bg-surface-container border-4 border-on-surface p-6 rounded-xl flex flex-col animate-reveal">
+                        ${PROJECT_STICKERS[repo.name] ? `<span class="project-sticker${PROJECT_STICKERS[repo.name].burst ? ' project-sticker--burst' : ''}" aria-hidden="true">${PROJECT_STICKERS[repo.name].text}</span>` : ''}
                         <div class="flex justify-between items-start mb-4">
                             <span class="bg-primary-container text-on-primary-fixed px-3 py-1 font-mono text-[10px] font-bold rounded border border-on-surface uppercase tracking-tighter">
                                 ${repo.language || 'Code'}
@@ -1296,7 +1452,7 @@ const PortfolioEngine = {
                         </div>
                         <h3 class="font-mono text-xl font-black text-on-surface mb-4 break-all lowercase">~/projects/${repo.name}</h3>
                         <p class="font-body text-sm text-on-surface-variant mb-8 line-clamp-3">
-                            ${repo.description || 'No description provided for this repository.'}
+                            ${repo.description || REPO_DESCRIPTIONS[repo.name] || 'No description provided for this repository.'}
                         </p>
                         <div class="mt-auto flex flex-col gap-3">
                             ${repo.homepage && repo.name !== 'Nicolaas_Labuschagne' ? `
@@ -1314,6 +1470,7 @@ const PortfolioEngine = {
                 `).join('');
 
                 this.observeReveal(grid.querySelectorAll('.animate-reveal'));
+                this.decorateProjectCards();
             })
             .catch(err => {
                 console.error('GitHub Fetch Error:', err);
@@ -1325,6 +1482,82 @@ const PortfolioEngine = {
                     </div>
                 `;
             });
+    },
+
+    // Gives each project card its own "taped to the page" look: a tilt, a washi
+    // tape angle and colour, and a shadow colour, cycling in grid order so
+    // neighbouring cards never match. Runs again after the GitHub cards render.
+    // Moves the case-study cards and the GitHub cards into ROUTE_ORDER, so
+    // static and fetched projects can be interleaved. Cards are moved in the
+    // DOM (not just with CSS `order`) so tab order matches the route.
+    // Cards missing from ROUTE_ORDER keep their relative order at the end.
+    orderRouteStages() {
+        const route = document.getElementById('github-projects-grid');
+        // Insert ahead of the dynamic container, so the loading/error message
+        // inside it always sits after the cards.
+        const anchor = document.getElementById('github-projects-dynamic');
+        if (!anchor) return;
+        const rank = card => {
+            const i = ROUTE_ORDER.indexOf(card.dataset.project);
+            return i === -1 ? ROUTE_ORDER.length : i;
+        };
+        [...route.querySelectorAll('.project-card')]
+            .map((card, i) => ({ card, i }))
+            .sort((a, b) => rank(a.card) - rank(b.card) || a.i - b.i)
+            .forEach(({ card }) => route.insertBefore(card, anchor));
+    },
+
+    decorateProjectCards() {
+        const tilts = [-1.8, 1.4, 1.1, -1.3, -0.9, 1.7, 1.2, -1.5];
+        const tapes = [-4, 3, -2, 5, 2, -5, 4, -3];
+        const colors = ['pink', 'lime', 'yellow', 'purple'];
+        this.orderRouteStages();
+        document.querySelectorAll('#github-projects-grid .project-card').forEach((card, i) => {
+            card.dataset.side = i % 2 === 0 ? 'left' : 'right';
+            card.dataset.stage = String(i + 1);
+            card.style.setProperty('--tilt', `${tilts[i % tilts.length]}deg`);
+            card.style.setProperty('--tape-tilt', `${tapes[i % tapes.length]}deg`);
+            card.dataset.color = colors[i % colors.length];
+            if (card.dataset.decorated) return;
+            card.dataset.decorated = 'true';
+            // The reveal stagger is an inline transition-delay; once the card has
+            // arrived, drop it so hover reacts instantly instead of lagging.
+            card.addEventListener('transitionend', () => { card.style.transitionDelay = '0ms'; }, { once: true });
+        });
+        this.limitRouteStages();
+        RouteMap.init();
+        RouteMap.refresh();
+    },
+
+    // Only the first ROUTE_VISIBLE_STAGES projects show at first; the rest
+    // wait behind a "Keep riding" button so the route never gets too long.
+    limitRouteStages() {
+        const route = document.getElementById('github-projects-grid');
+        const btn = route && route.querySelector('.route-more');
+        if (!btn) return;
+        const cards = [...route.querySelectorAll('.project-card')];
+        const extra = cards.slice(ROUTE_VISIBLE_STAGES);
+        const expanded = route.dataset.expanded === 'true';
+
+        cards.forEach((card, i) => card.classList.toggle('route-hidden', !expanded && i >= ROUTE_VISIBLE_STAGES));
+        btn.hidden = expanded || extra.length === 0;
+        btn.setAttribute('aria-expanded', String(expanded));
+        btn.querySelector('.route-more-label').textContent =
+            `Keep riding · ${extra.length} more stage${extra.length === 1 ? '' : 's'}`;
+
+        if (btn.dataset.bound) return;
+        btn.dataset.bound = 'true';
+        btn.addEventListener('click', () => {
+            route.dataset.expanded = 'true';
+            const firstHidden = route.querySelector('.project-card.route-hidden');
+            this.limitRouteStages();
+            if (firstHidden) {
+                // Hand keyboard focus to the first newly revealed stage
+                firstHidden.setAttribute('tabindex', '-1');
+                firstHidden.focus({ preventScroll: true });
+                firstHidden.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        });
     },
 
     initSkillAnimations() {

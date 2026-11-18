@@ -2342,3 +2342,326 @@ body.terminal-open {
     .plan-card { transform: none; }
     .faq-item summary { font-size: 1rem; padding: 1rem; }
 }
+
+/* ===========================
+   Projects: taped-to-the-page board
+   (--tilt, --tape-tilt and data-color are set per card in script.js)
+   =========================== */
+/* Route layout: cards alternate either side of a winding road (see RouteMap) */
+.project-route {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 3.5rem;
+    padding: 4.5rem 0 1rem;
+}
+.project-route .project-card {
+    width: calc(50% - 5.5rem);
+    z-index: 1;
+}
+.project-route .project-card[data-side="right"] { align-self: flex-end; }
+@media (min-width: 768px) {
+    /* Opposite-side neighbours overlap vertically so the route zig-zags */
+    .project-route .project-card[data-stage]:not([data-stage="1"]) {
+        margin-top: -7rem;
+    }
+}
+.route-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: visible;
+    pointer-events: none;
+    z-index: 0;
+}
+.route-road {
+    fill: none;
+    stroke: var(--text-dim);
+    stroke-width: 4;
+    stroke-dasharray: 2 14;
+    stroke-linecap: round;
+    opacity: 0.7;
+}
+.route-ridden {
+    fill: none;
+    stroke: var(--accent-color);
+    stroke-width: 6;
+    stroke-linecap: round;
+}
+.route-spur {
+    stroke: var(--text-color);
+    stroke-width: 3;
+    stroke-dasharray: 4 6;
+    opacity: 0.5;
+}
+.route-marker circle {
+    fill: var(--marker-color);
+    stroke: var(--text-color);
+    stroke-width: 3;
+}
+.route-marker text {
+    fill: var(--on-primary-color);
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 13px;
+}
+.route-marker .route-stage-label {
+    fill: var(--text-dim);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+}
+.route-bike-bg {
+    fill: var(--secondary-color);
+    stroke: var(--text-color);
+    stroke-width: 3;
+}
+.route-bike-icon {
+    font-family: 'Material Symbols Outlined';
+    font-size: 26px;
+    fill: var(--on-secondary-color);
+}
+.route-flag {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -30%) rotate(-3deg);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.35rem 1rem;
+    background: var(--primary-color);
+    color: var(--on-primary-color);
+    border: 3px solid var(--text-color);
+    border-radius: 9999px;
+    box-shadow: 3px 3px 0 0 var(--text-color);
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    z-index: 2;
+}
+.route-flag .material-symbols-outlined { font-size: 1.1rem; }
+.route-finish {
+    position: relative;
+    z-index: 1;
+    align-self: center;
+    margin-top: 1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    background: var(--surface-low);
+    color: var(--text-color);
+    border: 4px solid var(--text-color);
+    border-radius: 1rem;
+    box-shadow: 6px 6px 0 0 var(--accent-color);
+    transform: rotate(-1.5deg);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.route-finish:hover,
+.route-finish:focus-visible {
+    transform: rotate(0deg) translate(3px, 3px);
+    box-shadow: 0 0 0 0 var(--accent-color);
+}
+.route-finish-flag {
+    width: 44px;
+    height: 32px;
+    flex-shrink: 0;
+    border: 3px solid var(--text-color);
+    background-color: var(--surface-low);
+    background-image:
+        linear-gradient(45deg, var(--text-color) 25%, transparent 25%, transparent 75%, var(--text-color) 75%),
+        linear-gradient(45deg, var(--text-color) 25%, transparent 25%, transparent 75%, var(--text-color) 75%);
+    background-size: 12px 12px;
+    background-position: 0 0, 6px 6px;
+}
+/* GitHub loading/error placeholder spans the route */
+.project-route .contents > div:not(.project-card) {
+    width: 100%;
+    z-index: 1;
+    background: var(--bg-color);
+}
+@media (max-width: 767px) {
+    .project-route { gap: 3rem; padding-top: 3.5rem; }
+    .project-route .project-card,
+    .project-route .project-card[data-side="right"] {
+        width: auto;
+        align-self: stretch;
+        margin-left: 3.25rem;
+    }
+    .route-flag { left: 22px; transform: translate(-20%, -30%) rotate(-3deg); }
+    .route-finish { align-self: stretch; margin-left: 3.25rem; }
+    .project-route .contents > div:not(.project-card) { margin-left: 3.25rem; width: auto; }
+}
+.project-card {
+    --card-accent: var(--accent-color);
+    --tilt-scale: 1;
+    box-shadow: 8px 8px 0px 0px var(--card-accent);
+}
+.project-card[data-color="pink"]   { --card-accent: var(--accent-color); }
+.project-card[data-color="lime"]   { --card-accent: var(--primary-color); }
+.project-card[data-color="yellow"] { --card-accent: var(--secondary-color); }
+.project-card[data-color="purple"] { --card-accent: var(--purple-color); }
+
+/* Combine the reveal slide-up with the card's tilt so neither overrides the other */
+.project-card.animate-reveal {
+    transform: translateY(30px) rotate(calc(var(--tilt, 0deg) * var(--tilt-scale)));
+}
+.project-card.animate-reveal.active {
+    transform: rotate(calc(var(--tilt, 0deg) * var(--tilt-scale)));
+    transition: opacity 0.8s ease, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease;
+}
+.project-card.animate-reveal.active:hover {
+    transform: rotate(0deg) translateY(-8px) scale(1.02);
+    box-shadow: 14px 14px 0px 0px var(--card-accent);
+    z-index: 5;
+}
+
+/* Washi tape strip holding the card to the page */
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: -16px;
+    left: 50%;
+    width: 104px;
+    height: 28px;
+    transform: translateX(-50%) rotate(var(--tape-tilt, -3deg));
+    background:
+        repeating-linear-gradient(45deg, transparent 0 6px, rgba(255, 255, 255, 0.18) 6px 12px),
+        color-mix(in srgb, var(--card-accent) 70%, transparent);
+    border-left: 2px dashed rgba(0, 0, 0, 0.15);
+    border-right: 2px dashed rgba(0, 0, 0, 0.15);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+    z-index: 3;
+    pointer-events: none;
+}
+
+/* Corner stickers */
+.project-sticker {
+    position: absolute;
+    top: -18px;
+    right: -14px;
+    z-index: 4;
+    padding: 6px 14px;
+    background: var(--card-accent);
+    color: var(--on-primary-color);
+    border: 3px solid var(--text-color);
+    border-radius: 9999px;
+    font-family: var(--font-mono);
+    font-weight: 900;
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    box-shadow: 3px 3px 0px 0px var(--text-color);
+    transform: rotate(8deg);
+    pointer-events: none;
+}
+.project-sticker--burst {
+    top: -26px;
+    right: -20px;
+    width: 76px;
+    height: 76px;
+    padding: 0;
+    display: grid;
+    place-items: center;
+    background: none;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    font-size: 0.85rem;
+    transform: rotate(-12deg);
+    filter: drop-shadow(3px 3px 0px var(--text-color));
+}
+.project-sticker--burst::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--secondary-color);
+    clip-path: polygon(50% 0%, 59% 13%, 75% 7%, 76% 24%, 93% 25%, 87% 41%, 100% 50%, 87% 59%, 93% 75%, 76% 76%, 75% 93%, 59% 87%, 50% 100%, 41% 87%, 25% 93%, 24% 76%, 7% 75%, 13% 59%, 0% 50%, 13% 41%, 7% 25%, 24% 24%, 25% 7%, 41% 13%);
+}
+.project-card:hover .project-sticker {
+    animation: sticker-wobble 0.5s ease-in-out;
+}
+@keyframes sticker-wobble {
+    0%, 100% { rotate: 0deg; scale: 1; }
+    30% { rotate: -10deg; scale: 1.12; }
+    65% { rotate: 6deg; scale: 1.05; }
+}
+
+/* Hand-written margin note above the grid */
+.project-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    width: fit-content;
+    margin: 0.5rem 0 1.25rem auto;
+    transform: rotate(-3deg);
+    opacity: 0.85;
+}
+.project-note-arrow {
+    width: 40px;
+    height: 48px;
+    margin-top: 1.2rem;
+    flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+    .project-card { --tilt-scale: 0.5; }
+    .project-note { margin: 0.5rem 0 1.25rem; }
+    .project-note-arrow { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .project-card:hover .project-sticker { animation: none; }
+    .project-card.animate-reveal.active:hover { transform: rotate(0deg); }
+}
+@media (min-width: 1100px) {
+    /* Wide enough to sit beside the intro paragraph */
+    .project-note { margin: 1.5rem 0 -2.5rem auto; }
+}
+
+/* Stages beyond ROUTE_VISIBLE_STAGES wait behind the "Keep riding" button */
+.project-route .project-card.route-hidden { display: none; }
+.route-more {
+    position: relative;
+    z-index: 1;
+    align-self: center;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.75rem 1.4rem;
+    background: var(--secondary-color);
+    color: var(--on-secondary-color);
+    border: 3px solid var(--text-color);
+    border-radius: 9999px;
+    box-shadow: 4px 4px 0 0 var(--text-color);
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    transform: rotate(2deg);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.route-more[hidden] { display: none; }
+.route-more:hover,
+.route-more:focus-visible {
+    transform: rotate(0deg) translate(4px, 4px);
+    box-shadow: 0 0 0 0 var(--text-color);
+}
+.route-more:focus-visible { outline: 3px solid var(--accent-color); outline-offset: 3px; }
+.route-more .material-symbols-outlined { font-size: 1.4rem; }
+.route-more:hover .material-symbols-outlined { animation: route-pedal 0.6s ease-in-out infinite; }
+@keyframes route-pedal {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(4px); }
+}
+.project-card:focus { outline: none; }
+@media (max-width: 767px) {
+    .route-more { align-self: flex-start; margin-left: 3.25rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .route-more:hover .material-symbols-outlined { animation: none; }
+}

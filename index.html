@@ -412,20 +412,38 @@
                     <h1 class="text-6xl md:text-8xl font-headline font-black uppercase tracking-tighter glow-lime leading-none">Projects</h1>
                     <span class="font-hand text-tertiary-container text-2xl rotate-[-5deg] pb-2">/github_repos</span>
                 </div>
+                <div class="project-note font-hand text-2xl md:text-3xl text-on-surface" aria-hidden="true">
+                    the route so far
+                    <svg class="project-note-arrow" viewBox="0 0 60 70" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M10 5 C 40 15, 50 35, 30 62" />
+                        <path d="M18 52 L 30 63 L 38 49" />
+                    </svg>
+                </div>
                 <p class="max-w-2xl text-xl font-body text-on-surface-variant">
                     Source code artifacts, architectural experiments, and case studies from client work. Public repos sync live from GitHub.
                 </p>
             </header>
 
-            <!-- Projects Grid -->
-            <div id="github-projects-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Projects Route: cards are checkpoints along a winding road drawn by RouteMap in script.js -->
+            <div id="github-projects-grid" class="project-route">
+                <svg class="route-svg" aria-hidden="true" focusable="false">
+                    <path class="route-road" d="" />
+                    <path class="route-ridden" d="" />
+                    <g class="route-markers"></g>
+                    <g class="route-bike"><circle class="route-bike-bg" r="20" /><text class="route-bike-icon" text-anchor="middle" dominant-baseline="central">directions_bike</text></g>
+                </svg>
+                <div class="route-flag route-start" aria-hidden="true">
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">flag</span> Start
+                </div>
+
                 <!-- Manually curated: closed-source client work, shown as a case study rather than a public repo link -->
-                <div class="group relative bg-surface-container border-4 border-on-surface p-6 rounded-xl hard-shadow hover:-translate-y-2 transition-all flex flex-col animate-reveal">
+                <div data-project="ticketing-system" class="project-card group relative bg-surface-container border-4 border-on-surface p-6 rounded-xl flex flex-col animate-reveal">
                     <div class="flex justify-between items-start mb-4">
                         <span class="bg-primary-container text-on-primary-fixed px-3 py-1 font-mono text-[10px] font-bold rounded border border-on-surface uppercase tracking-tighter">
                             Case Study
                         </span>
                     </div>
+                    <span class="project-sticker" aria-hidden="true">Client work</span>
                     <h3 class="font-mono text-xl font-black text-on-surface mb-4 break-all lowercase">~/projects/ticketing-system</h3>
                     <p class="font-body text-sm text-on-surface-variant mb-8">
                         Built an IT ticketing system from scratch for a freelance client — role-based access control, audit trails, and a drag-and-drop interface using Draggable.js. Closed-source client work, so it's shown here rather than linked to a public repo.
@@ -437,6 +455,25 @@
                     </div>
                 </div>
 
+                <!-- Manually curated: Bloom repo is private, so it's shown as a case study -->
+                <div data-project="bloom" class="project-card group relative bg-surface-container border-4 border-on-surface p-6 rounded-xl flex flex-col animate-reveal">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="bg-primary-container text-on-primary-fixed px-3 py-1 font-mono text-[10px] font-bold rounded border border-on-surface uppercase tracking-tighter">
+                            Case Study &middot; Mobile
+                        </span>
+                    </div>
+                    <span class="project-sticker project-sticker--burst" aria-hidden="true">New!</span>
+                    <h3 class="font-mono text-xl font-black text-on-surface mb-4 break-all lowercase">~/projects/bloom</h3>
+                    <p class="font-body text-sm text-on-surface-variant mb-8">
+                        A calm budgeting app for Android and the web, built for a real daily user to replace her monthly budget spreadsheet. Expo (React Native) and Supabase with row-level security. Snap a payslip or bank statement and a Groq vision model suggests where each amount goes &mdash; nothing is saved until the user confirms it.
+                    </p>
+                    <div class="mt-auto flex flex-col gap-3">
+                        <a href="https://bloom1.expo.app/" target="_blank" rel="noopener noreferrer" class="font-headline font-bold text-sm uppercase tracking-widest text-on-primary bg-primary px-4 py-2 rounded-lg border-2 border-on-surface text-center hover:-translate-y-0.5 transition-transform flex items-center justify-center gap-2">
+                            VIEW LIVE <span class="material-symbols-outlined text-sm">arrow_outward</span>
+                        </a>
+                    </div>
+                </div>
+
                 <div id="github-projects-dynamic" class="contents">
                     <!-- Loading State -->
                     <div class="col-span-full flex flex-col items-center justify-center p-20 border-4 border-dashed border-on-surface/20 rounded-3xl">
@@ -444,6 +481,19 @@
                         <p class="font-mono text-xl text-on-surface-variant animate-pulse">Syncing with remote repository...</p>
                     </div>
                 </div>
+
+                <button type="button" class="route-more" hidden aria-controls="github-projects-grid">
+                    <span class="material-symbols-outlined" aria-hidden="true">directions_bike</span>
+                    <span class="route-more-label">Keep riding</span>
+                </button>
+
+                <a href="plans.html" class="route-finish">
+                    <span class="route-finish-flag" aria-hidden="true"></span>
+                    <span>
+                        <span class="block font-label text-xs uppercase tracking-widest opacity-80">Next stage</span>
+                        <span class="block font-headline text-2xl md:text-3xl font-black uppercase tracking-tighter">Yours? See plans &rarr;</span>
+                    </span>
+                </a>
             </div>
         </section>
 
