@@ -4,6 +4,7 @@ This document provides a comprehensive guide to the "Neon Zine / Global Dev" des
 
 ## 1. Core Brand & Theme
 - **Theme Name:** Neon Zine / Global Dev (Glow-Cartoon).
+- **Brand Name:** `NICOLAAS_DEV` (nav logo + footer). "Global Dev" is only the name of the design theme, not the brand.
 - **Concept:** The website is designed as a high-contrast, interactive "Zine" or dossier. It balances technical rigor ("Global Dev") with a creative, vibrant aesthetic.
 - **Aesthetic:** Neo-brutalist with "Glow-Cartoon" accents. Features thick borders (4px-6px), hard shadows (no blur), and vibrant neon highlights.
 - **Theme Cycling:** Features a tri-state theme engine (Creative, Fun, Professional) toggled via an interactive pet (🐾).
